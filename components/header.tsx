@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
@@ -27,8 +28,23 @@ export function Header() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            <Link href="/" className="text-xl lg:text-2xl font-bold text-primary">
-              J-GEN SENEGAL
+            <Link href="/" className="flex items-center gap-3">
+              <Image 
+                src="/logo-jgen.png" 
+                alt="J-GEN SENEGAL Logo" 
+                width={150}
+                height={60}
+                className="h-12 lg:h-14 w-auto"
+                priority
+              />
+              <div className="flex flex-col">
+                <span className="text-lg lg:text-xl font-bold text-primary leading-tight">
+                  J-GEN SENEGAL
+                </span>
+                <span className="text-[9px] lg:text-[10px] text-muted-foreground leading-tight">
+                  Agir pour les femmes et les filles au sénégal
+                </span>
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
