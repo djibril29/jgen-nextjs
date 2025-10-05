@@ -4,14 +4,16 @@ import { useEffect, useRef } from "react"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 const partners = [
-  { name: "ONU Femmes", logo: "/un-women-logo.png" },
-  { name: "UNICEF", logo: "/unicef-logo.png" },
-  { name: "Union Africaine", logo: "/african-union-logo.jpg" },
-  { name: "Ministère de la Femme", logo: "/ministry-women-senegal-logo.jpg" },
-  { name: "USAID", logo: "/generic-aid-logo.png" },
-  { name: "Oxfam", logo: "/oxfam-logo.jpg" },
-  { name: "Plan International", logo: "/plan-international-logo.jpg" },
-  { name: "Care International", logo: "/care-international-logo.jpg" },
+  { name: "AWFDF", logo: "/2-LOGO-AWFDF-300x165.png" },
+  { name: "BFF", logo: "/3-BFF-150x150.png" },
+  { name: "Collectif", logo: "/collectif.png" },
+  { name: "Equipop", logo: "/equipop.png" },
+  { name: "GFFW", logo: "/gffw.png" },
+  { name: "J-GEN TV", logo: "/jgentv_preview_rev_1-300x185.png" },
+  { name: "AWFDF Logo", logo: "/LOGO-AWFDF.png" },
+  { name: "PPglobal", logo: "/PPglobal.png" },
+  { name: "Save the Children", logo: "/save-the-children.png" },
+  { name: "Speak Up Africa", logo: "/SpeakupAfrica-logo_72dpi-300x169.jpg" },
 ]
 
 export function PartnersCarousel() {
