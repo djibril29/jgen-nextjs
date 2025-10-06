@@ -46,7 +46,7 @@ export default async function BlogPage() {
         ]}
         title="ACTUALITÉS & INSIGHTS"
         description="Histoires, mises à jour et perspectives de notre travail dans la lutte contre la violence basée sur le genre au Sénégal."
-        image="/youth-activists-advocacy.jpg"
+        image="/nos-programmes.png"
         imageAlt="Actualités J-GEN SENEGAL"
       />
 

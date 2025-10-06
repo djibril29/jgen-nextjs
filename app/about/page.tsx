@@ -31,7 +31,7 @@ export default function AboutPage() {
         ]}
         title="À PROPOS DE J-GEN SENEGAL"
         description="Nous sommes une organisation féministe engagée à créer un Sénégal où les femmes et les filles vivent libres de toute violence, avec des opportunités et des droits égaux."
-        image="/african-women-empowerment-community.jpg"
+        image="/nos-programmes.png"
         imageAlt="Femmes sénégalaises engagées pour l'égalité"
       />
 

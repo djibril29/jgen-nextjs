@@ -16,8 +16,8 @@ export default function ProgramsPage() {
         ]}
         title="NOS PROGRAMMES"
         description="Des initiatives complètes conçues pour prévenir la violence basée sur le genre, soutenir les survivantes et créer un changement durable dans les communautés à travers le Sénégal."
-        image="/community-education-workshop.jpg"
-        imageAlt="Programmes de J-GEN SENEGAL"
+        image="/Proscide.jpg"
+        imageAlt="Projet PROSCIDE - Semaine Patronale des Enfants"
       />
 
       <Programs />
