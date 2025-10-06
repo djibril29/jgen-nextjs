@@ -76,7 +76,7 @@ export default function AboutPage() {
               <div className="aspect-video w-full rounded-lg overflow-hidden shadow-2xl">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  src="https://www.youtube.com/embed/IOBwnXGW3co"
                   title="Présentation J-GEN SENEGAL"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
