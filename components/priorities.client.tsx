@@ -24,6 +24,13 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
   const buttonReveal = useScrollReveal({ threshold: 0.2 })
   const cardReveals = [card1Reveal, card2Reveal, card3Reveal, card4Reveal]
 
+  // Fonction pour limiter le nombre de mots
+  const truncateText = (text: string, maxWords: number = 15) => {
+    const words = text.split(' ')
+    if (words.length <= maxWords) return text
+    return words.slice(0, maxWords).join(' ') + '...'
+  }
+
   return (
     <section className="py-20 lg:py-32 bg-[#c61d4d]">
       <div className="container mx-auto px-4 lg:px-8">
@@ -38,30 +45,32 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
           {programs.map((program, index) => {
             const reveal = cardReveals[index]
             return (
-              <Link key={program._id} href={`/programs/${program.slug}`} className="group">
+              <Link key={program._id} href={`/programs/${program.slug}`} className="group h-full">
                 <div
                   ref={reveal.ref}
-                  className={`scroll-reveal delay-${(index + 1) * 100} ${reveal.isVisible ? "is-visible" : ""}`}
+                  className={`h-full scroll-reveal delay-${(index + 1) * 100} ${reveal.isVisible ? "is-visible" : ""}`}
                 
                 >
-                  <Card className="h-full border-0 shadow-lg hover:shadow-2xl transition-all overflow-hidden bg-white">
-                    <div className="aspect-[4/3] overflow-hidden">
+                  <Card className="h-full border-0 shadow-lg hover:shadow-2xl transition-all overflow-hidden bg-white flex flex-col">
+                    <div className="aspect-[4/3] overflow-hidden flex-shrink-0">
                       <img
                         src={program.featuredImage ? urlFor(program.featuredImage).width(800).height(600).url() : "/placeholder.svg"}
                         alt={program.title}
                         className="w-full h-full object-cover image-zoom group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>
-                    <CardContent className="p-6">
-                      <h3 className="text-xl md:text-2xl font-bold mb-3 text-balance group-hover:text-primary transition-colors">
+                    <CardContent className="p-6 flex flex-col flex-grow">
+                      <h3 className="text-xl md:text-2xl font-bold mb-3 text-balance group-hover:text-primary transition-colors line-clamp-2">
                         {program.title}
                       </h3>
                       {program.summary ? (
-                        <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">
-                          {program.summary}
+                        <p className="text-base text-muted-foreground leading-relaxed mb-4 flex-grow">
+                          {truncateText(program.summary, 15)}
                         </p>
-                      ) : null}
-                      <div className="flex items-center text-primary text-base font-medium">
+                      ) : (
+                        <div className="flex-grow" />
+                      )}
+                      <div className="flex items-center text-primary text-base font-medium mt-auto">
                         En savoir plus
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </div>

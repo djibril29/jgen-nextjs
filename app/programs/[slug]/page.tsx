@@ -82,8 +82,8 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
         {/* Back Button */}
         <Link href="/programs" className="inline-flex items-center text-primary hover:underline mb-8">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Retour aux programmes
-        </Link>
+              Retour aux programmes
+          </Link>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Left Column - Main Content */}
@@ -105,7 +105,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                   <PortableText value={program.content} />
                 </div>
               )}
-            </div>
+        </div>
 
             {/* Réalisations */}
             {program.achievements && program.achievements.length > 0 && (
@@ -114,7 +114,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                   <h2 className="text-2xl font-bold mb-4">Réalisations</h2>
                   <div className="prose prose-base max-w-none">
                     <PortableText value={program.achievements} />
-                  </div>
+        </div>
                 </CardContent>
               </Card>
             )}
@@ -150,9 +150,9 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                               <Badge variant="secondary" className="bg-background/90 backdrop-blur">
                                 {post.categories[0]}
                               </Badge>
-                            </div>
+          </div>
                           )}
-                        </div>
+        </div>
                         <CardContent className="p-4">
                           <p className="text-sm text-muted-foreground mb-2">
                             {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('fr-FR') : ''}
@@ -189,7 +189,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                           <span className="font-medium">Période d'exécution</span>
                         </div>
                         <p className="text-base font-semibold ml-6">{program.executionPeriod}</p>
-                      </div>
+        </div>
                     )}
 
                     {program.beneficiaries && (
@@ -199,7 +199,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                           <span className="font-medium">Bénéficiaires</span>
                         </div>
                         <p className="text-base font-semibold ml-6">{program.beneficiaries}</p>
-                      </div>
+              </div>
                     )}
 
                     {program.location && (
@@ -207,9 +207,9 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                           <MapPin className="h-4 w-4" />
                           <span className="font-medium">Localisation</span>
-                        </div>
+          </div>
                         <p className="text-base font-semibold ml-6">{program.location}</p>
-                      </div>
+        </div>
                     )}
 
                     {program.status && (
@@ -221,9 +221,9 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                              program.status === 'completed' ? 'Terminé' : 'À venir'}
                           </Badge>
                         </div>
-                      </div>
+          </div>
                     )}
-                  </div>
+                </div>
                 </CardContent>
               </Card>
 
@@ -244,14 +244,14 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                         <div className="text-center py-2">
                           <div className="text-3xl font-bold text-primary mb-1">{program.projectsCompleted}</div>
                           <p className="text-sm text-muted-foreground">Projets réalisés</p>
-                        </div>
+          </div>
                       )}
                       
                       {program.partnersEngaged && (
                         <div className="text-center py-2">
                           <div className="text-3xl font-bold text-primary mb-1">{program.partnersEngaged}</div>
                           <p className="text-sm text-muted-foreground">Partenaires engagés</p>
-                        </div>
+        </div>
                       )}
                     </div>
                   </CardContent>
