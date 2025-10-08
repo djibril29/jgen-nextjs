@@ -4,7 +4,8 @@ import { authorType } from './documents/author'
 import { categoryType } from './documents/category'
 import { programType } from './documents/program'
 import { resourceType } from './documents/resource'
+import { careerType } from './documents/career'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [postType, authorType, categoryType, programType, resourceType],
+  types: [postType, authorType, categoryType, programType, resourceType, careerType],
 }
