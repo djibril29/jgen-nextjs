@@ -79,7 +79,7 @@ const Slide = ({ post, index, current, handleSlideClick }: SlideProps) => {
     <div className="[perspective:1200px] [transform-style:preserve-3d]">
       <li
         ref={slideRef}
-        className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[70vmin] h-[70vmin] mx-[4vmin] z-10 cursor-pointer"
+        className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[85vmin] sm:w-[75vmin] lg:w-[70vmin] h-[85vmin] sm:h-[75vmin] lg:h-[70vmin] mx-[2vmin] sm:mx-[3vmin] lg:mx-[4vmin] z-10 cursor-pointer"
         onClick={() => handleSlideClick(index)}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -118,33 +118,33 @@ const Slide = ({ post, index, current, handleSlideClick }: SlideProps) => {
         </div>
 
         <article
-          className={`relative p-[4vmin] transition-opacity duration-1000 ease-in-out z-10 ${
+          className={`relative p-[3vmin] sm:p-[4vmin] transition-opacity duration-1000 ease-in-out z-10 ${
             current === index ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
           {post.category && (
-            <div className="inline-block px-4 py-2 bg-primary/30 backdrop-blur-sm rounded-full mb-4">
-              <span className="text-white font-semibold text-xs md:text-sm uppercase tracking-wide">
+            <div className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-primary/30 backdrop-blur-sm rounded-full mb-2 sm:mb-4">
+              <span className="text-white font-semibold text-[10px] sm:text-xs md:text-sm uppercase tracking-wide">
                 {post.category}
               </span>
             </div>
           )}
-          <h2 className="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-bold relative mb-4 text-balance leading-tight">
+          <h2 className="text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl font-bold relative mb-2 sm:mb-4 text-balance leading-tight px-2">
             {post.title}
           </h2>
           {post.excerpt && (
-            <p className="text-sm md:text-base lg:text-lg text-white/90 mb-6 line-clamp-2 max-w-2xl mx-auto">
+            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/90 mb-4 sm:mb-6 line-clamp-2 max-w-2xl mx-auto px-2">
               {post.excerpt}
             </p>
           )}
           <div className="flex justify-center">
             <Button
               asChild
-              className="mt-2 px-6 py-3 w-fit mx-auto text-sm md:text-base text-black bg-white h-12 border border-transparent flex justify-center items-center rounded-2xl hover:shadow-lg transition duration-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
+              className="mt-1 sm:mt-2 px-4 py-2 sm:px-6 sm:py-3 w-fit mx-auto text-xs sm:text-sm md:text-base text-black bg-white h-10 sm:h-12 border border-transparent flex justify-center items-center rounded-2xl hover:shadow-lg transition duration-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
             >
               <Link href={`/blog/${post.slug}`}>
                 Lire l'article
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="ml-1.5 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
               </Link>
             </Button>
           </div>
@@ -239,13 +239,13 @@ export function HeroCarouselClient({ posts }: HeroCarouselClientProps) {
   }
 
   return (
-    <section className="relative pt-24 pb-24 md:pt-28 md:pb-28 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-br from-[#c61d4d] to-[#a01640]">
+    <section className="relative pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-br from-[#c61d4d] to-[#a01640]">
       <div
-        className="relative w-full max-w-[90vmin] h-[70vmin] min-h-[500px] max-h-[700px] mx-auto"
+        className="relative w-full max-w-[90vmin] h-[70vmin] min-h-[400px] sm:min-h-[500px] max-h-[700px] mx-auto px-4 sm:px-0"
         aria-labelledby={`carousel-heading-${id}`}
       >
         <ul
-          className="absolute flex mx-[-4vmin] transition-transform duration-1000 ease-in-out"
+          className="absolute flex mx-[-2vmin] sm:mx-[-3vmin] lg:mx-[-4vmin] transition-transform duration-1000 ease-in-out"
           style={{
             transform: `translateX(-${current * (100 / posts.length)}%)`,
           }}
