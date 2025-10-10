@@ -25,25 +25,38 @@ interface BlogCardPost {
 
 export default function BlogPage() {
   const [blogPosts, setBlogPosts] = useState<BlogCardPost[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("Tous")
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const query = `
-        *[_type == "post"]|order(publishedAt desc){
-          _id,
-          "slug": slug.current,
-          title,
-          excerpt,
-          publishedAt,
-          image,
-          "categories": coalesce(categories[]->title, []),
-          "author": author->{name}
-        }
-      `
-      const posts = await client.fetch<BlogCardPost[]>(query)
-      setBlogPosts(posts)
+      try {
+        setLoading(true)
+        setError(null)
+        
+        const query = `
+          *[_type == "post"]|order(publishedAt desc){
+            _id,
+            "slug": slug.current,
+            title,
+            excerpt,
+            publishedAt,
+            image,
+            "categories": coalesce(categories[]->title, []),
+            "author": author->{name}
+          }
+        `
+        const posts = await client.fetch<BlogCardPost[]>(query)
+        console.log('Fetched posts:', posts) // Debug log
+        setBlogPosts(posts || [])
+      } catch (err) {
+        console.error('Error fetching posts:', err)
+        setError('Erreur lors du chargement des articles. Veuillez réessayer.')
+      } finally {
+        setLoading(false)
+      }
     }
     fetchPosts()
   }, [])
@@ -136,7 +149,30 @@ export default function BlogPage() {
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
-            {filteredPosts.length > 0 ? (
+            {loading ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[1, 2, 3, 4, 5, 6].map((i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="aspect-[4/3] bg-gray-200 rounded-lg mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                ))}
+              </div>
+            ) : error ? (
+              <div className="text-center py-16">
+                <div className="bg-red-50 border border-red-200 rounded-lg p-8 max-w-md mx-auto">
+                  <p className="text-lg text-red-600 mb-4">{error}</p>
+                  <button 
+                    onClick={() => window.location.reload()} 
+                    className="bg-[#c61d4d] text-white px-6 py-2 rounded-lg hover:bg-[#b01a45] transition-colors"
+                  >
+                    Réessayer
+                  </button>
+                </div>
+              </div>
+            ) : filteredPosts.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredPosts.map((post, index) => (
                   <Link key={post._id} href={`/blog/${post.slug}`} className="group">
@@ -180,9 +216,30 @@ export default function BlogPage() {
               </div>
             ) : (
               <div className="text-center py-16">
-                <p className="text-lg text-gray-600">
-                  Aucun article trouvé pour cette recherche.
-                </p>
+                <div className="max-w-md mx-auto">
+                  <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Aucun article trouvé</h3>
+                  <p className="text-gray-600 mb-6">
+                    {searchQuery || selectedCategory !== "Tous" 
+                      ? "Aucun article ne correspond à votre recherche." 
+                      : "Il n'y a pas encore d'articles publiés. Revenez bientôt !"}
+                  </p>
+                  {(searchQuery || selectedCategory !== "Tous") && (
+                    <button 
+                      onClick={() => {
+                        setSearchQuery("")
+                        setSelectedCategory("Tous")
+                      }}
+                      className="bg-[#c61d4d] text-white px-6 py-2 rounded-lg hover:bg-[#b01a45] transition-colors"
+                    >
+                      Effacer les filtres
+                    </button>
+                  )}
+                </div>
               </div>
             )}
           </div>
