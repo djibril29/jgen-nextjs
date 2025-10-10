@@ -60,20 +60,20 @@ export function Values() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {values.map((value, index) => (
             <div
               key={index}
-              className={`${value.bgColor} rounded-2xl p-8 text-center hover:shadow-2xl transition-all duration-300 hover:scale-105 relative overflow-hidden`}
+              className={`${value.bgColor} min-h-[350px] pt-12 px-12 pb-16 text-center hover:shadow-2xl transition-all duration-300 hover:scale-105 relative overflow-hidden flex flex-col justify-center`}
             >
               {/* Decorative element */}
-              <div className="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-bl-full" />
+              <div className="absolute top-0 right-0 w-16 h-16 bg-white/10" />
               
-              <div className={`inline-flex items-center justify-center w-20 h-20 ${value.iconBg} rounded-full mb-6 relative z-10`}>
+              <div className={`inline-flex items-center justify-center w-20 h-20 ${value.iconBg} mb-8 relative z-10`}>
                 <value.icon className={`h-10 w-10 ${value.iconColor}`} />
               </div>
-              <h3 className={`text-2xl font-bold mb-4 ${value.textColor} relative z-10`}>{value.title}</h3>
-              <p className={`leading-relaxed ${value.textColor} ${value.bgColor === 'bg-[#ffd23f]' ? 'opacity-90' : 'opacity-95'} relative z-10`}>{value.description}</p>
+              <h3 className={`text-xl font-bold mb-4 ${value.textColor} relative z-10`}>{value.title}</h3>
+              <p className={`leading-relaxed text-sm ${value.textColor} ${value.bgColor === 'bg-[#ffd23f]' ? 'opacity-90' : 'opacity-95'} relative z-10`}>{value.description}</p>
             </div>
           ))}
         </div>
