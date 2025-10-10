@@ -5,7 +5,6 @@ import { Open_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
-import { SocialMediaBar } from "@/components/social-media-bar"
 
 const jost = Jost({
   subsets: ["latin"],
@@ -33,7 +32,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${jost.variable} ${openSans.variable} antialiased`}>
-        <SocialMediaBar />
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>
