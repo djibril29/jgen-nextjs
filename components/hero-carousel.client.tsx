@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef, useId } from "react"
+import { useState, useEffect, useId } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
@@ -22,134 +22,110 @@ interface HeroCarouselClientProps {
 
 interface SlideProps {
   post: Post
-  index: number
-  current: number
-  handleSlideClick: (index: number) => void
+  current: boolean
 }
 
-const Slide = ({ post, index, current, handleSlideClick }: SlideProps) => {
-  const slideRef = useRef<HTMLLIElement>(null)
-  const xRef = useRef(0)
-  const yRef = useRef(0)
-  const frameRef = useRef<number>()
-
-  useEffect(() => {
-    const animate = () => {
-      if (!slideRef.current) return
-
-      const x = xRef.current
-      const y = yRef.current
-
-      slideRef.current.style.setProperty("--x", `${x}px`)
-      slideRef.current.style.setProperty("--y", `${y}px`)
-
-      frameRef.current = requestAnimationFrame(animate)
-    }
-
-    frameRef.current = requestAnimationFrame(animate)
-
-    return () => {
-      if (frameRef.current) {
-        cancelAnimationFrame(frameRef.current)
-      }
-    }
-  }, [])
-
-  const handleMouseMove = (event: React.MouseEvent) => {
-    const el = slideRef.current
-    if (!el) return
-
-    const r = el.getBoundingClientRect()
-    xRef.current = event.clientX - (r.left + Math.floor(r.width / 2))
-    yRef.current = event.clientY - (r.top + Math.floor(r.height / 2))
-  }
-
-  const handleMouseLeave = () => {
-    xRef.current = 0
-    yRef.current = 0
-  }
-
-  const imageLoaded = (event: React.SyntheticEvent<HTMLImageElement>) => {
-    event.currentTarget.style.opacity = "1"
-  }
-
-  const imageUrl = post.image ? urlFor(post.image).width(1200).height(1200).url() : "/placeholder.svg"
+const Slide = ({ post, current }: SlideProps) => {
+  const imageUrl = post.image ? urlFor(post.image).width(1400).height(900).url() : "/placeholder.svg"
 
   return (
-    <div className="[perspective:1200px] [transform-style:preserve-3d]">
-      <li
-        ref={slideRef}
-        className="flex flex-1 flex-col items-center justify-center relative text-center text-white opacity-100 transition-all duration-300 ease-in-out w-[85vmin] sm:w-[75vmin] lg:w-[70vmin] h-[85vmin] sm:h-[75vmin] lg:h-[70vmin] mx-[2vmin] sm:mx-[3vmin] lg:mx-[4vmin] z-10 cursor-pointer"
-        onClick={() => handleSlideClick(index)}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          transform:
-            current !== index
-              ? "scale(0.98) rotateX(8deg)"
-              : "scale(1) rotateX(0deg)",
-          transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-          transformOrigin: "bottom",
-        }}
-      >
-        <div
-          className="absolute top-0 left-0 w-full h-full bg-[#1D1F2F] rounded-[1%] overflow-hidden transition-all duration-150 ease-out"
-          style={{
-            transform:
-              current === index
-                ? "translate3d(calc(var(--x) / 30), calc(var(--y) / 30), 0)"
-                : "none",
-          }}
-        >
-          <img
-            className="absolute inset-0 w-[120%] h-[120%] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
-            style={{
-              opacity: current === index ? 1 : 0.5,
-            }}
-            alt={post.title}
-            src={imageUrl}
-            onLoad={imageLoaded}
-            loading="eager"
-            decoding="sync"
-          />
-          {current === index && (
-            <div className="absolute inset-0 bg-black/40 transition-all duration-1000" />
-          )}
+    <div
+      className={`absolute inset-0 transition-opacity duration-700 ${
+        current ? "opacity-100 z-10" : "opacity-0 z-0"
+      }`}
+    >
+      {/* Mobile: Image as background */}
+      <div className="absolute inset-0 lg:hidden">
+        <img
+          src={imageUrl}
+          alt={post.title}
+          className="w-full h-full object-cover grayscale"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#3d1f47]/90 via-[#3d1f47]/80 to-[#3d1f47]/90" />
+      </div>
+
+      <div className="h-full relative flex flex-col lg:flex-row">
+        {/* Left Side - Purple Background with Text */}
+        <div className="w-full lg:w-[55%] bg-gradient-to-br from-[#3d1f47] to-[#2d1537] relative overflow-hidden flex items-center">
+          {/* Decorative Elements */}
+          <div className="absolute top-0 left-0 w-32 h-32 bg-[#a42c64] opacity-80" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }} />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#ffd23f] opacity-90 -translate-x-1/3 translate-y-1/3 rotate-12" />
+          
+          <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-0 relative z-10">
+            <div className="max-w-2xl">
+              {post.category && (
+                <div className="mb-4 lg:mb-6">
+                  <span className="text-[10px] sm:text-xs lg:text-sm font-bold uppercase tracking-widest text-white/80">
+                    {post.category}
+                  </span>
+                </div>
+              )}
+              
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-[1.15] text-white mb-4 lg:mb-6">
+                {post.title}
+              </h1>
+              
+              {post.excerpt && (
+                <p className="text-sm sm:text-base lg:text-lg text-white/90 leading-relaxed mb-6 lg:mb-8 font-normal">
+                  {post.excerpt}
+                </p>
+              )}
+
+              <div className="flex">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-[#c61d4d] text-white hover:bg-[#c61d4d]/90 font-bold text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 h-auto rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                >
+                  <Link href={`/blog/${post.slug}`} className="flex items-center gap-2">
+                    Lire l'article
+                    <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Exit Website badge - bottom left corner */}
+          <div className="hidden lg:block absolute bottom-8 left-0 bg-[#c61d4d] text-white font-black text-sm px-6 py-3 uppercase tracking-wide">
+            J-GEN SENEGAL
+          </div>
         </div>
 
-        <article
-          className={`relative p-[3vmin] sm:p-[4vmin] transition-opacity duration-1000 ease-in-out z-10 ${
-            current === index ? "opacity-100 visible" : "opacity-0 invisible"
-          }`}
-        >
-          {post.category && (
-            <div className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-primary/30 backdrop-blur-sm rounded-full mb-2 sm:mb-4">
-              <span className="text-white font-semibold text-[10px] sm:text-xs md:text-sm uppercase tracking-wide">
-                {post.category}
-              </span>
-            </div>
-          )}
-          <h2 className="text-lg sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl font-bold relative mb-2 sm:mb-4 text-balance leading-tight px-2">
-            {post.title}
-          </h2>
-          {post.excerpt && (
-            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/90 mb-4 sm:mb-6 line-clamp-2 max-w-2xl mx-auto px-2">
-              {post.excerpt}
-            </p>
-          )}
-          <div className="flex justify-center">
-            <Button
-              asChild
-              className="mt-1 sm:mt-2 px-4 py-2 sm:px-6 sm:py-3 w-fit mx-auto text-xs sm:text-sm md:text-base text-black bg-white h-10 sm:h-12 border border-transparent flex justify-center items-center rounded-2xl hover:shadow-lg transition duration-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]"
-            >
-              <Link href={`/blog/${post.slug}`}>
-                Lire l'article
-                <ArrowRight className="ml-1.5 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4" />
-              </Link>
-            </Button>
+        {/* Right Side - Image */}
+        <div className="hidden lg:flex w-full lg:w-[45%] relative overflow-hidden bg-gray-100">
+          <img
+            src={imageUrl}
+            alt={post.title}
+            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+            loading="eager"
+          />
+          
+          {/* Decorative graphic elements */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <svg width="300" height="300" viewBox="0 0 300 300" className="opacity-30">
+              {/* Circular lines pattern */}
+              <circle cx="150" cy="150" r="50" fill="none" stroke="#c61d4d" strokeWidth="3" />
+              <circle cx="150" cy="150" r="75" fill="none" stroke="#c61d4d" strokeWidth="2" />
+              <circle cx="150" cy="150" r="100" fill="none" stroke="#c61d4d" strokeWidth="2" />
+              <circle cx="150" cy="150" r="125" fill="none" stroke="#c61d4d" strokeWidth="1" />
+              {/* Connection lines */}
+              <line x1="150" y1="25" x2="150" y2="275" stroke="#c61d4d" strokeWidth="2" />
+              <line x1="25" y1="150" x2="275" y2="150" stroke="#c61d4d" strokeWidth="2" />
+            </svg>
           </div>
-        </article>
-      </li>
+
+          {/* Top right label */}
+          <div className="absolute top-8 right-8 bg-white/90 backdrop-blur-sm px-4 py-2 font-bold text-xs text-gray-800 uppercase tracking-wide">
+            {new Date(post.publishedAt || new Date()).toLocaleDateString('fr-FR', { 
+              day: 'numeric', 
+              month: 'long', 
+              year: 'numeric' 
+            })}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -163,14 +139,14 @@ interface CarouselControlProps {
 const CarouselControl = ({ type, title, handleClick }: CarouselControlProps) => {
   return (
     <button
-      className={`w-12 h-12 flex items-center mx-2 justify-center bg-white/90 dark:bg-neutral-800 border-2 border-transparent rounded-full focus:border-primary focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200 shadow-lg ${
+      className={`w-10 h-10 flex items-center justify-center bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full focus:outline-none focus:ring-2 focus:ring-[#ffd23f] transition-all duration-200 ${
         type === "previous" ? "rotate-180" : ""
       }`}
       title={title}
       onClick={handleClick}
       aria-label={title}
     >
-      <ChevronRight className="text-neutral-800 dark:text-neutral-200 h-6 w-6" />
+      <ChevronRight className="text-white h-5 w-5" />
     </button>
   )
 }
@@ -183,17 +159,17 @@ export function HeroCarouselClient({ posts }: HeroCarouselClientProps) {
   // If no posts, show a default message
   if (!posts || posts.length === 0) {
     return (
-      <section className="relative pt-16 md:pt-20 overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+      <section className="relative pt-16 lg:pt-20 overflow-hidden bg-gradient-to-br from-[#3d1f47] to-[#2d1537]">
         <div className="relative min-h-[500px] sm:min-h-[600px] lg:h-[700px]">
           <div className="container mx-auto px-4 lg:px-8 h-full flex items-center justify-center py-12 md:py-0">
             <div className="text-center max-w-3xl">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6 leading-tight text-white uppercase">
                 Bienvenue sur J-GEN SENEGAL
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-6 md:mb-8 px-4">
+              <p className="text-base sm:text-lg md:text-xl text-white/95 mb-6 md:mb-8 px-4 font-medium">
                 Œuvrant pour un Sénégal où les femmes et les filles vivent libres de toute violence et discrimination.
               </p>
-              <Button size="lg" asChild className="h-12 md:h-14 text-base md:text-lg px-6 md:px-8">
+              <Button size="lg" asChild className="h-12 md:h-14 text-base md:text-lg px-6 md:px-8 bg-[#c61d4d] text-white hover:bg-[#c61d4d]/90 font-black uppercase">
                 <Link href="/about">
                   Découvrir notre action
                   <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
@@ -230,52 +206,45 @@ export function HeroCarouselClient({ posts }: HeroCarouselClientProps) {
     setTimeout(() => setIsAutoPlaying(true), 10000)
   }
 
-  const handleSlideClick = (index: number) => {
-    if (current !== index) {
-      setCurrent(index)
-      setIsAutoPlaying(false)
-      setTimeout(() => setIsAutoPlaying(true), 10000)
-    }
-  }
-
   return (
-    <section className="relative pt-20 pb-16 md:pt-24 md:pb-20 lg:pt-32 lg:pb-32 overflow-hidden bg-gradient-to-br from-[#c61d4d] to-[#a01640]">
-      <div
-        className="relative w-full max-w-[90vmin] h-[70vmin] min-h-[400px] sm:min-h-[500px] max-h-[700px] mx-auto px-4 sm:px-0"
-        aria-labelledby={`carousel-heading-${id}`}
-      >
-        <ul
-          className="absolute flex mx-[-2vmin] sm:mx-[-3vmin] lg:mx-[-4vmin] transition-transform duration-1000 ease-in-out"
-          style={{
-            transform: `translateX(-${current * (100 / posts.length)}%)`,
-          }}
-        >
-          {posts.map((post, index) => (
-            <Slide
-              key={post._id}
-              post={post}
-              index={index}
-              current={current}
-              handleSlideClick={handleSlideClick}
-            />
-          ))}
-        </ul>
+    <section 
+      className="relative pt-16 lg:pt-20 overflow-hidden"
+      aria-labelledby={`carousel-heading-${id}`}
+    >
+      {/* Carousel Container */}
+      <div className="relative w-full h-[600px] sm:h-[650px] lg:h-[700px] xl:h-[750px]">
+        {/* Slides */}
+        {posts.map((post, index) => (
+          <Slide
+            key={post._id}
+            post={post}
+            current={current === index}
+          />
+        ))}
 
-        {posts.length > 1 && (
-          <div className="absolute flex justify-center w-full top-[calc(100%+1rem)]">
-            <CarouselControl
-              type="previous"
-              title="Aller au slide précédent"
-              handleClick={handlePreviousClick}
-            />
-
-            <CarouselControl
-              type="next"
-              title="Aller au slide suivant"
-              handleClick={handleNextClick}
-            />
+      {/* Navigation Controls - Dots only */}
+      {posts.length > 1 && (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+          <div className="flex items-center gap-3">
+            {posts.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setCurrent(index)
+                  setIsAutoPlaying(false)
+                  setTimeout(() => setIsAutoPlaying(true), 10000)
+                }}
+                className={`transition-all duration-300 rounded-full ${
+                  current === index 
+                    ? "bg-white w-8 h-3" 
+                    : "bg-white/40 hover:bg-white/60 w-3 h-3"
+                }`}
+                aria-label={`Aller au slide ${index + 1}`}
+              />
+            ))}
           </div>
-        )}
+        </div>
+      )}
       </div>
     </section>
   )

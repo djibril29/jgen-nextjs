@@ -66,12 +66,20 @@ export function Mission() {
             </div>
 
             <div ref={imageReveal.ref} className={`scroll-reveal-right ${imageReveal.isVisible ? "is-visible" : ""}`}>
-              <div className="overflow-hidden rounded-lg shadow-2xl">
-                <img
-                  src="/MAYA.jpeg"
-                  alt="Réunion communautaire"
-                  className="w-full h-auto image-zoom"
-                />
+              <div className="relative">
+                {/* Decorative squares - similar to carousel */}
+                <div className="absolute -top-6 -left-6 w-32 h-32 bg-[#c61d4d] opacity-80 z-0" />
+                <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-[#ffd23f] opacity-90 z-0 rotate-12" />
+                <div className="absolute top-1/2 -right-4 w-24 h-24 bg-[#8c80f7] opacity-70 z-0" />
+                
+                {/* Image */}
+                <div className="relative overflow-hidden rounded-lg shadow-2xl z-10">
+                  <img
+                    src="/MAYA.jpeg"
+                    alt="Réunion communautaire"
+                    className="w-full h-auto image-zoom"
+                  />
+                </div>
               </div>
             </div>
           </div>
