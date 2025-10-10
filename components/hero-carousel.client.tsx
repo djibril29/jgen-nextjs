@@ -49,7 +49,7 @@ const Slide = ({ post, current }: SlideProps) => {
         {/* Left Side - Purple Background with Text */}
         <div className="w-full lg:w-[55%] bg-gradient-to-br from-[#3d1f47] to-[#2d1537] relative overflow-hidden flex items-center">
           {/* Decorative Elements */}
-          <div className="absolute top-0 left-0 w-32 h-32 bg-[#a42c64] opacity-80" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }} />
+          <div className="absolute top-0 left-0 w-32 h-32 bg-[#3d1f47] opacity-80" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }} />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#ffd23f] opacity-90 -translate-x-1/3 translate-y-1/3 rotate-12" />
           
           <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-0 relative z-10">

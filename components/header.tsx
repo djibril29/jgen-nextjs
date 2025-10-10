@@ -15,6 +15,9 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
 
+  // Pages qui ont un fond violet dans le hero
+  const isHomePage = pathname === "/"
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
@@ -38,9 +41,9 @@ export function Header() {
     <>
       <header className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled 
+        isScrolled || !isHomePage
           ? "bg-white shadow-md" 
-          : "bg-transparent"
+          : "bg-white/95 backdrop-blur-sm"
       )}>
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-14 lg:h-16">
@@ -102,7 +105,7 @@ export function Header() {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <nav className="md:hidden py-4 border-t border-border">
+            <nav className="md:hidden py-4 border-t border-border bg-white">
               {navItems.map((item) => (
                 <Link
                   key={item.href}

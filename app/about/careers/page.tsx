@@ -40,7 +40,7 @@ export default async function CareersPage() {
   const careers = await getCareers()
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-white">
       <Header />
       <Suspense fallback={<CareersPageSkeleton />}>
         <CareersClient careers={careers} />

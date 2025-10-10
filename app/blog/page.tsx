@@ -1,12 +1,14 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Calendar, ArrowRight } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Search } from "lucide-react"
 import Link from "next/link"
-import { PageHero } from "@/components/page-hero"
 import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
+import { useState, useEffect } from "react"
 
 interface BlogCardPost {
   _id: string
@@ -16,73 +18,173 @@ interface BlogCardPost {
   publishedAt?: string
   categories?: string[]
   image?: any
+  author?: {
+    name: string
+  }
 }
 
-export const revalidate = 60 // revalidate every 60s in production
+export default function BlogPage() {
+  const [blogPosts, setBlogPosts] = useState<BlogCardPost[]>([])
+  const [searchQuery, setSearchQuery] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("Tous")
 
-export default async function BlogPage() {
-  const query = `
-    *[_type == "post"]|order(publishedAt desc){
-      _id,
-      "slug": slug.current,
-      title,
-      excerpt,
-      publishedAt,
-      image,
-      "categories": coalesce(categories[]->title, [])
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const query = `
+        *[_type == "post"]|order(publishedAt desc){
+          _id,
+          "slug": slug.current,
+          title,
+          excerpt,
+          publishedAt,
+          image,
+          "categories": coalesce(categories[]->title, []),
+          "author": author->{name}
+        }
+      `
+      const posts = await client.fetch<BlogCardPost[]>(query)
+      setBlogPosts(posts)
     }
-  `
-  const blogPosts = await client.fetch<BlogCardPost[]>(query)
+    fetchPosts()
+  }, [])
+
+  const categories = ["Tous", "Autonomisation", "Education", "Santé"]
+
+  const filteredPosts = blogPosts.filter((post) => {
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()))
+    const matchesCategory = selectedCategory === "Tous" || post.categories?.includes(selectedCategory)
+    return matchesSearch && matchesCategory
+  })
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-white">
       <Header />
 
-      <PageHero
-        category="ACTUALITÉS"
-        breadcrumbs={[
-          { label: "Accueil", href: "/" },
-          { label: "Blog", href: "/blog" },
-        ]}
-        title="ACTUALITÉS & INSIGHTS"
-        description="Histoires, mises à jour et perspectives de notre travail dans la lutte contre la violence basée sur le genre au Sénégal."
-        image="/nos-programmes.png"
-        imageAlt="Actualités J-GEN SENEGAL"
-      />
+      {/* Hero Section - Violet avec carrés décoratifs */}
+      <section className="pt-32 pb-16 bg-gradient-to-br from-[#3d1f47] to-[#2d1537] relative overflow-hidden">
+        {/* Decorative squares */}
+        <div className="absolute top-20 right-10 w-24 h-24 bg-[#ffd23f] opacity-40 z-0 rotate-12" />
+        <div className="absolute bottom-10 left-10 w-28 h-28 bg-[#00d4aa] opacity-30 z-0 -rotate-12" />
+        <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-[#8c80f7] opacity-20 z-0" />
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6">
+              Notre Blog
+            </h1>
+            <div className="w-24 h-1 bg-[#ffd23f] mx-auto mb-6" />
+            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+              Découvrez nos articles sur l'égalité des sexes, l'autonomisation des femmes
+              et nos actions au Sénégal.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      {/* Blog Posts Grid */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <Card key={post._id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={post.image ? urlFor(post.image).width(1200).height(675).url() : "/placeholder.svg"}
-                    alt={post.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
+      {/* Search and Filters - Blanc avec carrés décoratifs */}
+      <section className="py-12 bg-white border-b border-gray-200 relative overflow-hidden">
+        {/* Decorative squares */}
+        <div className="absolute top-5 left-5 w-16 h-16 bg-[#c61d4d] opacity-20 z-0" />
+        <div className="absolute bottom-5 right-5 w-20 h-20 bg-[#8c80f7] opacity-20 z-0 rotate-45" />
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            {/* Search Bar */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+              <div className="relative flex-grow max-w-xl">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                  <Search className="h-5 w-5 text-gray-400" />
                 </div>
-                <CardHeader>
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                    <span className="text-primary font-medium">{post.categories?.[0] ?? ""}</span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : ""}
-                    </span>
-                  </div>
-                  <CardTitle className="text-xl leading-tight">{post.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed mb-4">{post.excerpt}</p>
-                  <Link href={`/blog/${post.slug}`}>
-                    <Button variant="link" className="p-0 h-auto text-primary">
-                      Read More <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
+                <Input
+                  type="text"
+                  placeholder="Rechercher des articles..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full rounded-full h-12 pl-12 pr-4 bg-white border-2 border-gray-300 focus:ring-2 focus:ring-[#c61d4d] focus:border-[#c61d4d] text-base shadow-sm"
+                />
+              </div>
+            </div>
+
+            {/* Category Pills */}
+            <div className="flex justify-center gap-3 flex-wrap">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${
+                    selectedCategory === category
+                      ? "bg-[#c61d4d] text-white shadow-md"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog Posts Grid - Blanc avec carrés décoratifs */}
+      <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
+        {/* Decorative squares */}
+        <div className="absolute top-40 right-10 w-24 h-24 bg-[#ffd23f] opacity-30 z-0 rotate-12" />
+        <div className="absolute bottom-40 left-10 w-28 h-28 bg-[#a42c64] opacity-25 z-0" />
+        <div className="absolute top-1/2 right-1/4 w-20 h-20 bg-[#00d4aa] opacity-20 z-0 -rotate-12" />
+        
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <div className="max-w-7xl mx-auto">
+            {filteredPosts.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredPosts.map((post, index) => (
+                  <Link key={post._id} href={`/blog/${post.slug}`} className="group">
+                    <div className="relative h-full">
+                      {/* Decorative squares around cards (only on first few cards) */}
+                      {index % 3 === 0 && (
+                        <div className="absolute -top-3 -left-3 w-16 h-16 bg-[#c61d4d] opacity-40 z-0" />
+                      )}
+                      {index % 3 === 1 && (
+                        <div className="absolute -bottom-3 -right-3 w-20 h-20 bg-[#ffd23f] opacity-40 z-0 rotate-12" />
+                      )}
+                      {index % 3 === 2 && (
+                        <div className="absolute -top-3 -right-3 w-16 h-16 bg-[#8c80f7] opacity-40 z-0" />
+                      )}
+                      
+                      <Card className="relative h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden bg-white z-10">
+                        <div className="aspect-[4/3] overflow-hidden">
+                          <img
+                            src={post.image ? urlFor(post.image).width(800).height(600).url() : "/placeholder.svg"}
+                            alt={post.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                        </div>
+                        <CardContent className="p-6">
+                          <h3 className="text-xl md:text-2xl font-bold mb-3 leading-tight text-gray-900 group-hover:text-[#c61d4d] transition-colors line-clamp-2">
+                            {post.title}
+                          </h3>
+                          <p className="text-sm text-gray-600 mb-2">
+                            Par {post.author?.name || "J-GEN"}, {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }) : ""}
+                          </p>
+                          {post.excerpt && (
+                            <p className="text-base text-gray-700 leading-relaxed line-clamp-3">
+                              {post.excerpt}
+                            </p>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </div>
                   </Link>
-                </CardContent>
-              </Card>
-            ))}
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-lg text-gray-600">
+                  Aucun article trouvé pour cette recherche.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </section>
