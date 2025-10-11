@@ -3,6 +3,7 @@
 import { useState, useEffect, useId } from "react"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { urlFor } from "@/sanity/lib/image"
 
 interface Post {
@@ -35,11 +36,14 @@ const Slide = ({ post, current }: SlideProps) => {
     >
       {/* Background Image with Dark Overlay */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src={imageUrl}
           alt={post.title}
-          className="w-full h-full object-cover"
-          loading="eager"
+          fill
+          className="object-cover"
+          priority={current}
+          quality={85}
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-black/60" />
       </div>
@@ -84,7 +88,15 @@ export function HeroCarouselClient({ posts }: HeroCarouselClientProps) {
         <div className="relative min-h-[500px] sm:min-h-[550px] md:min-h-[600px] lg:h-[700px]">
           {/* Background with overlay */}
           <div className="absolute inset-0">
-            <img src="/empowered-african-women-standing-together-in-solid.jpg" alt="" className="w-full h-full object-cover" />
+            <Image 
+              src="/empowered-african-women-standing-together-in-solid.jpg" 
+              alt="Femmes sénégalaises unies pour leurs droits" 
+              fill
+              className="object-cover"
+              priority
+              quality={85}
+              sizes="100vw"
+            />
             <div className="absolute inset-0 bg-black/60" />
           </div>
           

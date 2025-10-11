@@ -3,6 +3,29 @@ import { Footer } from "@/components/footer"
 import { Contact } from "@/components/contact"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import { PageHero } from "@/components/page-hero"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Contact - Nous Contacter",
+  description: "Contactez J-GEN SENEGAL pour toute question, demande d'aide ou collaboration. Nous sommes là pour soutenir les femmes et filles victimes de violences basées sur le genre au Sénégal.",
+  alternates: {
+    canonical: 'https://jgen.sn/contact',
+  },
+  openGraph: {
+    title: "Contact - J-GEN SENEGAL",
+    description: "Contactez-nous pour toute question ou demande d'aide",
+    url: "https://jgen.sn/contact",
+    images: ["/support-center-dakar.jpg"],
+  },
+  keywords: [
+    "contact J-GEN SENEGAL",
+    "aide femmes victimes VBG",
+    "numéro urgence violences",
+    "centre d'écoute Dakar",
+    "accompagnement juridique",
+    "soutien psychologique femmes"
+  ]
+}
 
 export default function ContactPage() {
   return (

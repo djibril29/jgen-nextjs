@@ -4,6 +4,7 @@ import { Anton } from "next/font/google"
 import { Open_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import { OrganizationSchema, WebsiteSchema } from "@/components/structured-data"
 import "./globals.css"
 
 const anton = Anton({
@@ -20,19 +21,77 @@ const openSans = Open_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "J-GEN SENEGAL - Fighting Gender-Based Violence",
-  description: "Feminist organization advocating for women and girls rights in Senegal",
-  generator: "v0.app",
+  metadataBase: new URL('https://jgen.sn'),
+  title: {
+    default: "J-GEN SENEGAL - Lutter contre les violences basées sur le genre",
+    template: "%s | J-GEN SENEGAL"
+  },
+  description: "Organisation féministe sénégalaise engagée dans la lutte contre les violences basées sur le genre. Plaidoyer, sensibilisation et accompagnement des femmes et filles au Sénégal.",
+  keywords: [
+    "violence basée sur le genre",
+    "droits des femmes Sénégal",
+    "organisation féministe Sénégal",
+    "VBG Sénégal",
+    "autonomisation femmes",
+    "plaidoyer féministe",
+    "protection femmes filles",
+    "égalité genre Sénégal",
+    "Dakar droits femmes",
+    "J-GEN SENEGAL"
+  ],
+  authors: [{ name: "J-GEN SENEGAL" }],
+  creator: "J-GEN SENEGAL",
+  publisher: "J-GEN SENEGAL",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_SN",
+    url: "https://jgen.sn",
+    siteName: "J-GEN SENEGAL",
+    title: "J-GEN SENEGAL - Lutter contre les violences basées sur le genre",
+    description: "Organisation féministe sénégalaise engagée dans la lutte contre les violences basées sur le genre.",
+    images: [
+      {
+        url: "/logo-jgen.png",
+        width: 1200,
+        height: 630,
+        alt: "J-GEN SENEGAL Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "J-GEN SENEGAL - Lutter contre les violences basées sur le genre",
+    description: "Organisation féministe sénégalaise engagée dans la lutte contre les violences basées sur le genre.",
+    images: ["/logo-jgen.png"],
+    creator: "@jgensenegal",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/logo-jgen.png" },
       { url: "/logo-jgen.png", sizes: "16x16", type: "image/png" },
       { url: "/logo-jgen.png", sizes: "32x32", type: "image/png" },
     ],
-    apple: [
-      { url: "/logo-jgen.png" },
-    ],
+    apple: [{ url: "/logo-jgen.png" }],
     shortcut: ["/logo-jgen.png"],
+  },
+  verification: {
+    google: "votre-code-google-search-console",
   },
 }
 
@@ -42,7 +101,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
+      <head>
+        <OrganizationSchema />
+        <WebsiteSchema />
+      </head>
       <body className={`font-sans ${anton.variable} ${openSans.variable} antialiased`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />

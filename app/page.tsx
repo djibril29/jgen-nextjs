@@ -7,6 +7,21 @@ import { PartnersCarousel } from "@/components/partners-carousel"
 import { Impact } from "@/components/impact"
 import { Footer } from "@/components/footer"
 import { Suspense } from "react"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Accueil",
+  description: "Découvrez J-GEN SENEGAL, organisation féministe engagée dans la lutte contre les violences basées sur le genre au Sénégal. Plaidoyer, sensibilisation et accompagnement des femmes et filles.",
+  alternates: {
+    canonical: 'https://jgen.sn',
+  },
+  openGraph: {
+    title: "J-GEN SENEGAL - Lutter contre les violences basées sur le genre",
+    description: "Organisation féministe sénégalaise engagée dans la lutte contre les violences basées sur le genre",
+    url: "https://jgen.sn",
+    images: ["/empowered-african-women-standing-together-in-solid.jpg"],
+  },
+}
 
 export default function Home() {
   return (

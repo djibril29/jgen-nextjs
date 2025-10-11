@@ -3,6 +3,29 @@ import { Footer } from "@/components/footer"
 import { CareersClient } from "@/components/careers-client"
 import { client } from "@/sanity/lib/client"
 import { Suspense } from "react"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Carrières - Rejoignez Notre Équipe",
+  description: "Rejoignez l'équipe de J-GEN SENEGAL ! Découvrez nos offres d'emploi et opportunités de carrière dans la lutte contre les violences basées sur le genre au Sénégal.",
+  alternates: {
+    canonical: 'https://jgen.sn/about/careers',
+  },
+  openGraph: {
+    title: "Carrières - J-GEN SENEGAL",
+    description: "Rejoignez notre équipe pour lutter contre les VBG",
+    url: "https://jgen.sn/about/careers",
+    images: ["/young-leaders-workshop-senegal.jpg"],
+  },
+  keywords: [
+    "emploi J-GEN SENEGAL",
+    "carrières organisation féministe",
+    "offres emploi Sénégal",
+    "stage droits femmes",
+    "bénévolat VBG",
+    "opportunités carrière"
+  ]
+}
 
 export const revalidate = 60 // Revalidate every 60 seconds
 

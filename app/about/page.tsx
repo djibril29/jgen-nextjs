@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer"
 import { Values } from "@/components/values"
 import { Megaphone, Users, TrendingUp, Network } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 
 export default function AboutPage() {
@@ -175,10 +176,13 @@ export default function AboutPage() {
                     >
                       <div className="relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300">
                         <div className="aspect-[4/3] relative">
-                          <img
+                          <Image
                             src={item.image || "/placeholder.svg"}
                             alt={item.alt}
-                            className="w-full h-full object-cover image-zoom group-hover:scale-110 transition-transform duration-500"
+                            fill
+                            className="object-cover image-zoom group-hover:scale-110 transition-transform duration-500"
+                            quality={85}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#3d1f47]/95 via-[#3d1f47]/60 to-transparent" />
                           <div className="absolute bottom-0 left-0 right-0 p-6">

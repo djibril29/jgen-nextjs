@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 const slides = [
   {
@@ -92,7 +93,15 @@ export function HeroCarousel() {
           >
             {/* Background Image with Dark Overlay */}
             <div className="absolute inset-0">
-              <img src={slide.image || "/placeholder.svg"} alt="" className="w-full h-full object-cover" />
+              <Image 
+                src={slide.image || "/placeholder.svg"} 
+                alt={slide.title}
+                fill
+                className="object-cover"
+                priority={index === 0}
+                quality={85}
+                sizes="100vw"
+              />
               <div className="absolute inset-0 bg-black/60" />
             </div>
 
