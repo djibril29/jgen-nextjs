@@ -28,8 +28,8 @@ export default function Home() {
 // Skeleton loader for the hero carousel
 function HeroCarouselSkeleton() {
   return (
-    <section className="relative pt-20 overflow-hidden">
-      <div className="relative h-[600px] lg:h-[700px] bg-gradient-to-br from-muted/50 to-muted/20 animate-pulse">
+    <section className="relative pt-20 overflow-hidden isolate" style={{ zIndex: 1 }}>
+      <div className="relative h-[500px] sm:h-[550px] md:h-[600px] lg:h-[700px] bg-gradient-to-br from-muted/50 to-muted/20 animate-pulse">
         <div className="container mx-auto px-4 lg:px-8 h-full flex items-center">
           <div className="max-w-3xl space-y-4">
             <div className="h-8 w-32 bg-muted rounded-full" />

@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
@@ -80,9 +79,9 @@ export function HeroCarousel() {
   }
 
   return (
-    <section className="relative pt-20 overflow-hidden">
+    <section className="relative pt-20 overflow-hidden isolate" style={{ zIndex: 1 }}>
       {/* Carousel Container */}
-      <div className="relative h-[600px] lg:h-[700px]">
+      <div className="relative h-[500px] sm:h-[550px] md:h-[600px] lg:h-[700px]">
         {/* Slides */}
         {slides.map((slide, index) => (
           <div
@@ -91,38 +90,29 @@ export function HeroCarousel() {
               index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            {/* Background Image with Overlay */}
+            {/* Background Image with Dark Overlay */}
             <div className="absolute inset-0">
               <img src={slide.image || "/placeholder.svg"} alt="" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/60" />
+              <div className="absolute inset-0 bg-black/60" />
             </div>
 
-            {/* Content */}
-            <div className="container mx-auto px-4 lg:px-8 relative z-10 h-full flex items-center">
-              <div className="max-w-3xl">
-                <div className="inline-block px-4 py-2 bg-primary/20 backdrop-blur-sm rounded-full mb-6">
-                  <span className="text-primary font-semibold text-sm uppercase tracking-wide">{slide.category}</span>
-                </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-balance leading-tight">
+            {/* Content - Centered */}
+            <div className="container mx-auto px-4 lg:px-8 relative z-10 h-full flex items-center justify-center">
+              <div className="max-w-5xl text-center">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-5 md:mb-6 leading-[1.1] text-[#00d4aa] uppercase tracking-tight">
                   {slide.title}
                 </h1>
-                <p className="text-lg md:text-xl text-foreground/90 mb-8 text-pretty leading-relaxed max-w-2xl">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white mb-6 md:mb-8 leading-relaxed max-w-3xl mx-auto">
                   {slide.description}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button
-                    size="lg"
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg h-14 px-8"
-                    asChild
+                <div className="flex justify-center">
+                  <Link 
+                    href={slide.link}
+                    className="inline-flex items-center gap-3 text-[#ffd23f] hover:text-[#ffd23f]/80 transition-colors group"
                   >
-                    <Link href={slide.link}>
-                      {slide.linkText}
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                  <Button size="lg" variant="outline" className="text-lg h-14 px-8 border-2 bg-transparent" asChild>
-                    <Link href="/contact">Nous soutenir</Link>
-                  </Button>
+                    <span className="text-lg md:text-xl font-bold uppercase tracking-wide">{slide.linkText}</span>
+                    <ArrowRight className="h-6 w-6 md:h-7 md:w-7 transition-transform group-hover:translate-x-2" />
+                  </Link>
                 </div>
               </div>
             </div>

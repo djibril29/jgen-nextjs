@@ -41,7 +41,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --font-open-sans: "Open Sans", sans-serif;
-  --font-jost: "Jost", sans-serif;
+  --font-anton: "Anton", sans-serif;
 }
 
 .dark {
@@ -82,9 +82,9 @@
 }
 
 @theme inline {
-  /* Configure Jost for headings and Open Sans for body text */
+  /* Configure Anton for headings and Open Sans for body text */
   --font-sans: var(--font-open-sans);
-  --font-heading: var(--font-jost);
+  --font-heading: var(--font-anton);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -130,14 +130,14 @@
   body {
     @apply bg-background text-foreground;
   }
-  /* Apply Jost font to all headings */
+  /* Apply Anton font to all headings */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    font-family: var(--font-jost);
+    font-family: var(--font-anton);
   }
 
   /* Increased paragraph font sizes for better readability */

@@ -1,14 +1,15 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Jost } from "next/font/google"
+import { Anton } from "next/font/google"
 import { Open_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import "./globals.css"
 
-const jost = Jost({
+const anton = Anton({
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-jost",
+  variable: "--font-anton",
   display: "swap",
 })
 
@@ -31,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans ${jost.variable} ${openSans.variable} antialiased`}>
+      <body className={`font-sans ${anton.variable} ${openSans.variable} antialiased`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>
