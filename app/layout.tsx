@@ -23,6 +23,17 @@ export const metadata: Metadata = {
   title: "J-GEN SENEGAL - Fighting Gender-Based Violence",
   description: "Feminist organization advocating for women and girls rights in Senegal",
   generator: "v0.app",
+  icons: {
+    icon: [
+      { url: "/logo-jgen.png" },
+      { url: "/logo-jgen.png", sizes: "16x16", type: "image/png" },
+      { url: "/logo-jgen.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/logo-jgen.png" },
+    ],
+    shortcut: ["/logo-jgen.png"],
+  },
 }
 
 export default function RootLayout({
