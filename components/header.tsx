@@ -109,7 +109,7 @@ export function Header() {
               <div className="flex items-center gap-2">
                 <div className="w-10 h-10 rounded-full bg-[#00d4aa] flex items-center justify-center">
                   <a 
-                    href="https://facebook.com/jgensenegal" 
+                    href="https://www.facebook.com/JGENSenegal/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-8 h-8 rounded-full bg-white hover:bg-[#c61d4d] flex items-center justify-center transition-colors"
@@ -123,7 +123,7 @@ export function Header() {
                 
                 <div className="w-10 h-10 rounded-full bg-[#00d4aa] flex items-center justify-center">
                   <a 
-                    href="https://instagram.com/jgensenegal" 
+                    href="https://www.instagram.com/jgen.sn/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-8 h-8 rounded-full bg-white hover:bg-[#c61d4d] flex items-center justify-center transition-colors"
@@ -137,7 +137,7 @@ export function Header() {
                 
                 <div className="w-10 h-10 rounded-full bg-[#00d4aa] flex items-center justify-center">
                   <a 
-                    href="https://linkedin.com/company/jgensenegal" 
+                    href="https://www.linkedin.com/company/jgen-women-global-entrepreneurship" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-8 h-8 rounded-full bg-white hover:bg-[#c61d4d] flex items-center justify-center transition-colors"
@@ -221,7 +221,7 @@ export function Header() {
                 {/* Social Icons */}
                 <div className="flex items-center gap-4 justify-start">
                   <a 
-                    href="https://facebook.com/jgensenegal" 
+                    href="https://www.facebook.com/JGENSenegal/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-[#3d1f47]/10 hover:bg-[#c61d4d] flex items-center justify-center transition-colors group"
@@ -233,7 +233,7 @@ export function Header() {
                   </a>
                   
                   <a 
-                    href="https://instagram.com/jgensenegal" 
+                    href="https://www.instagram.com/jgen.sn/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-[#3d1f47]/10 hover:bg-[#c61d4d] flex items-center justify-center transition-colors group"
@@ -245,7 +245,7 @@ export function Header() {
                   </a>
                   
                   <a 
-                    href="https://linkedin.com/company/jgensenegal" 
+                    href="https://www.linkedin.com/company/jgen-women-global-entrepreneurship" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="w-10 h-10 rounded-full bg-[#3d1f47]/10 hover:bg-[#c61d4d] flex items-center justify-center transition-colors group"
