@@ -61,6 +61,31 @@ export const programType = defineType({
       ],
       group: 'main'
     }),
+    defineField({
+      name: 'gallery',
+      title: 'Galerie d\'images',
+      type: 'array',
+      description: 'Galerie de photos du programme',
+      of: [{
+        type: 'image',
+        options: {hotspot: true},
+        fields: [
+          defineField({ 
+            name: 'alt', 
+            type: 'string', 
+            title: 'Texte alternatif',
+            description: 'Description de l\'image pour l\'accessibilité'
+          }),
+          defineField({ 
+            name: 'caption', 
+            type: 'string', 
+            title: 'Légende',
+            description: 'Légende affichée sous l\'image'
+          }),
+        ]
+      }],
+      group: 'main'
+    }),
 
     // Details & Timeline
     defineField({ 
