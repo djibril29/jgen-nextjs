@@ -48,6 +48,27 @@ const Slide = ({ post, current }: SlideProps) => {
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
+      {/* Decorative Squares */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Top Left - Rose */}
+        <div className="absolute top-20 left-10 w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 bg-[#c61d4d] opacity-20 rotate-12 animate-float" />
+        
+        {/* Top Right - Turquoise */}
+        <div className="absolute top-32 right-16 w-20 h-20 sm:w-28 sm:h-28 lg:w-36 lg:h-36 bg-[#00d4aa] opacity-25 -rotate-6 animate-float-delayed" />
+        
+        {/* Bottom Left - Yellow */}
+        <div className="absolute bottom-24 left-20 w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44 bg-[#ffd23f] opacity-20 rotate-45 animate-float" />
+        
+        {/* Bottom Right - Purple */}
+        <div className="absolute bottom-32 right-10 w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-[#8c80f7] opacity-30 -rotate-12 animate-float-delayed" />
+        
+        {/* Center Left - Small Rose */}
+        <div className="absolute top-1/2 left-5 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-[#c61d4d] opacity-15 rotate-[30deg] animate-float" />
+        
+        {/* Center Right - Small Yellow */}
+        <div className="absolute top-1/3 right-5 w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-[#ffd23f] opacity-25 -rotate-[20deg] animate-float-delayed" />
+      </div>
+
       {/* Content - Centered */}
       <div className="container mx-auto px-4 lg:px-8 relative z-10 h-full flex items-center justify-center">
         <div className="max-w-5xl text-center">
@@ -98,6 +119,27 @@ export function HeroCarouselClient({ posts }: HeroCarouselClientProps) {
               sizes="100vw"
             />
             <div className="absolute inset-0 bg-black/60" />
+          </div>
+          
+          {/* Decorative Squares */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Top Left - Rose */}
+            <div className="absolute top-20 left-10 w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 bg-[#c61d4d] opacity-20 rotate-12 animate-float" />
+            
+            {/* Top Right - Turquoise */}
+            <div className="absolute top-32 right-16 w-20 h-20 sm:w-28 sm:h-28 lg:w-36 lg:h-36 bg-[#00d4aa] opacity-25 -rotate-6 animate-float-delayed" />
+            
+            {/* Bottom Left - Yellow */}
+            <div className="absolute bottom-24 left-20 w-28 h-28 sm:w-36 sm:h-36 lg:w-44 lg:h-44 bg-[#ffd23f] opacity-20 rotate-45 animate-float" />
+            
+            {/* Bottom Right - Purple */}
+            <div className="absolute bottom-32 right-10 w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-[#8c80f7] opacity-30 -rotate-12 animate-float-delayed" />
+            
+            {/* Center Left - Small Rose */}
+            <div className="absolute top-1/2 left-5 w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-[#c61d4d] opacity-15 rotate-[30deg] animate-float" />
+            
+            {/* Center Right - Small Yellow */}
+            <div className="absolute top-1/3 right-5 w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-[#ffd23f] opacity-25 -rotate-[20deg] animate-float-delayed" />
           </div>
           
           <div className="container mx-auto px-4 lg:px-8 h-full flex items-center justify-center relative z-10">
