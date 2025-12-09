@@ -41,7 +41,9 @@ async function getProgram(slug: string) {
       "categories": categories[]->title
     }
   }`
-  return client.fetch(query, { slug })
+  return client.fetch(query, { slug }, {
+    next: { revalidate: 60 } // Revalidate every 60 seconds
+  })
 }
 
 export default async function ProgramPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -232,20 +234,20 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             {/* Partners - Clean horizontal layout */}
             {program.partners && program.partners.length > 0 && (
               <div className="py-12 border-y border-border">
-                <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Nos Partenaires</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center">
+                <h2 className="text-2xl md:text-3xl font-bold mb-10 text-center">Nos Partenaires</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-8 gap-y-10 items-end justify-items-center">
                   {program.partners.map((partner: any, index: number) => (
-                    <div key={index} className="flex flex-col items-center gap-3 group">
+                    <div key={index} className="flex flex-col items-center gap-3 group w-full max-w-[180px]">
                       {partner.logo && (
-                        <div className="w-20 h-20 relative transition-transform group-hover:scale-110">
+                        <div className="w-full h-20 flex items-center justify-center transition-transform group-hover:scale-105">
                           <img
-                            src={urlFor(partner.logo).width(200).height(200).url()}
-                            alt={partner.name}
-                            className="w-full h-full object-contain transition-all"
+                            src={urlFor(partner.logo).width(400).url()}
+                            alt={partner.name || "Partenaire"}
+                            className="max-w-full max-h-full object-contain"
                           />
                         </div>
                       )}
-                      <span className="text-xs text-center text-muted-foreground font-medium">
+                      <span className="text-sm text-center text-muted-foreground font-medium leading-tight">
                         {partner.name}
                       </span>
                     </div>

@@ -13,7 +13,7 @@ export default function ResourcesPage() {
 
   const { resources, loading, error } = useResources({
     category: selectedCategory,
-    limit: 20
+    limit: selectedCategory === "Tous" ? 100 : 20
   })
 
   const categories = ["Tous", "Publications", "Rapports", "Guides", "Outils", "Vidéos", "Formations"]

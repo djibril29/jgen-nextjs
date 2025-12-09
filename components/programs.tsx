@@ -21,7 +21,9 @@ export async function Programs() {
     "slug": slug.current,
     featuredImage
   }`
-  const programs = await client.fetch<ProgramCard[]>(query)
+  const programs = await client.fetch<ProgramCard[]>(query, {}, {
+    next: { revalidate: 60 } // Revalidate every 60 seconds
+  })
 
   return (
     <>

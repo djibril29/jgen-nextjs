@@ -12,7 +12,9 @@ export async function NewsSection() {
     "tags": coalesce(categories[]->title, []),
     publishedAt
   }`
-  const items = await client.fetch<NewsItem[]>(query)
+  const items = await client.fetch<NewsItem[]>(query, {}, {
+    next: { revalidate: 60 } // Revalidate every 60 seconds
+  })
   return (
     <Suspense>
       {/* @ts-expect-error Async Server/Client boundary */}

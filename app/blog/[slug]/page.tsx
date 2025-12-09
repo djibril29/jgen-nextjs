@@ -18,7 +18,9 @@ async function getPost(slug: string) {
     body,
     "categories": categories[]->title
   }`
-  return client.fetch(query, { slug })
+  return client.fetch(query, { slug }, {
+    next: { revalidate: 60 } // Revalidate every 60 seconds
+  })
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -68,13 +70,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-balance leading-tight">{post.title}</h1>
 
             {/* Categories */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {post.categories.map((category: string, index: number) => (
-                <span key={index} className="px-3 py-1 bg-accent text-foreground text-sm rounded-full">
-                  {category}
-                </span>
-              ))}
-            </div>
+            {post.categories && post.categories.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-4">
+                {post.categories.map((category: string, index: number) => (
+                  <span key={index} className="px-3 py-1 bg-accent text-foreground text-sm rounded-full">
+                    {category}
+                  </span>
+                ))}
+              </div>
+            )}
 
             {/* Date */}
             <div className="flex items-center gap-2 text-muted-foreground mb-8 pb-8 border-b">

@@ -13,7 +13,9 @@ async function getFeaturedPosts() {
     publishedAt
   }`
   
-  const posts = await client.fetch(query)
+  const posts = await client.fetch(query, {}, {
+    next: { revalidate: 60 }
+  })
   
   // If no featured posts, get the 4 most recent posts
   if (!posts || posts.length === 0) {
@@ -26,7 +28,9 @@ async function getFeaturedPosts() {
       "category": categories[0]->title,
       publishedAt
     }`
-    return client.fetch(fallbackQuery)
+    return client.fetch(fallbackQuery, {}, {
+      next: { revalidate: 60 }
+    })
   }
   
   return posts

@@ -14,13 +14,15 @@ export function CounterAnimation({ value, duration = 2000, className = "" }: Cou
   const ref = useRef<HTMLDivElement>(null)
 
   // Extract number from string (e.g., "5000+" -> 5000, "15+" -> 15)
-  const extractNumber = (str: string): number => {
+  const extractNumber = (str: string | undefined | null): number => {
+    if (!str) return 0
     const match = str.match(/\d+/)
     return match ? parseInt(match[0], 10) : 0
   }
 
   // Get suffix (e.g., "+", "K", "%", etc.)
-  const getSuffix = (str: string): string => {
+  const getSuffix = (str: string | undefined | null): string => {
+    if (!str) return ""
     return str.replace(/\d+/, "").trim()
   }
 

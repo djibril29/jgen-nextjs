@@ -8,7 +8,8 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const category = searchParams.get('category')
     const featured = searchParams.get('featured')
-    const limit = parseInt(searchParams.get('limit') || '20')
+    const limitParam = searchParams.get('limit')
+    const limit = limitParam ? parseInt(limitParam) : 100
 
     let query = `*[_type == "resource"`
     const params: any = {}

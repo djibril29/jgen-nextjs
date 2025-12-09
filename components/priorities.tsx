@@ -10,7 +10,9 @@ export async function Priorities() {
     "slug": slug.current,
     featuredImage
   }`
-  const programs = await client.fetch<ProgramCard[]>(query)
+  const programs = await client.fetch<ProgramCard[]>(query, {}, {
+    next: { revalidate: 60 } // Revalidate every 60 seconds
+  })
   return (
     <Suspense>
       {/* @ts-expect-error Async Server/Client boundary */}
