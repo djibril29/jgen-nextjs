@@ -109,8 +109,10 @@ export default function RootLayout({
         {/* Mailchimp Newsletter Integration */}
         <Script
           id="mcjs"
-          strategy="afterInteractive"
-          src="https://chimpstatic.com/mcjs-connected/js/users/82a350c96cc3fb21f345f388f/27dcfbf9d6363585b6717376a.js"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/82a350c96cc3fb21f345f388f/f721dc9b90678893f85cd88ac.js");`
+          }}
         />
       </head>
       <body className={`font-sans ${anton.variable} ${openSans.variable} antialiased`}>
