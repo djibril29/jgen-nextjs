@@ -4,6 +4,7 @@ import { Anton } from "next/font/google"
 import { Open_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import Script from "next/script"
 import { OrganizationSchema, WebsiteSchema } from "@/components/structured-data"
 import "./globals.css"
 
@@ -105,6 +106,12 @@ export default function RootLayout({
       <head>
         <OrganizationSchema />
         <WebsiteSchema />
+        {/* Mailchimp Newsletter Integration */}
+        <Script
+          id="mcjs"
+          strategy="afterInteractive"
+          src="https://chimpstatic.com/mcjs-connected/js/users/82a350c96cc3fb21f345f388f/27dcfbf9d6363585b6717376a.js"
+        />
       </head>
       <body className={`font-sans ${anton.variable} ${openSans.variable} antialiased`}>
         <Suspense fallback={null}>{children}</Suspense>
