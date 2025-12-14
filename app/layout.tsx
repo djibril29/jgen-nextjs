@@ -4,7 +4,6 @@ import { Anton } from "next/font/google"
 import { Open_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
-import Script from "next/script"
 import { OrganizationSchema, WebsiteSchema } from "@/components/structured-data"
 import "./globals.css"
 
@@ -107,9 +106,8 @@ export default function RootLayout({
         <OrganizationSchema />
         <WebsiteSchema />
         {/* Mailchimp Newsletter Integration */}
-        <Script
+        <script
           id="mcjs"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/82a350c96cc3fb21f345f388f/f721dc9b90678893f85cd88ac.js");`
           }}
