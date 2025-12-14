@@ -85,18 +85,20 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
                   </div>
                 </div>
 
-                {/* Visualiseur PDF intégré */}
-                <div className="w-full border-2 border-border rounded-xl overflow-hidden shadow-xl bg-gray-50">
-                  <div className="bg-gray-100 border-b border-border px-4 py-2 flex items-center justify-between">
-                    <span className="text-sm font-medium text-muted-foreground">Aperçu du document</span>
-                    <span className="text-xs text-muted-foreground hidden sm:inline">Utilisez la molette pour naviguer</span>
+                {/* Visualiseur PDF intégré - Pleine largeur */}
+                <div className="-mx-8 sm:-mx-12 md:-mx-16 lg:-mx-24">
+                  <div className="w-full border-y-2 border-border overflow-hidden shadow-2xl bg-gray-50">
+                    <div className="bg-gray-800 border-b border-gray-700 px-6 py-3 flex items-center justify-between">
+                      <span className="text-sm font-medium text-white">📄 Aperçu du document</span>
+                      <span className="text-xs text-gray-300 hidden sm:inline">Utilisez la molette pour naviguer • Cliquez sur le PDF pour zoomer</span>
+                    </div>
+                    <iframe
+                      src={`${pdfUrl}#toolbar=1&navpanes=1&scrollbar=1&view=FitH`}
+                      className="w-full h-[85vh] min-h-[600px] bg-white"
+                      title={resource.title}
+                      allow="fullscreen"
+                    />
                   </div>
-                  <iframe
-                    src={`${pdfUrl}#toolbar=1&navpanes=1&scrollbar=1&view=FitH`}
-                    className="w-full h-[600px] md:h-[800px] lg:h-[1000px] bg-white"
-                    title={resource.title}
-                    allow="fullscreen"
-                  />
                 </div>
 
                 {/* Message d'aide */}
@@ -243,10 +245,10 @@ export default async function ResourcePage({ params }: { params: Promise<{ slug:
 
       {/* Resource Content */}
       <section className="py-12">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <Card>
-              <CardContent className="p-8">
+        <div className={`container mx-auto px-4 lg:px-8 ${resource.type === 'pdf' ? 'max-w-7xl' : ''}`}>
+          <div className={resource.type === 'pdf' ? 'max-w-7xl mx-auto' : 'max-w-4xl mx-auto'}>
+            <Card className={resource.type === 'pdf' ? 'overflow-visible' : ''}>
+              <CardContent className={resource.type === 'pdf' ? 'p-4 sm:p-6 md:p-8' : 'p-8'}>
                 {renderResourceContent()}
               </CardContent>
             </Card>

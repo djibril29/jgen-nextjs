@@ -6,7 +6,7 @@ import { useState } from "react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Mail } from "lucide-react"
+import { Mail, AlertCircle } from "lucide-react"
 
 interface NewsletterModalProps {
   open: boolean
@@ -17,23 +17,40 @@ export function NewsletterModal({ open, onOpenChange }: NewsletterModalProps) {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError(null)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+      const data = await response.json()
 
-    // Reset after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setEmail("")
-      onOpenChange(false)
-    }, 3000)
+      if (data.success) {
+        setIsSubmitted(true)
+        // Reset after 3 seconds
+        setTimeout(() => {
+          setIsSubmitted(false)
+          setEmail("")
+          onOpenChange(false)
+        }, 3000)
+      } else {
+        setError(data.error || "Une erreur est survenue lors de l'inscription.")
+      }
+    } catch (err) {
+      setError("Une erreur est survenue. Veuillez réessayer.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -61,11 +78,23 @@ export function NewsletterModal({ open, onOpenChange }: NewsletterModalProps) {
                 type="email"
                 placeholder="Votre adresse email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                  setError(null) // Clear error when user types
+                }}
                 required
-                className="h-12 text-lg"
+                className={`h-12 text-lg ${error ? 'border-red-500 focus:ring-red-500' : ''}`}
               />
             </div>
+            
+            {/* Error message */}
+            {error && (
+              <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+                <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                <span>{error}</span>
+              </div>
+            )}
+            
             <Button type="submit" disabled={isSubmitting} className="w-full h-12 text-lg">
               {isSubmitting ? "Inscription en cours..." : "S'abonner"}
             </Button>
