@@ -6,6 +6,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  // Use fresh data during development; enable CDN in production for speed
-  useCdn: process.env.NODE_ENV === 'production',
+  // Disable CDN to always get fresh data
+  // Set to true in production if you want faster responses (with 60s delay for updates)
+  useCdn: false,
 })

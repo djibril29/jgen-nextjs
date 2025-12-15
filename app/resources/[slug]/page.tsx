@@ -36,8 +36,13 @@ async function getResource(slug: string) {
     tags
   }`
 
-  return client.fetch(query, { slug })
+  return client.fetch(query, { slug }, {
+    next: { revalidate: 30 } // Revalidate every 30 seconds
+  })
 }
+
+// Enable ISR (Incremental Static Regeneration)
+export const revalidate = 30
 
 export default async function ResourcePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
