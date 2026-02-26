@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     canonical: 'https://jgen.sn',
   },
   openGraph: {
-    title: "J-GEN SENEGAL - Lutter contre les violences basées sur le genre",
-    description: "Organisation féministe sénégalaise engagée dans la lutte contre les violences basées sur le genre",
+    title: "J-GEN SENEGAL - Lutter contre les violences basées sur le genre au Sénégal",
+    description: "Organisation féministe sénégalaise engagée dans la lutte contre les violences basées sur le genre et les droits des femmes au Sénégal",
     url: "https://jgen.sn",
     images: ["/empowered-african-women-standing-together-in-solid.jpg"],
   },
