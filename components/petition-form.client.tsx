@@ -291,8 +291,9 @@ export function PetitionForm({ initialCount }: PetitionFormProps) {
             <div className="flex items-start gap-2 text-xs text-muted-foreground">
               <input type="checkbox" id="consent" required className="mt-0.5 shrink-0" />
               <label htmlFor="consent">
-                J&apos;accepte que mes données soient utilisées dans le cadre de cette pétition et
-                de la mobilisation pour les droits des femmes au Sénégal.
+                En cochant cette case, vous acceptez de recevoir par e-mail des mises à jour sur
+                nos actions. Vous pouvez vous désabonner à tout moment en utilisant le lien présent
+                dans chaque e-mail.
               </label>
             </div>
             <Button
