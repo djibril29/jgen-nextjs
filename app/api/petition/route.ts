@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Redis } from '@upstash/redis'
 
-const redis = Redis.fromEnv()
-
 const PETITION_KEY = 'petition:count'
+
+function getRedis() {
+  return Redis.fromEnv()
+}
 const GOAL = 5000
 
 export async function GET() {
   try {
-    const count = (await redis.get<number>(PETITION_KEY)) ?? 0
+    const count = (await getRedis().get<number>(PETITION_KEY)) ?? 0
     return NextResponse.json({ count, goal: GOAL })
   } catch (error) {
     console.error('Redis GET error:', error)
@@ -65,7 +67,7 @@ export async function POST(request: NextRequest) {
     // If already signed, don't increment counter but return success
     if (!mcResponse.ok) {
       if (mcData.title === 'Member Exists') {
-        const count = (await redis.get<number>(PETITION_KEY)) ?? 0
+        const count = (await getRedis().get<number>(PETITION_KEY)) ?? 0
         return NextResponse.json({
           success: false,
           alreadySigned: true,
@@ -81,7 +83,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Increment counter in Redis
-    const newCount = await redis.incr(PETITION_KEY)
+    const newCount = await getRedis().incr(PETITION_KEY)
 
     return NextResponse.json({ success: true, count: newCount, goal: GOAL })
   } catch (error) {

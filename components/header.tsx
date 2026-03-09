@@ -86,7 +86,7 @@ export function Header() {
             </Link>
 
             {/* Desktop Navigation - Centered, responsive */}
-            <nav className="hidden xl:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
+            <nav className="hidden lg:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -104,7 +104,7 @@ export function Header() {
             </nav>
 
             {/* Right side - Social Icons & Newsletter button */}
-            <div className="hidden xl:flex items-center gap-4 flex-shrink-0">
+            <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
               {/* Social Icons with Green Accent */}
               <div className="flex items-center gap-2">
                 <div className="w-10 h-10 rounded-full bg-[#00d4aa] flex items-center justify-center">
@@ -161,9 +161,9 @@ export function Header() {
             </div>
 
             {/* Mobile/Tablet Menu Button */}
-            <button 
+            <button
               className={cn(
-                "xl:hidden p-2 flex-shrink-0 transition-colors z-[110] relative",
+                "lg:hidden p-2 flex-shrink-0 transition-colors z-[110] relative",
                 isMenuOpen && "text-[#00d4aa]"
               )} 
               onClick={() => setIsMenuOpen(!isMenuOpen)} 
@@ -181,12 +181,12 @@ export function Header() {
         <>
           {/* Backdrop overlay */}
           <div 
-            className="xl:hidden fixed inset-0 bg-black/50 z-[9998] animate-in fade-in duration-300"
+            className="lg:hidden fixed inset-0 bg-black/50 z-[9998] animate-in fade-in duration-300"
             onClick={() => setIsMenuOpen(false)}
           />
           
           {/* Sidebar Menu */}
-          <div className="xl:hidden fixed left-0 top-0 bottom-0 w-[85%] sm:w-[400px] bg-white z-[9999] overflow-y-auto animate-in slide-in-from-left duration-300 shadow-2xl">
+          <div className="lg:hidden fixed left-0 top-0 bottom-0 w-[85%] sm:w-[400px] bg-white z-[9999] overflow-y-auto animate-in slide-in-from-left duration-300 shadow-2xl">
             {/* Close button */}
             <button
               onClick={() => setIsMenuOpen(false)}

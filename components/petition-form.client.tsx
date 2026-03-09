@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { CheckCircle2, Loader2, Copy, Check } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const GOAL = 5000
 
@@ -49,7 +50,10 @@ function ShareButtons({ shareUrl, shareText, compact = false }: { shareUrl: stri
     })
   }
 
-  const size = compact ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'
+  const base = cn(
+    'flex items-center gap-1.5 rounded-full font-medium transition-colors',
+    compact ? 'px-3 py-1.5 text-xs' : 'px-4 py-2 text-sm'
+  )
 
   return (
     <div className="flex flex-wrap gap-2">
@@ -57,7 +61,7 @@ function ShareButtons({ shareUrl, shareText, compact = false }: { shareUrl: stri
         href={`https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center gap-1.5 ${size} rounded-full bg-green-500 text-white font-medium hover:bg-green-600 transition-colors`}
+        className={cn(base, 'bg-green-500 text-white hover:bg-green-600')}
       >
         WhatsApp
       </a>
@@ -65,7 +69,7 @@ function ShareButtons({ shareUrl, shareText, compact = false }: { shareUrl: stri
         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center gap-1.5 ${size} rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors`}
+        className={cn(base, 'bg-blue-600 text-white hover:bg-blue-700')}
       >
         Facebook
       </a>
@@ -73,7 +77,7 @@ function ShareButtons({ shareUrl, shareText, compact = false }: { shareUrl: stri
         href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center gap-1.5 ${size} rounded-full bg-[#0077b5] text-white font-medium hover:bg-[#005f91] transition-colors`}
+        className={cn(base, 'bg-[#0077b5] text-white hover:bg-[#005f91]')}
       >
         LinkedIn
       </a>
@@ -81,13 +85,13 @@ function ShareButtons({ shareUrl, shareText, compact = false }: { shareUrl: stri
         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className={`flex items-center gap-1.5 ${size} rounded-full bg-black text-white font-medium hover:bg-zinc-800 transition-colors`}
+        className={cn(base, 'bg-black text-white hover:bg-zinc-800')}
       >
         X
       </a>
       <button
         onClick={copyLink}
-        className={`flex items-center gap-1.5 ${size} rounded-full border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors`}
+        className={cn(base, 'border border-gray-300 text-gray-700 hover:bg-gray-50')}
       >
         {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
         {copied ? 'Copié !' : 'Copier'}
@@ -176,7 +180,8 @@ export function PetitionForm({ initialCount }: PetitionFormProps) {
     }
   }
 
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : 'https://jgen.sn/petition'
+  const [shareUrl, setShareUrl] = useState('https://jgen.sn/petition')
+  useEffect(() => { setShareUrl(window.location.href) }, [])
   const shareText = 'Je viens de signer la pétition pour les droits des femmes au Sénégal. Rejoignez-moi !'
 
   return (
