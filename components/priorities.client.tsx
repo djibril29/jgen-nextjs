@@ -47,7 +47,7 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
   }, [api])
 
   return (
-    <section className="py-10 my-20 lg:py-32 bg-white overflow-hidden ">
+    <section className="py-100 my-20 lg:py-32 bg-white overflow-hidden ">
       <div className="container mx-auto px-4 lg:px-8">
 
         {/* Header — title only */}
