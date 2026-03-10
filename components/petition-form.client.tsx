@@ -180,8 +180,7 @@ export function PetitionForm({ initialCount }: PetitionFormProps) {
     }
   }
 
-  const [shareUrl, setShareUrl] = useState('https://jgen.sn/petition')
-  useEffect(() => { setShareUrl(window.location.href) }, [])
+  const shareUrl = 'https://jgen.sn/petition'
   const shareText = 'Je viens de signer la pétition pour les droits des femmes au Sénégal. Rejoignez-moi !'
 
   return (

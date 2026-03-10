@@ -15,6 +15,11 @@ export const metadata: Metadata = {
     title: 'Pétition — Pour les droits des femmes au Sénégal',
     description: 'Chaque signature compte. Agissons maintenant.',
     url: 'https://jgen.sn/petition',
+    images: [{ url: 'https://jgen.sn/petition-hero.jpeg', width: 1200, height: 630, alt: 'Pétition J-GEN SÉNÉGAL' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['https://jgen.sn/petition-hero.jpeg'],
   },
 }
 
@@ -74,7 +79,7 @@ export default async function PetitionPage() {
         <div className="relative overflow-hidden min-h-[60vh] lg:min-h-0">
           <div className="absolute top-0 left-0 right-0 h-2 bg-[#c61d4d] z-10" />
           <Image
-            src="/petition-hero.png"
+            src="/petition-hero.jpeg"
             alt="Femme sénégalaise levant le poing pour ses droits"
             fill
             className="object-cover object-center"
