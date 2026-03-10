@@ -58,7 +58,7 @@ function ShareButtons({ shareUrl, shareText, compact = false }: { shareUrl: stri
   return (
     <div className="flex flex-wrap gap-2">
       <a
-        href={`https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`}
+        href={`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(base, 'bg-green-500 text-white hover:bg-green-600')}
@@ -82,7 +82,7 @@ function ShareButtons({ shareUrl, shareText, compact = false }: { shareUrl: stri
         LinkedIn
       </a>
       <a
-        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
+        href={`https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(base, 'bg-black text-white hover:bg-zinc-800')}
