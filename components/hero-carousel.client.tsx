@@ -56,7 +56,7 @@ interface SlideProps {
 const Slide = ({ slide, current }: SlideProps) => {
   const [videoOpen, setVideoOpen] = useState(false)
   const imageUrl = slide.image
-    ? urlFor(slide.image).width(900).height(750).url()
+    ? urlFor(slide.image).width(1920).height(900).url()
     : "/empowered-african-women-standing-together-in-solid.jpg"
 
   return (
@@ -65,91 +65,87 @@ const Slide = ({ slide, current }: SlideProps) => {
         current ? "opacity-100 z-10" : "opacity-0 z-0"
       }`}
     >
-      <div className="flex flex-col lg:grid lg:grid-cols-2 h-full">
+      {/* Background image */}
+      <Image
+        src={imageUrl}
+        alt={slide.title}
+        fill
+        className="object-cover"
+        priority={current}
+        quality={85}
+        sizes="100vw"
+      />
 
-        {/* Image — top on mobile, right on desktop */}
-        <div className="relative h-52 sm:h-64 lg:h-full overflow-hidden lg:col-start-2 lg:row-start-1">
-          <div className="absolute top-0 left-0 right-0 h-2 bg-[#c61d4d] z-10" />
-          <Image
-            src={imageUrl}
-            alt={slide.title}
-            fill
-            className="object-cover"
-            priority={current}
-            quality={85}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-        </div>
+      {/* Dark gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20" />
 
-        {/* Text — below image on mobile, left on desktop */}
-        <div className="bg-[#3d1f47] flex-1 flex items-center px-8 py-10 pb-16 lg:px-16 lg:py-32 lg:pb-32 lg:col-start-1 lg:row-start-1">
-          <div className="max-w-xl w-full">
+      {/* Text content */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="container mx-auto px-6 lg:px-16 text-center max-w-4xl">
 
-            {/* Badge */}
-            {slide.badge && (
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ffd23f]/10 border border-[#ffd23f]/30 mb-4">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ffd23f] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ffd23f]" />
-                </span>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#ffd23f]">
-                  {slide.badge}
-                </span>
-              </div>
-            )}
+          {/* Badge */}
+          {slide.badge && (
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ffd23f]/10 border border-[#ffd23f]/30 mb-5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ffd23f] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ffd23f]" />
+              </span>
+              <span className="text-xs font-bold uppercase tracking-widest text-[#ffd23f]">
+                {slide.badge}
+              </span>
+            </div>
+          )}
 
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight mb-4 uppercase tracking-tight">
-              {slide.title}
-            </h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-5 uppercase tracking-tight">
+            {slide.title}
+          </h1>
 
-            {slide.subtitle && (
-              <p className="!text-sm lg:!text-base text-white/75 leading-relaxed mb-7 max-w-lg">
-                {slide.subtitle.length > 120
-                  ? slide.subtitle.slice(0, 120).trimEnd() + "…"
-                  : slide.subtitle}
-              </p>
-            )}
+          {slide.subtitle && (
+            <p className="text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed mb-8 max-w-2xl mx-auto">
+              {slide.subtitle.length > 160
+                ? slide.subtitle.slice(0, 160).trimEnd() + "…"
+                : slide.subtitle}
+            </p>
+          )}
 
-            {/* CTA */}
-            {slide.youtubeUrl ? (
-              <>
-                <button
-                  onClick={() => setVideoOpen(true)}
-                  className="inline-flex items-center gap-3 text-[#ffd23f] hover:text-[#ffd23f]/80 transition-colors group"
-                >
-                  <span className="text-base font-bold uppercase tracking-wide">{slide.ctaLabel}</span>
-                  <Play className="h-5 w-5 transition-transform group-hover:scale-110" />
-                </button>
-                <Dialog open={videoOpen} onOpenChange={setVideoOpen}>
-                  <DialogContent className="max-w-4xl p-0 border-0 bg-black">
-                    <DialogTitle className="sr-only">{slide.title}</DialogTitle>
-                    <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                      {videoOpen && (
-                        <iframe
-                          className="absolute inset-0 w-full h-full"
-                          src={toYouTubeEmbedUrl(slide.youtubeUrl)}
-                          title={slide.title}
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                      )}
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </>
-            ) : slide.ctaUrl ? (
-              <Link
-                href={slide.ctaUrl}
+          {/* CTA */}
+          {slide.youtubeUrl ? (
+            <>
+              <button
+                onClick={() => setVideoOpen(true)}
                 className="inline-flex items-center gap-3 text-[#ffd23f] hover:text-[#ffd23f]/80 transition-colors group"
               >
                 <span className="text-base font-bold uppercase tracking-wide">{slide.ctaLabel}</span>
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-2" />
-              </Link>
-            ) : null}
+                <Play className="h-5 w-5 transition-transform group-hover:scale-110" />
+              </button>
+              <Dialog open={videoOpen} onOpenChange={setVideoOpen}>
+                <DialogContent className="max-w-4xl p-0 border-0 bg-black">
+                  <DialogTitle className="sr-only">{slide.title}</DialogTitle>
+                  <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                    {videoOpen && (
+                      <iframe
+                        className="absolute inset-0 w-full h-full"
+                        src={toYouTubeEmbedUrl(slide.youtubeUrl)}
+                        title={slide.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    )}
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </>
+          ) : slide.ctaUrl ? (
+            <Link
+              href={slide.ctaUrl}
+              className="inline-flex items-center gap-3 text-[#ffd23f] hover:text-[#ffd23f]/80 transition-colors group"
+            >
+              <span className="text-base font-bold uppercase tracking-wide">{slide.ctaLabel}</span>
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-2" />
+            </Link>
+          ) : null}
 
-          </div>
         </div>
-
       </div>
     </div>
   )
@@ -182,25 +178,23 @@ export function HeroCarouselClient({ slides }: HeroCarouselClientProps) {
   if (!slides || slides.length === 0) {
     return (
       <section className="relative pt-16 lg:pt-20 overflow-hidden isolate" style={{ zIndex: 1 }}>
-        <div className="flex flex-col lg:grid lg:grid-cols-2 min-h-[500px] sm:min-h-[550px] lg:h-[700px] xl:h-[750px]">
-          <div className="relative h-52 sm:h-64 lg:h-full overflow-hidden lg:col-start-2 lg:row-start-1">
-            <div className="absolute top-0 left-0 right-0 h-2 bg-[#c61d4d] z-10" />
-            <Image
-              src="/empowered-african-women-standing-together-in-solid.jpg"
-              alt="Femmes sénégalaises unies pour leurs droits"
-              fill
-              className="object-cover"
-              priority
-              quality={85}
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
-          <div className="bg-[#3d1f47] flex-1 flex items-center px-8 py-10 lg:px-16 lg:py-32 lg:col-start-1 lg:row-start-1">
-            <div className="max-w-xl w-full">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight mb-4 uppercase tracking-tight">
+        <div className="relative min-h-[500px] sm:min-h-[550px] lg:h-[700px] xl:h-[750px]">
+          <Image
+            src="/empowered-african-women-standing-together-in-solid.jpg"
+            alt="Femmes sénégalaises unies pour leurs droits"
+            fill
+            className="object-cover"
+            priority
+            quality={85}
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="container mx-auto px-6 lg:px-16 text-center max-w-4xl">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-5 uppercase tracking-tight">
                 Bienvenue sur J-GEN SENEGAL
               </h1>
-              <p className="!text-sm lg:!text-base text-white/75 leading-relaxed mb-8">
+              <p className="text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed mb-8 max-w-2xl mx-auto">
                 Œuvrant pour un Sénégal où les femmes et les filles vivent libres de toute violence et discrimination.
               </p>
               <Link
@@ -238,10 +232,10 @@ export function HeroCarouselClient({ slides }: HeroCarouselClientProps) {
           />
         ))}
 
-        {/* Navigation bar — sits on the left (purple) half */}
+        {/* Navigation bar — bottom center */}
         {slides.length > 1 && (
-          <div className="absolute bottom-0 left-0 z-20 w-full lg:w-1/2 border-t border-white/10">
-            <div className="px-8 lg:px-16 py-5 flex items-center justify-between">
+          <div className="absolute bottom-0 left-0 right-0 z-20 border-t border-white/10">
+            <div className="container mx-auto px-6 lg:px-16 py-5 flex items-center justify-between">
 
               {/* Arrows */}
               <div className="flex gap-3">
