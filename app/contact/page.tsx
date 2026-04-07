@@ -54,44 +54,38 @@ export default function ContactPage() {
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <MapPin className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Visit Us</h3>
+                <h3 className="text-lg font-semibold mb-2">Adresse</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Dakar, Senegal
-                  <br />
-                  [Address Details]
+                  Dakar, Sénégal
                 </p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Phone className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Call Us</h3>
+                <h3 className="text-lg font-semibold mb-2">Appelez-nous</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  +221 XX XXX XXXX
+                  33 868 91 29
                   <br />
-                  24/7 Hotline
+                  Lun-Ven : 9h - 17h
                 </p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Mail className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Email Us</h3>
+                <h3 className="text-lg font-semibold mb-2">Écrivez-nous</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  info@jgensenegal.org
-                  <br />
-                  support@jgensenegal.org
+                  info@jgen.sn
                 </p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Clock className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Office Hours</h3>
+                <h3 className="text-lg font-semibold mb-2">Horaires</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Mon-Fri: 9AM - 5PM
-                  <br />
-                  Emergency: 24/7
+                  Lun-Ven : 9h - 17h
                 </p>
               </div>
             </div>
