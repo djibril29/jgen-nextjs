@@ -3,17 +3,22 @@ import { Resend } from 'resend'
 import { z } from 'zod'
 import { Redis } from '@upstash/redis'
 
-// --- Initialisation Resend ---
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Resend et Redis sont initialisés à la demande (pas au build)
+function getResend() {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error('RESEND_API_KEY manquant dans les variables d\'environnement.')
+  }
+  return new Resend(process.env.RESEND_API_KEY)
+}
 
-// --- Initialisation Redis (rate limiting) ---
-// Si les variables Upstash ne sont pas configurées, le rate limiting est désactivé
-let redis: Redis | null = null
-if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
-  redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN,
-  })
+function getRedis(): Redis | null {
+  if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+    return new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    })
+  }
+  return null
 }
 
 // --- Schéma de validation Zod ---
@@ -38,6 +43,7 @@ function sanitize(str: string): string {
 
 // --- Rate limiting : max 3 messages par IP toutes les 10 minutes ---
 async function checkRateLimit(ip: string): Promise<boolean> {
+  const redis = getRedis()
   if (!redis) return true // pas de Redis → on laisse passer
 
   const key = `contact_rate_limit:${ip}`
@@ -154,6 +160,7 @@ export async function POST(request: NextRequest) {
   const safeMessage = sanitize(message)
 
   // --- Envoi de l'email via Resend ---
+  const resend = getResend()
   const { error } = await resend.emails.send({
     from: 'J-GEN SENEGAL <noreply@jgen.sn>',
     to: ['info@jgen.sn'],
