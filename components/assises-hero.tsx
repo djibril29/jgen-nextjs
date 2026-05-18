@@ -49,17 +49,17 @@ export function AssisesHero() {
 
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <a
-                href="#calendrier"
+                href="#participer-en-ligne"
                 className="inline-flex items-center gap-2 bg-[#c61d4d] hover:bg-[#a8173f] text-white font-bold px-7 py-3.5 rounded-full transition-all hover:shadow-xl hover:-translate-y-0.5"
               >
-                Voir le calendrier
+                Participer en ligne
                 <ArrowDown className="h-4 w-4" />
               </a>
               <a
-                href="#documents"
+                href="#calendrier"
                 className="inline-flex items-center gap-2 border-2 border-white/70 hover:border-white text-white font-semibold px-7 py-3.5 rounded-full backdrop-blur-sm bg-white/5 hover:bg-white/10 transition-all"
               >
-                Documents officiels
+                Voir le calendrier
               </a>
             </div>
           </div>

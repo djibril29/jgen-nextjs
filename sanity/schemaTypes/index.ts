@@ -6,7 +6,17 @@ import { programType } from './documents/program'
 import { resourceType } from './documents/resource'
 import { careerType } from './documents/career'
 import { heroSlideType } from './documents/heroSlide'
+import { assisesDocumentType } from './documents/assisesDocument'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [postType, authorType, categoryType, programType, resourceType, careerType, heroSlideType],
+  types: [
+    postType,
+    authorType,
+    categoryType,
+    programType,
+    resourceType,
+    careerType,
+    heroSlideType,
+    assisesDocumentType,
+  ],
 }
