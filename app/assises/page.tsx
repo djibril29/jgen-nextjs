@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer"
 import { AssisesHero } from "@/components/assises-hero"
 import { AssisesOnline } from "@/components/assises-online"
 import { AssisesCalendar } from "@/components/assises-calendar"
+import { AssisesFeedback } from "@/components/assises-feedback"
 import { AssisesDocument, type AssisesDoc } from "@/components/assises-document"
 import { client } from "@/sanity/lib/client"
 import type { Metadata } from "next"
@@ -65,6 +66,7 @@ export default async function AssisesPage() {
       <AssisesHero />
       <AssisesOnline />
       <AssisesCalendar />
+      <AssisesFeedback />
       <AssisesDocument documents={documents} />
       <Footer />
     </main>
