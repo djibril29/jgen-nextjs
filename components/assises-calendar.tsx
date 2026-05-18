@@ -57,14 +57,14 @@ const SCHEDULE: AgendaDay[] = [
         time: "09h15 – 09h30",
         activity: "Rappel des objectifs et résultats attendus de la rencontre",
         comment: "Retour sur le contexte et les objectifs.",
-        lead: "Dr Selly Ba",
+        lead: "Mme Dior Fall Sow",
         type: "session",
       },
       {
         time: "09h30 – 10h00",
         activity: "Présentation des participants",
         comment: "Tour de table interactif.",
-        lead: "Dr Selly Ba",
+        lead: "Mme Dior Fall Sow",
         type: "session",
       },
       {
@@ -85,7 +85,7 @@ const SCHEDULE: AgendaDay[] = [
         activity: "Mise en place officielle du COPIL",
         comment:
           "Validation des missions, rôles, composition, mécanisme de coordination. Déclaration solennelle de mise en place du COPIL des Assises.",
-        lead: "Dr Selly Ba & Maimouna A. Yade",
+        lead: "Mme Dior Fall Sow & Maimouna A. Yade",
         type: "session",
       },
       {
@@ -120,7 +120,7 @@ const SCHEDULE: AgendaDay[] = [
         time: "09h00 – 09h10",
         activity: "Rappel des acquis du J1",
         comment: "Rappel des résultats et conclusions du jour 1.",
-        lead: "Dr Selly Ba",
+        lead: "Mme Dior Fall Sow",
         type: "session",
       },
       {
@@ -128,7 +128,7 @@ const SCHEDULE: AgendaDay[] = [
         activity: "Validation de la méthodologie des pré-assises",
         comment:
           "Structuration des pôles régionaux pour la tenue des pré-assises. Validation du format des pré-assises.",
-        lead: "Dr Selly Ba",
+        lead: "Mme Dior Fall Sow",
         type: "session",
       },
       {
@@ -167,7 +167,7 @@ const SCHEDULE: AgendaDay[] = [
         time: "16h00 – 16h30",
         activity: "Identification des prochaines étapes",
         comment: "Définition des jalons prioritaires à la sortie de l'atelier.",
-        lead: "Dr Selly Ba",
+        lead: "Mme Dior Fall Sow",
         type: "session",
       },
       {
@@ -175,7 +175,7 @@ const SCHEDULE: AgendaDay[] = [
         activity: "Mot de clôture",
         comment:
           "Retours des participants. Mot de clôture de la Directrice de JGEN.",
-        lead: "Dr Selly Ba",
+        lead: "Mme Dior Fall Sow",
         type: "session",
       },
     ],
