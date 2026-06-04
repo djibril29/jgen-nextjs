@@ -1,4 +1,4 @@
-import { FileText, Download, ExternalLink, Inbox, Calendar } from "lucide-react"
+import { FileText, ExternalLink, Inbox, Calendar } from "lucide-react"
 
 export interface AssisesDoc {
   _id: string
@@ -43,13 +43,6 @@ function categoryStyles(category: string) {
     default:
       return "bg-white/20 text-white"
   }
-}
-
-function ensureDownloadUrl(url: string, filename?: string): string {
-  // Sanity asset URLs support `?dl=filename` to force download with that name
-  if (!filename) return url
-  const separator = url.includes("?") ? "&" : "?"
-  return `${url}${separator}dl=${encodeURIComponent(filename)}`
 }
 
 export function AssisesDocument({ documents }: AssisesDocumentProps) {
@@ -102,10 +95,6 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
           <div className="max-w-4xl mx-auto grid gap-6 md:gap-8">
             {documents.map((doc) => {
               const fileSize = formatFileSize(doc.fileSize)
-              const downloadUrl = ensureDownloadUrl(
-                doc.fileUrl,
-                doc.originalFilename ?? `${doc.title}.pdf`,
-              )
 
               return (
                 <article
@@ -151,19 +140,12 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
                       </div>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row md:flex-col gap-2 md:gap-3 flex-shrink-0">
-                      <a
-                        href={downloadUrl}
-                        className="inline-flex items-center justify-center gap-2 bg-[#c61d4d] hover:bg-[#a8173f] text-white font-bold px-5 py-3 rounded-full text-sm transition-all hover:shadow-lg whitespace-nowrap"
-                      >
-                        Télécharger
-                        <Download className="h-4 w-4" />
-                      </a>
+                    <div className="flex-shrink-0">
                       <a
                         href={doc.fileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 border-2 border-[#3d1f47]/20 hover:border-[#3d1f47] text-[#3d1f47] font-semibold px-5 py-3 rounded-full text-sm transition-all whitespace-nowrap"
+                        className="inline-flex items-center justify-center gap-2 bg-[#c61d4d] hover:bg-[#a8173f] text-white font-bold px-5 py-3 rounded-full text-sm transition-all hover:shadow-lg whitespace-nowrap"
                       >
                         Aperçu
                         <ExternalLink className="h-4 w-4" />
