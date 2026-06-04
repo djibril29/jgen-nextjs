@@ -30,7 +30,6 @@ export const assisesDocumentType = defineType({
         ],
         layout: 'radio',
       },
-      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'pdfFile',
