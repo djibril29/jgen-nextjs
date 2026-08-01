@@ -26,8 +26,10 @@ export function EditorialColumn({
   return (
     <div
       className={cn(
-        "mx-auto w-full px-5 sm:px-6",
-        size === "prose" ? "max-w-[46rem]" : "max-w-[60rem]",
+        // Meme conteneur que le reste du site, pour que la newsletter
+        // s'aligne sur les autres pages au lieu d'avoir ses propres marges.
+        "container mx-auto px-4 lg:px-8",
+        size === "prose" ? "max-w-3xl" : "",
         className,
       )}
     >

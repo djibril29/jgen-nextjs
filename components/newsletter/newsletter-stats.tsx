@@ -22,7 +22,7 @@ export function NewsletterStats() {
         {/* Plus de cartes grises a liseré : le chiffre lui-meme porte le bloc,
             souligne du filet tricolore. Le contexte reste attache a chaque
             valeur — aucune donnee n'est presentee hors de son origine. */}
-        <ul className="grid gap-x-10 gap-y-12 sm:grid-cols-2">
+        <ul className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {statistics.map((stat) => (
             <li key={stat.id}>
               <StatBlock value={stat.value} label={stat.label} />

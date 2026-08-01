@@ -8,8 +8,7 @@ import { NewsletterHero } from "@/components/newsletter/newsletter-hero"
 import { NewsletterHighlights } from "@/components/newsletter/newsletter-highlights"
 import { NewsletterOutlook } from "@/components/newsletter/newsletter-outlook"
 import { NewsletterStats } from "@/components/newsletter/newsletter-stats"
-import { NewsletterTimeline } from "@/components/newsletter/newsletter-timeline"
-import { MagazineNav } from "@/components/patterns/magazine-nav.client"
+import { MagazineNav } from "@/components/patterns/magazine"
 import { newsletterSemesterOne2026 as data } from "@/content/newsletter-semestre-1-2026"
 import { resolveNewsletterImage } from "@/lib/newsletter-image"
 import { buildUrl } from "@/lib/site"
@@ -44,10 +43,7 @@ export const metadata: Metadata = {
 
 export default function NewsletterSemestreUn2026Page() {
   return (
-    // `magazine-page` active le defilement magnetique (voir globals.css). La
-    // classe est portee ici et nulle part ailleurs : aucune autre page du site
-    // n'est affectee.
-    <main className="magazine-page min-h-screen bg-white">
+    <main className="min-h-screen bg-white">
       <Header />
 
       {/* Seule bande pleine largeur de l'en-tete : elle annonce la page. Tout
@@ -59,15 +55,14 @@ export default function NewsletterSemestreUn2026Page() {
         chapters={[
           { id: "axes", label: "Les axes d'intervention" },
           { id: "temps-forts", label: "Temps forts" },
-          { id: "chronologie", label: "Chronologie" },
           { id: "chiffres", label: "Les chiffres" },
-          { id: "enseignements", label: "Enseignements" },
+          { id: "partenaires", label: "Partenaires" },
           { id: "agir", label: "Agir" },
         ]}
       />
+
       <NewsletterAxes />
       <NewsletterHighlights />
-      <NewsletterTimeline />
 
       {/* Le bilan chiffre ferme la narration plutot que de l'ouvrir : on lit
           d'abord ce qui a ete fait, on en voit la somme ensuite. */}

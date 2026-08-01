@@ -32,13 +32,6 @@ export function NewsletterCta() {
             <Button
               asChild
               size="lg"
-              className="h-auto bg-jgen-plum px-8 py-6 text-base font-bold text-white hover:bg-[#2d1537]"
-            >
-              <Link href={links.contact}>{cta.partner}</Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
               variant="outline"
               className="h-auto border-2 border-jgen-plum px-8 py-6 text-base font-bold text-jgen-plum hover:bg-jgen-plum hover:text-white"
             >
