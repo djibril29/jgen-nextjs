@@ -65,7 +65,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
           <span className="inline-block text-jgen-jaune text-xs font-bold uppercase tracking-[0.25em] mb-4">
             Ressources & documentation
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
             Documents officiels
           </h2>
           <div className="w-20 h-1 bg-jgen-rose mx-auto mb-6 rounded-full" />
@@ -77,11 +77,11 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
 
         {documents.length === 0 ? (
           <div className="max-w-2xl mx-auto">
-            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-10 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-5">
+            <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-none p-10 text-center">
+              <div className="w-16 h-16 rounded-none bg-white/10 flex items-center justify-center mx-auto mb-5">
                 <Inbox className="h-7 w-7 text-jgen-jaune" />
               </div>
-              <h3 className="text-xl font-black text-white mb-2">
+              <h3 className="text-xl font-extrabold text-white mb-2">
                 Documents bientôt disponibles
               </h3>
               <p className="text-white/70 leading-relaxed">
@@ -99,11 +99,11 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
               return (
                 <article
                   key={doc._id}
-                  className="group bg-white rounded-2xl p-6 lg:p-8 shadow-2xl hover:shadow-[0_20px_60px_-15px_rgba(198,29,77,0.4)] transition-all duration-300 hover:-translate-y-1"
+                  className="group bg-white rounded-none p-6 lg:p-8 shadow-2xl hover:shadow-[0_20px_60px_-15px_rgba(198,29,77,0.4)] transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="flex flex-col md:flex-row md:items-center gap-6">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-jgen-rose to-[#a8173f] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-none bg-gradient-to-br from-jgen-rose to-[#a8173f] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                         <FileText className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
                       </div>
                     </div>
@@ -111,7 +111,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-2 mb-3">
                         <span
-                          className={`inline-block text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full ${categoryStyles(
+                          className={`inline-block text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full ${categoryStyles(
                             doc.category,
                           )}`}
                         >
@@ -126,7 +126,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
                           </span>
                         )}
                       </div>
-                      <h3 className="text-xl lg:text-2xl font-black text-jgen-plum mb-2 leading-tight">
+                      <h3 className="text-xl lg:text-2xl font-extrabold text-jgen-plum mb-2 leading-tight">
                         {doc.title}
                       </h3>
                       {doc.description && (

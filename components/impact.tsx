@@ -105,7 +105,7 @@ export function Impact() {
           </div>
 
           <div ref={ctaReveal.ref} className={`scroll-reveal-scale ${ctaReveal.isVisible ? "is-visible" : ""}`}>
-            <div className="bg-white text-gray-900 rounded-2xl p-8 md:p-12 lg:p-16 text-center max-w-4xl mx-auto shadow-2xl relative overflow-hidden">
+            <div className="bg-white text-gray-900 rounded-none p-8 md:p-12 lg:p-16 text-center max-w-4xl mx-auto shadow-2xl relative overflow-hidden">
               {/* Small decorative square inside the CTA box */}
               <div className="absolute top-0 right-0 w-16 h-16 bg-jgen-rose opacity-20" />
               <div className="absolute bottom-0 left-0 w-20 h-20 bg-jgen-jaune opacity-20 rotate-45" />

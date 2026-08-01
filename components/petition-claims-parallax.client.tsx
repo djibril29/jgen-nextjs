@@ -100,7 +100,7 @@ export function PetitionClaimsParallax() {
           <span className="mb-4 inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-jgen-jaune">
             Nos revendications
           </span>
-          <h2 className="mb-5 text-3xl font-black md:text-4xl">Des droits qui doivent enfin devenir concrets</h2>
+          <h2 className="mb-5 text-3xl font-extrabold md:text-4xl">Des droits qui doivent enfin devenir concrets</h2>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
             Faites défiler pour ressentir l’urgence de chaque demande. Chaque image et chaque mot
             rappellent ce que vivent les femmes et les filles quand la justice tarde.
@@ -148,7 +148,7 @@ export function PetitionClaimsParallax() {
                         <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.24em] text-jgen-rose">
                           {claim.tag}
                         </span>
-                        <h3 className="mb-4 text-3xl font-black leading-tight md:text-4xl">
+                        <h3 className="mb-4 text-3xl font-extrabold leading-tight md:text-4xl">
                           {claim.title}
                         </h3>
                         <p className="mb-6 text-base leading-relaxed text-jgen-plum/80 md:text-lg">

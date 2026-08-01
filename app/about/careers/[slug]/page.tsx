@@ -117,14 +117,14 @@ export default async function CareerDetailPage({
               <p className="text-sm font-semibold text-primary uppercase tracking-wide mb-4">
                 {career.subtitle || "OFFRE D'EMPLOI"}
               </p>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-12">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-12">
                 {career.title}
               </h1>
               
               {/* Featured Image */}
               <div className="max-w-2xl mx-auto mb-12">
-                <div className="bg-gradient-to-br from-[#f4a261] to-[#e9c46a] rounded-3xl p-8 md:p-12 shadow-xl">
-                  <div className="aspect-square max-w-md mx-auto flex items-center justify-center overflow-hidden rounded-2xl">
+                <div className="bg-gradient-to-br from-[#f4a261] to-[#e9c46a] rounded-none p-8 md:p-12 shadow-xl">
+                  <div className="aspect-square max-w-md mx-auto flex items-center justify-center overflow-hidden rounded-none">
                     {career.heroImage ? (
                       <img
                         src={urlFor(career.heroImage).width(600).height(600).url()}
@@ -307,7 +307,7 @@ export default async function CareerDetailPage({
                 <div className="sticky top-24 space-y-6">
                   {/* Advantages Card */}
                   {career.advantages && career.advantages.length > 0 && (
-                    <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                    <div className="bg-white rounded-none p-6 shadow-lg border border-gray-100">
                       <h3 className="text-xl font-bold mb-4">Avantages</h3>
                       <ul className="space-y-3">
                         {career.advantages.map((advantage: string, index: number) => (
@@ -323,7 +323,7 @@ export default async function CareerDetailPage({
                   )}
 
                   {/* Application Card */}
-                  <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                  <div className="bg-white rounded-none p-6 shadow-lg border border-gray-100">
                     <h3 className="text-xl font-bold mb-4">Prêt(e) à nous rejoindre ?</h3>
                     <p className="text-sm text-gray-600 mb-4">
                       Date limite de candidature :
@@ -364,7 +364,7 @@ export default async function CareerDetailPage({
 
                   {/* Info Card */}
                   {(career.duration || career.location) && (
-                    <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                    <div className="bg-white rounded-none p-6 shadow-lg border border-gray-100">
                       <h3 className="text-xl font-bold mb-4">Informations</h3>
                       <div className="space-y-3 text-sm">
                         {career.type && (
@@ -393,7 +393,7 @@ export default async function CareerDetailPage({
             </div>
 
             {/* About Section */}
-            <div className="mt-16 bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-100">
+            <div className="mt-16 bg-white rounded-none p-8 md:p-12 shadow-lg border border-gray-100">
               <h2 className="text-3xl md:text-4xl font-bold text-center mb-6">
                 A propos de J-GEN SENEGAL
               </h2>

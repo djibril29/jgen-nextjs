@@ -96,7 +96,7 @@ const Slide = ({ slide, current }: SlideProps) => {
             </div>
           )}
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-5 uppercase tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5 tracking-tight">
             {slide.title}
           </h1>
 
@@ -191,7 +191,7 @@ export function HeroCarouselClient({ slides }: HeroCarouselClientProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="container mx-auto px-6 lg:px-16 text-center max-w-4xl">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-5 uppercase tracking-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-5 tracking-tight">
                 Bienvenue sur J-GEN SENEGAL
               </h1>
               <p className="text-sm sm:text-base lg:text-lg text-white/80 leading-relaxed mb-8 max-w-2xl mx-auto">

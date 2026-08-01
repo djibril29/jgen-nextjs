@@ -315,7 +315,7 @@ export function PetitionForm({ initialCount }: PetitionFormProps) {
 
       {/* Right — Counter + progress */}
       <div className="space-y-6">
-        <div className="bg-white rounded-2xl shadow-sm border p-6">
+        <div className="bg-white rounded-none shadow-sm border p-6">
           <div className="flex items-end gap-2 mb-1">
             <span className="text-5xl font-bold text-jgen-plum tabular-nums">
               {animatedCount.toLocaleString('fr-SN')}

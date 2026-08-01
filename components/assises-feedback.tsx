@@ -35,7 +35,7 @@ export function AssisesFeedback() {
             <Sparkles className="h-3.5 w-3.5" />
             Atelier participatif
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-jgen-plum leading-tight mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-jgen-plum leading-tight mb-6">
             Partagez vos retours
           </h2>
           <div className="w-20 h-1 bg-jgen-rose mx-auto mb-6 rounded-full" />
@@ -47,7 +47,7 @@ export function AssisesFeedback() {
         </div>
 
         <div className="max-w-4xl mx-auto mb-12 lg:mb-16">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-jgen-rose to-[#8a1438] text-white p-8 lg:p-12 shadow-[0_25px_60px_-15px_rgba(198,29,77,0.5)]">
+          <div className="relative overflow-hidden rounded-none bg-gradient-to-br from-jgen-rose to-[#8a1438] text-white p-8 lg:p-12 shadow-[0_25px_60px_-15px_rgba(198,29,77,0.5)]">
             <div
               aria-hidden
               className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-jgen-jaune/25 blur-3xl pointer-events-none"
@@ -65,7 +65,7 @@ export function AssisesFeedback() {
                     Étape 1 — Soumettre votre retour
                   </span>
                 </div>
-                <h3 className="text-2xl lg:text-3xl font-black leading-tight mb-3">
+                <h3 className="text-2xl lg:text-3xl font-extrabold leading-tight mb-3">
                   Donnez votre avis en quelques secondes
                 </h3>
                 <p className="text-white/85 text-base lg:text-lg leading-relaxed mb-2">
@@ -94,7 +94,7 @@ export function AssisesFeedback() {
                 href={MENTIMETER_VOTE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 bg-jgen-jaune hover:bg-white text-jgen-plum font-black text-base lg:text-lg px-7 py-4 lg:px-9 lg:py-5 rounded-full transition-all hover:shadow-2xl hover:-translate-y-1 whitespace-nowrap"
+                className="inline-flex items-center justify-center gap-3 bg-jgen-jaune hover:bg-white text-jgen-plum font-extrabold text-base lg:text-lg px-7 py-4 lg:px-9 lg:py-5 rounded-full transition-all hover:shadow-2xl hover:-translate-y-1 whitespace-nowrap"
               >
                 <Send className="h-5 w-5" />
                 Donner mon avis
@@ -116,7 +116,7 @@ export function AssisesFeedback() {
             </span>
           </div>
 
-          <div className="relative rounded-3xl bg-white shadow-[0_25px_60px_-15px_rgba(61,31,71,0.25)] border border-jgen-plum/10 overflow-hidden">
+          <div className="relative rounded-none bg-white shadow-[0_25px_60px_-15px_rgba(61,31,71,0.25)] border border-jgen-plum/10 overflow-hidden">
             <div className="flex items-center gap-2 bg-jgen-plum text-white px-5 py-3 border-b border-white/10">
               <span className="flex gap-1.5" aria-hidden>
                 <span className="h-2.5 w-2.5 rounded-full bg-jgen-rose" />

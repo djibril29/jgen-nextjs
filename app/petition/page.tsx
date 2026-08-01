@@ -50,7 +50,7 @@ export default async function PetitionPage() {
             <span className="inline-block text-jgen-jaune text-xs font-semibold uppercase tracking-widest mb-6">
               Campagne & Mobilisation
             </span>
-            <h1 className="text-4xl md:text-5xl xl:text-6xl font-black text-white leading-tight mb-6">
+            <h1 className="text-4xl md:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-6">
               Pour les droits des femmes au Sénégal&nbsp;:{' '}
               <span className="text-jgen-rose">Agissons maintenant.</span>
             </h1>
@@ -91,7 +91,7 @@ export default async function PetitionPage() {
       {/* ── Pourquoi cette pétition ──────────────────────── */}
       <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
-          <h2 className="text-3xl md:text-4xl font-black text-jgen-plum mb-6">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-jgen-plum mb-6">
             Pourquoi cette pétition&nbsp;?
           </h2>
           <div className="w-16 h-1 bg-jgen-rose mx-auto mb-8" />
@@ -114,9 +114,9 @@ export default async function PetitionPage() {
       {/* ── Formulaire de signature ───────────────────────── */}
       <section id="signer" className="py-20 lg:py-28 bg-jgen-rose">
         <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
-          <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+          <div className="bg-white rounded-none shadow-xl p-8 md:p-12">
             <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-black text-jgen-plum mb-3">
+              <h2 className="text-3xl md:text-4xl font-extrabold text-jgen-plum mb-3">
                 Signez la pétition
               </h2>
               <p className="text-muted-foreground max-w-lg mx-auto">

@@ -32,7 +32,7 @@ export default function AboutPage() {
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
               À Propos de J-GEN SENEGAL
             </h1>
             <div className="w-24 h-1 bg-jgen-jaune mx-auto mb-6" />

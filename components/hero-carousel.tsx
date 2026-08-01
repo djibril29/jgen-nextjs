@@ -108,7 +108,7 @@ export function HeroCarousel() {
             {/* Content - Centered */}
             <div className="container mx-auto px-4 lg:px-8 relative z-10 h-full flex items-center justify-center">
               <div className="max-w-5xl text-center">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-5 md:mb-6 leading-[1.1] text-jgen-vert uppercase tracking-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-5 md:mb-6 leading-[1.1] text-jgen-vert tracking-tight">
                   {slide.title}
                 </h1>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white mb-6 md:mb-8 leading-relaxed max-w-3xl mx-auto">

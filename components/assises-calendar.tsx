@@ -192,21 +192,21 @@ function AgendaTable({ day }: { day: AgendaDay }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-jgen-plum/10 bg-white shadow-[0_10px_40px_-15px_rgba(61,31,71,0.2)]">
+    <div className="overflow-hidden rounded-none border border-jgen-plum/10 bg-white shadow-[0_10px_40px_-15px_rgba(61,31,71,0.2)]">
       <div className="bg-jgen-plum text-white px-6 py-5 lg:px-8 lg:py-6 relative overflow-hidden">
         <div
           aria-hidden
           className="absolute top-0 right-0 w-40 h-40 rounded-full bg-jgen-rose/30 blur-3xl -translate-y-12 translate-x-12"
         />
         <div className="flex flex-wrap items-center gap-3 relative">
-          <span className="inline-block bg-jgen-jaune text-jgen-plum text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full">
+          <span className="inline-block bg-jgen-jaune text-jgen-plum text-[10px] font-extrabold uppercase tracking-[0.2em] px-3 py-1 rounded-full">
             {day.number}
           </span>
           <span className="text-white/70 text-xs font-semibold uppercase tracking-[0.18em]">
             {day.shortLabel}
           </span>
         </div>
-        <h3 className="mt-2 text-xl lg:text-2xl font-black leading-tight relative">
+        <h3 className="mt-2 text-xl lg:text-2xl font-extrabold leading-tight relative">
           {day.title}
         </h3>
         <p className="mt-1 text-white/75 !text-base relative">{day.subtitle}</p>
@@ -398,7 +398,7 @@ export function AssisesCalendar() {
           <span className="inline-block text-jgen-rose text-xs font-bold uppercase tracking-[0.25em] mb-4">
             Programme officiel
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-jgen-plum leading-tight mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-jgen-plum leading-tight mb-6">
             Le calendrier
           </h2>
           <div className="w-20 h-1 bg-jgen-rose mx-auto mb-6 rounded-full" />

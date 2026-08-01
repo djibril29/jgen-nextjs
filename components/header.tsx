@@ -342,7 +342,7 @@ export function Header() {
 
                 {/* Newsletter Button */}
                 <Button
-                  className="w-full bg-jgen-rose text-white hover:bg-[#b01a45] font-black text-base py-5 rounded-none uppercase tracking-wide"
+                  className="w-full bg-jgen-rose text-white hover:bg-[#b01a45] font-extrabold text-base py-5 rounded-none uppercase tracking-wide"
                   onClick={() => {
                     setIsNewsletterOpen(true)
                     setIsMenuOpen(false)

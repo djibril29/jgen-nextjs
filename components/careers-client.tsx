@@ -86,7 +86,7 @@ export function CareersClient({ careers }: CareersClientProps) {
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6">
               Opportunités d'emploi
             </h1>
             <div className="w-24 h-1 bg-jgen-jaune mx-auto mb-6" />

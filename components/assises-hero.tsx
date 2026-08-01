@@ -28,7 +28,7 @@ export function AssisesHero() {
               Évènement national
             </span>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-black text-white leading-[1.05] mb-6 text-balance drop-shadow-[0_4px_24px_rgba(0,0,0,0.45)]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-extrabold text-white leading-[1.05] mb-6 text-balance drop-shadow-[0_4px_24px_rgba(0,0,0,0.45)]">
               Bienvenue aux{" "}
               <span className="text-jgen-jaune">
                 Assises nationales citoyennes

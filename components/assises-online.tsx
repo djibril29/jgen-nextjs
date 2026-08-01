@@ -61,7 +61,7 @@ export function AssisesOnline() {
             <Globe className="h-3.5 w-3.5" />
             Participer en ligne
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-jgen-plum leading-tight mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-jgen-plum leading-tight mb-6">
             Rejoindre la réunion
           </h2>
           <div className="w-20 h-1 bg-jgen-rose mx-auto mb-6 rounded-full" />
@@ -78,7 +78,7 @@ export function AssisesOnline() {
             return (
               <article
                 key={session.id}
-                className={`relative overflow-hidden rounded-3xl bg-gradient-to-br ${styles.card} p-8 lg:p-10 text-white shadow-[0_20px_50px_-15px_rgba(61,31,71,0.4)] hover:shadow-[0_25px_60px_-15px_rgba(198,29,77,0.5)] transition-all duration-300 hover:-translate-y-1`}
+                className={`relative overflow-hidden rounded-none bg-gradient-to-br ${styles.card} p-8 lg:p-10 text-white shadow-[0_20px_50px_-15px_rgba(61,31,71,0.4)] hover:shadow-[0_25px_60px_-15px_rgba(198,29,77,0.5)] transition-all duration-300 hover:-translate-y-1`}
               >
                 <div
                   aria-hidden
@@ -94,7 +94,7 @@ export function AssisesOnline() {
                 <div className="relative">
                   <div className="flex flex-wrap items-center gap-2 mb-5">
                     <span
-                      className={`inline-block text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full ${styles.badge}`}
+                      className={`inline-block text-[10px] font-extrabold uppercase tracking-[0.2em] px-3 py-1 rounded-full ${styles.badge}`}
                     >
                       {session.day}
                     </span>
@@ -104,7 +104,7 @@ export function AssisesOnline() {
                     </span>
                   </div>
 
-                  <h3 className="text-2xl lg:text-3xl font-black leading-tight mb-2">
+                  <h3 className="text-2xl lg:text-3xl font-extrabold leading-tight mb-2">
                     {session.title}
                   </h3>
 

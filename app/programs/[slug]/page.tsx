@@ -171,7 +171,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                     <div key={index} className="text-center space-y-3">
                       <CounterAnimation 
                         value={stat.value} 
-                        className="text-5xl md:text-6xl lg:text-7xl font-black text-jgen-violet drop-shadow-sm"
+                        className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-jgen-violet drop-shadow-sm"
                       />
                       <p className="text-sm md:text-base font-semibold text-foreground/80 leading-tight">{stat.label}</p>
                     </div>
@@ -181,7 +181,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                     <div className="text-center space-y-3">
                       <CounterAnimation 
                         value={program.projectsCompleted} 
-                        className="text-5xl md:text-6xl lg:text-7xl font-black text-jgen-violet drop-shadow-sm"
+                        className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-jgen-violet drop-shadow-sm"
                       />
                       <p className="text-sm md:text-base font-semibold text-foreground/80 leading-tight">Projets réalisés</p>
                     </div>
@@ -191,7 +191,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                     <div className="text-center space-y-3">
                       <CounterAnimation 
                         value={program.partnersEngaged} 
-                        className="text-5xl md:text-6xl lg:text-7xl font-black text-jgen-violet drop-shadow-sm"
+                        className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-jgen-violet drop-shadow-sm"
                       />
                       <p className="text-sm md:text-base font-semibold text-foreground/80 leading-tight">Partenaires engagés</p>
                     </div>
