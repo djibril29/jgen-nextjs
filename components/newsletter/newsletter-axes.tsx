@@ -17,16 +17,18 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
     <article
       id={project.id}
       aria-labelledby={`${project.id}-titre`}
-      className="scroll-mt-24 overflow-hidden border border-gray-200 bg-white shadow-sm"
+      className="scroll-mt-24"
     >
-      <div className="grid lg:grid-cols-5">
+      <div className="grid gap-6 lg:grid-cols-5 lg:gap-10">
         <NewsletterFigure
           image={project.image}
           sizes="(max-width: 1024px) 100vw, 40vw"
-          className="aspect-[16/10] w-full lg:col-span-2 lg:aspect-auto lg:min-h-full"
+          className="aspect-[16/10] w-full lg:col-span-2 lg:aspect-[4/3]"
         />
 
-        <div className="p-6 sm:p-8 lg:col-span-3">
+        {/* Le contenu coule sur la page : plus de fond blanc ni de liseré
+            gris, qui ne faisaient qu'enfermer sans rien apporter. */}
+        <div className="lg:col-span-3">
           <p className="mb-2 text-xs font-bold uppercase tracking-wide text-jgen-rose">
             {project.category}
           </p>
@@ -55,14 +57,17 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
               <h5 className="mb-3 border-b border-gray-200 pb-2 text-sm font-bold uppercase tracking-wide text-jgen-plum">
                 {group.periodLabel}
               </h5>
-              <ul className="space-y-2">
+              {/* Glyphes de puce retires, structure de liste conservee pour
+                  les lecteurs d'ecran. Chaque realisation respire, separee
+                  d'un filet fin au lieu d'un point. La reecriture en texte
+                  suivi suivra les rapports trimestriels source. */}
+              <ul className="list-none">
                 {group.items.map((item, index) => (
-                  <li key={index} className="flex gap-3 text-base leading-relaxed text-gray-700">
-                    <span
-                      className="mt-2 h-1.5 w-1.5 flex-shrink-0 bg-jgen-rose"
-                      aria-hidden="true"
-                    />
-                    <span>{item}</span>
+                  <li
+                    key={index}
+                    className="border-b border-gray-200/70 py-2.5 text-base leading-relaxed text-gray-700 last:border-b-0 last:pb-0"
+                  >
+                    {item}
                   </li>
                 ))}
               </ul>
@@ -140,7 +145,7 @@ export function NewsletterAxes() {
 
                   {/* Les dates des Assises sont prévisionnelles : mention explicite. */}
                   {axis.projectIds.includes("assises") && (
-                    <p className="mt-6 border-l-4 border-jgen-jaune bg-[#fffbee] p-5 text-sm leading-relaxed text-gray-700">
+                    <p className="mt-8 border-l-2 border-jgen-jaune py-1 pl-5 text-sm leading-relaxed text-gray-700">
                       <span className="font-bold text-jgen-plum">
                         {assisesPlannedDates.label} : {assisesPlannedDates.value}.
                       </span>{" "}

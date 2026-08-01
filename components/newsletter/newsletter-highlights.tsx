@@ -28,7 +28,7 @@ export function NewsletterHighlights() {
                 key={highlight.id}
                 id={highlight.id}
                 aria-labelledby={`${highlight.id}-titre`}
-                className="flex h-full scroll-mt-24 flex-col border border-gray-200 bg-white"
+                className="flex h-full scroll-mt-24 flex-col"
               >
                 <NewsletterFigure
                   image={highlight.image}
@@ -36,45 +36,43 @@ export function NewsletterHighlights() {
                   className="aspect-[16/9] w-full"
                 />
 
-                <div className="flex flex-1 flex-col p-6">
-                  <h3
-                    id={`${highlight.id}-titre`}
-                    className="mb-3 text-xl font-bold text-jgen-plum"
-                  >
+                {/* Aplat plein plutot que boite blanche cerclee de gris : la
+                    couleur porte la carte, aucun liseré n'est necessaire.
+                    Blanc sur plum = 14.14 de contraste. */}
+                <div className="flex flex-1 flex-col bg-jgen-plum p-6 text-white">
+                  <h3 id={`${highlight.id}-titre`} className="mb-3 text-xl font-bold text-white">
                     {highlight.title}
                   </h3>
 
                   {(highlight.date || highlight.place) && (
-                    <p className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-600">
+                    <p className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-white/75">
                       {highlight.date && (
                         <span className="inline-flex items-center gap-1.5">
-                          <Calendar className="h-4 w-4 text-jgen-vert" aria-hidden="true" />
+                          <Calendar className="h-4 w-4 text-jgen-jaune" aria-hidden="true" />
                           {highlight.date}
                         </span>
                       )}
                       {highlight.place && (
                         <span className="inline-flex items-center gap-1.5">
-                          <MapPin className="h-4 w-4 text-jgen-vert" aria-hidden="true" />
+                          <MapPin className="h-4 w-4 text-jgen-jaune" aria-hidden="true" />
                           {highlight.place}
                         </span>
                       )}
                     </p>
                   )}
 
-                  <p className="mb-4 text-base leading-relaxed text-gray-700">{highlight.body}</p>
+                  <p className="mb-4 text-base leading-relaxed text-white/90">{highlight.body}</p>
 
+                  {/* Puces remplacees par des lignes separees d'un filet fin.
+                      La reecriture en texte suivi suivra les rapports source. */}
                   {highlight.details && highlight.details.length > 0 && (
-                    <ul className="mt-auto space-y-2 border-t border-gray-200 pt-4">
+                    <ul className="mt-auto list-none border-t border-white/20 pt-4">
                       {highlight.details.map((detail, index) => (
                         <li
                           key={index}
-                          className="flex gap-3 text-sm leading-relaxed text-gray-700"
+                          className="border-b border-white/10 py-2 text-sm leading-relaxed text-white/80 last:border-b-0 last:pb-0"
                         >
-                          <span
-                            className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 bg-jgen-jaune"
-                            aria-hidden="true"
-                          />
-                          <span>{detail}</span>
+                          {detail}
                         </li>
                       ))}
                     </ul>
