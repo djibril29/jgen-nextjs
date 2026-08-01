@@ -10,6 +10,7 @@ export default async function sitemap(): MetadataRoute.Sitemap {
     '/about',
     '/about/careers',
     '/blog',
+    '/newsletter/semestre-1-2026',
     '/programs',
     '/resources',
     '/contact',

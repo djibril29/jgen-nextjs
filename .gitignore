@@ -18,6 +18,8 @@ yarn-error.log*
 
 # env files
 .env*
+# ...mais le modèle documenté doit être versionné
+!.env.example
 
 # vercel
 .vercel

@@ -6,7 +6,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { ChevronDown, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { NewsletterModal } from "@/components/newsletter-modal"
 
@@ -45,15 +51,33 @@ export function Header() {
     }
   }, [isMenuOpen])
 
-  const navItems = [
+  type NavChild = { label: string; href: string }
+  type NavItem = { label: string; href: string; children?: NavChild[] }
+
+  const navItems: NavItem[] = [
     { label: "Accueil", href: "/" },
     { label: "À propos", href: "/about" },
-    { label: "Blog", href: "/blog" },
+    {
+      label: "Actualités",
+      href: "/blog",
+      children: [
+        { label: "Blog", href: "/blog" },
+        { label: "Newsletter semestrielle", href: "/newsletter/semestre-1-2026" },
+      ],
+    },
     { label: "Programmes", href: "/programs" },
     { label: "Ressources", href: "/resources" },
     { label: "Carrière", href: "/about/careers" },
     { label: "Contact", href: "/contact" },
   ]
+
+  // Une entrée à sous-menu est active dès qu'on se trouve sur l'une de ses pages.
+  const isNavItemActive = (item: NavItem) =>
+    item.children
+      ? item.children.some(
+          (child) => pathname === child.href || pathname.startsWith(`${child.href}/`),
+        )
+      : pathname === item.href
 
   return (
     <>
@@ -87,20 +111,48 @@ export function Header() {
 
             {/* Desktop Navigation - Centered, responsive */}
             <nav className="hidden lg:flex items-center gap-0.5 absolute left-1/2 -translate-x-1/2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "text-xs font-bold uppercase tracking-wide px-3 py-2 transition-colors whitespace-nowrap",
-                    pathname === item.href 
-                      ? "bg-[#c61d4d] text-white" 
-                      : "text-gray-800 hover:bg-gray-100"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const itemClasses = cn(
+                  "text-xs font-bold uppercase tracking-wide px-3 py-2 transition-colors whitespace-nowrap",
+                  isNavItemActive(item)
+                    ? "bg-[#c61d4d] text-white"
+                    : "text-gray-800 hover:bg-gray-100"
+                )
+
+                if (item.children) {
+                  return (
+                    <DropdownMenu key={item.href}>
+                      <DropdownMenuTrigger
+                        className={cn(itemClasses, "flex items-center gap-1 outline-none")}
+                      >
+                        {item.label}
+                        <ChevronDown className="h-3 w-3" aria-hidden="true" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="center" className="z-[120] rounded-none">
+                        {item.children.map((child) => (
+                          <DropdownMenuItem key={child.href} asChild className="rounded-none">
+                            <Link
+                              href={child.href}
+                              className={cn(
+                                "text-xs font-bold uppercase tracking-wide cursor-pointer",
+                                pathname === child.href ? "text-[#c61d4d]" : "text-gray-800"
+                              )}
+                            >
+                              {child.label}
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  )
+                }
+
+                return (
+                  <Link key={item.href} href={item.href} className={itemClasses}>
+                    {item.label}
+                  </Link>
+                )
+              })}
             </nav>
 
             {/* Right side - Social Icons & Newsletter button */}
@@ -199,21 +251,52 @@ export function Header() {
             <nav className="flex flex-col h-full px-6 pt-20 pb-8">
               {/* Menu Items */}
               <div className="flex-1 space-y-1">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "block py-4 text-xl font-bold uppercase tracking-wide transition-all border-b border-gray-200",
-                      pathname === item.href 
-                        ? "text-[#c61d4d]" 
-                        : "text-[#3d1f47] hover:text-[#c61d4d] hover:translate-x-2",
-                    )}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                {navItems.map((item) => {
+                  // Sur mobile, pas de menu déroulant : l'intitulé sert de titre de
+                  // groupe et ses liens sont rendus juste en dessous. Aucun JS requis.
+                  if (item.children) {
+                    return (
+                      <div key={item.href} className="border-b border-gray-200 py-4">
+                        <p className="text-xl font-bold uppercase tracking-wide text-[#3d1f47]">
+                          {item.label}
+                        </p>
+                        <div className="mt-3 space-y-2 pl-4 border-l-2 border-[#ffd23f]">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              className={cn(
+                                "block py-1 text-base font-bold uppercase tracking-wide transition-all",
+                                pathname === child.href
+                                  ? "text-[#c61d4d]"
+                                  : "text-[#3d1f47] hover:text-[#c61d4d] hover:translate-x-2",
+                              )}
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  }
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        "block py-4 text-xl font-bold uppercase tracking-wide transition-all border-b border-gray-200",
+                        pathname === item.href
+                          ? "text-[#c61d4d]"
+                          : "text-[#3d1f47] hover:text-[#c61d4d] hover:translate-x-2",
+                      )}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                })}
               </div>
 
               {/* Bottom Section - Social Icons & Newsletter */}
