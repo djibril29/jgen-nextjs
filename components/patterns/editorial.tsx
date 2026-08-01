@@ -64,6 +64,34 @@ export function KeyFigure({
 }
 
 /**
+ * Rend un paragraphe ecrit en texte suivi, ou les chiffres a mettre en valeur
+ * sont marques entre doubles crochets :
+ *
+ *   "Nous avons forme [[68 jeunes filles]] a Kolda."
+ *
+ * Le contenu reste ainsi une simple chaine de caracteres dans le fichier de
+ * contenu : l'equipe de J-GEN peut le modifier sans toucher a du JSX, et les
+ * memes chaines restent utilisables ailleurs en retirant les marqueurs.
+ */
+export function RichText({ children, className }: { children: string; className?: string }) {
+  const segments = children.split(/\[\[(.+?)\]\]/g)
+
+  return (
+    <p className={cn("mb-5 leading-relaxed text-gray-700 last:mb-0", className)}>
+      {segments.map((segment, index) =>
+        // Les index impairs sont les captures du groupe, donc les chiffres.
+        index % 2 === 1 ? <KeyFigure key={index}>{segment}</KeyFigure> : segment,
+      )}
+    </p>
+  )
+}
+
+/** Retire les marqueurs, pour les usages en texte brut (e-mail, resume). */
+export function stripFigureMarkers(text: string): string {
+  return text.replace(/\[\[(.+?)\]\]/g, "$1")
+}
+
+/**
  * Enonce cle detache du texte courant, sur aplat pleine largeur. Remplace le
  * paragraphe encadre d'un liseré : ici l'aplat souligne au lieu d'enfermer.
  */

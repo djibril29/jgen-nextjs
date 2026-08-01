@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight, MapPin } from "lucide-react"
 
 import { NewsletterFigure } from "@/components/newsletter/newsletter-figure"
+import { RichText } from "@/components/patterns/editorial"
 import { EditorialColumn } from "@/components/patterns/layout"
 import {
   newsletterSemesterOne2026 as data,
@@ -53,26 +54,13 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
             </p>
           )}
 
-          {project.achievements.map((group) => (
-            <div key={group.period} className="mb-6 last:mb-0">
-              <h5 className="mb-3 border-b border-gray-200 pb-2 text-sm font-bold uppercase tracking-wide text-jgen-plum">
-                {group.periodLabel}
-              </h5>
-              {/* Glyphes de puce retires, structure de liste conservee pour
-                  les lecteurs d'ecran. Chaque realisation respire, separee
-                  d'un filet fin au lieu d'un point. La reecriture en texte
-                  suivi suivra les rapports trimestriels source. */}
-              <ul className="list-none">
-                {group.items.map((item, index) => (
-                  <li
-                    key={index}
-                    className="border-b border-gray-200/70 py-2.5 text-base leading-relaxed text-gray-700 last:border-b-0 last:pb-0"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Recit en texte suivi, ecrit depuis les deux rapports
+              trimestriels. Les chiffres marques entre doubles crochets dans le
+              fichier de contenu ressortent en surlignage. Le releve factuel
+              d'origine reste dans `project.achievements`, comme reference de
+              verification. */}
+          {project.narrative?.map((paragraph, index) => (
+            <RichText key={index}>{paragraph}</RichText>
           ))}
 
           {project.partnerNames && project.partnerNames.length > 0 && (

@@ -67,6 +67,19 @@ export type NewsletterProject = {
   name: string
   category: string
   summary: string
+  /**
+   * Récit du semestre en texte suivi, un paragraphe par entrée.
+   *
+   * Les chiffres à mettre en valeur sont marqués entre doubles crochets —
+   * « [[38 survivantes]] » — et rendus en surlignage par `RichText`. Le jaune
+   * de marque en couleur de texte plafonnerait à 1,44 de contraste sur blanc :
+   * c'est le fond coloré, et non la couleur des lettres, qui porte l'accent.
+   *
+   * `achievements` est conservé en dessous : c'est le relevé factuel tiré des
+   * rapports trimestriels, dont cette prose est écrite. Il sert de référence
+   * de vérification, il n'est plus affiché tel quel.
+   */
+  narrative?: string[]
   achievements: NewsletterAchievementGroup[]
   locations?: string[]
   partnerNames?: string[]
@@ -142,6 +155,12 @@ const projects: NewsletterProject[] = [
     },
     emailSummary:
       "À Niakhar, quatre cercles de guérison ont réuni 38 survivantes dans des espaces confidentiels et sécurisés, centrés sur l'écoute et le care. Ces temps ont favorisé l'expression émotionnelle, la cohésion et la sororité.",
+    narrative: [
+      "À Niakhar, [[quatre cercles de guérison]] ont réuni [[38 survivantes]] réparties en quatre groupes. Dans ces espaces confidentiels et bienveillants, elles ont pu partager leur expérience, exprimer leurs émotions et entamer un processus de reconstruction psychosociale. Les règles de fonctionnement — confidentialité, respect, écoute active — ont été définies collectivement, afin que la parole puisse se libérer en sécurité.",
+      "L'intervention a reposé sur une approche participative centrée sur le care, appuyée par des outils ludo-pédagogiques : cartes projectives, jeux de ballons, exercices de vocalisation. Cette méthode a facilité l'expression émotionnelle, réduit les blocages liés aux traumatismes et renforcé la cohésion et la sororité au sein des groupes.",
+      "Les échanges ont mis en évidence des mécanismes structurels qui dépassent les situations individuelles : la dépendance économique comme facteur majeur de vulnérabilité, l'existence de systèmes de prédation sociale et économique, et une « économie du silence » qui protège les auteurs et isole les survivantes.",
+      "Quatre besoins prioritaires ont été exprimés : un accès durable à un accompagnement psychosocial adapté, la mise en place d'espaces sûrs et permanents, le renforcement de l'autonomisation économique et l'amélioration des mécanismes de protection et d'accès à la justice.",
+    ],
     achievements: [
       {
         period: "T1",
@@ -179,6 +198,12 @@ const projects: NewsletterProject[] = [
     },
     emailSummary:
       "Trois plans d'action locaux ont été élaborés et budgétisés à Fatick, Diamaguène Sicap Mbao et Yoff. Un atelier national a été consacré au rôle des Bajenu Gox, et des dialogues intergénérationnels ont été organisés à Dakar.",
+    narrative: [
+      "Le programme s'est ouvert par deux lancements officiels, à Diamaguène Sicap Mbao et à Yoff, qui ont réuni les autorités territoriales, les organisations de la société civile, les acteurs communautaires et les populations locales. Ces rencontres ont renforcé les capacités des élus sur la gouvernance sensible au genre, le budget sensible au genre, le budget participatif et les mécanismes de redevabilité.",
+      "Des diagnostics participatifs conduits dans les communes ont ensuite permis d'identifier les besoins des populations en matière de VBG, d'autonomisation économique des femmes, d'accès aux services sociaux et de participation citoyenne. Ils ont abouti à [[trois plans d'action locaux]], élaborés et budgétisés à Fatick, Diamaguène Sicap Mbao et Yoff, qui servent désormais de feuilles de route aux interventions.",
+      "Le deuxième trimestre a été consacré aux Bajenu Gox. Un atelier national de renforcement des capacités et de plaidoyer a porté une meilleure reconnaissance de leur rôle dans la prévention et la prise en charge des violences basées sur le genre, avant qu'un atelier de validation ne consolide leur plan d'action en une feuille de route commune.",
+      "Le programme a enfin organisé des dialogues intergénérationnels à Biscuiterie/Grand-Dakar et à Ouakam/Sacré-Cœur. Ces espaces ont fait dialoguer les générations autour des violences sexuelles et sexistes faites aux femmes et aux filles, tout en sensibilisant les communautés aux moyens de prévention et de protection.",
+    ],
     achievements: [
       {
         period: "T1",
@@ -220,6 +245,12 @@ const projects: NewsletterProject[] = [
     },
     emailSummary:
       "L'argumentaire religieux a été enrichi et validé avec les acteurs religieux, et 60 jeunes leaders ont été enrôlés. Des formations à Pikine, Tivaouane Peulh et Patte d'Oie ont renforcé leurs compétences en plaidoyer.",
+    narrative: [
+      "Le mouvement s'organise autour de [[quatre sous-mouvements]] — les jeunes, les acteurs communautaires, les professionnels des médias et les acteurs religieux — afin d'assurer une mobilisation représentative et une action concertée.",
+      "Avec les acteurs religieux, deux rencontres en ligne et une rencontre en présentiel ont été organisées avec les mouvements de l'ANAR/JRS. Le Groupe Revue Littéraire et le Groupe Approche, Contenu et Méthodologie y ont mené un travail d'analyse, de relecture et d'harmonisation qui a permis de consolider puis de finaliser l'argumentaire religieux ; il ne reste plus qu'à y intégrer la version arabe.",
+      "En parallèle, un processus d'enrôlement a été enclenché auprès des jeunes et des acteurs communautaires : [[60 jeunes leaders]] ont rejoint le mouvement dans les communes de Pikine Nord et Est, Tivaouane Peulh et Patte d'Oie.",
+      "Ces jeunes ont ensuite été formés au deuxième trimestre, à Pikine, Tivaouane Peulh et Patte d'Oie. Les sessions ont porté sur les droits en santé sexuelle et reproductive, sur les argumentaires en faveur de l'avortement sécurisé dans les cas prévus par le plaidoyer, et sur les stratégies de compréhension et de réponse aux mouvements anti-droits. Des plans d'action ont été élaborés pour pérenniser les initiatives, et les participant·e·s se sont portés volontaires pour démultiplier la formation auprès de leurs pairs.",
+    ],
     achievements: [
       {
         period: "T1",
@@ -260,6 +291,12 @@ const projects: NewsletterProject[] = [
     },
     emailSummary:
       "Une étude sur les perceptions de la communauté de Yoff en matière de DSSR et de VBG a été réalisée puis restituée aux parties prenantes. Deux cercles de sororité ont été organisés à Ndenatte et Therme Nord.",
+    narrative: [
+      "Le projet est entré dans sa deuxième année, qui vise à consolider les acquis des interventions précédentes et à renforcer la pérennité des mécanismes communautaires en faveur des adolescentes et des jeunes femmes. Le premier trimestre a été consacré à la planification et à la budgétisation, avec la validation du plan d'action et le lancement du recrutement d'un consultant chargé de l'étude de base.",
+      "Les activités de terrain ont démarré au deuxième trimestre, avec la volonté de produire des données probantes. Une étude sur les perceptions de la communauté de Yoff en matière de DSSR et de VBG a été réalisée, puis restituée lors d'un atelier réunissant l'ensemble des parties prenantes, ce qui a permis d'orienter les interventions selon les besoins identifiés.",
+      "Dans cette dynamique, [[deux cercles de sororité]] ont été organisés dans les quartiers de Ndenatte et de Therme Nord. Ces espaces d'échange ont réuni des adolescentes et de jeunes femmes de profils variés autour de discussions, de travaux de groupe et de réflexion collective. Les participantes y ont renforcé leurs connaissances sur la citoyenneté active, les notions de genre et de sexe, les droits fondamentaux et les différentes formes de violences basées sur le genre.",
+      "Ces cercles ont également permis d'identifier les principaux défis auxquels les jeunes filles sont confrontées : mariages précoces et forcés, abandons scolaires, violences conjugales, psychologiques, verbales et économiques, et normes sociales discriminatoires. À l'issue des séances, les participantes se sont montrées engagées à agir comme relais au sein de leur communauté.",
+    ],
     achievements: [
       {
         period: "T1",
@@ -302,6 +339,12 @@ const projects: NewsletterProject[] = [
     },
     emailSummary:
       "Six GIE ont été créés et formalisés à Fatick et Kaolack. Des formations ont été organisées en pâtisserie, saponification, restauration et teinture, sous la supervision de partenaires associatifs locaux.",
+    narrative: [
+      "Après avoir créé et formalisé [[six GIE]], J-GEN Sénégal a organisé à leur profit des sessions de formation aux métiers dans les régions de Fatick et de Kaolack.",
+      "À Kaolack, les formations ont porté sur la pâtisserie avec le GIE « Les Amazones villageoises de Gandiaye », sur la saponification avec le GIE « Mbogga Yiff des jeunes femmes de Sibassor » et sur la restauration avec le GIE « Les jeunes femmes autonomes de Kaolack ».",
+      "À Fatick, le GIE « Niak Dieurignou » de la commune de Fatick a bénéficié d'une formation en teinture, tandis que les GIE « Ligueyal Sama Gokh » de Diouroup et « Mbokator Ndamite Rew wé » de Niakhar ont été formés en pâtisserie.",
+      "Ces sessions ont été supervisées par les partenaires de mise en œuvre des deux régions : l'Association Action pour le Développement du Sénégal à Kaolack et l'Association des Bajenu Gox de Fatick. Les équipes retiennent que la formation pratique facilite l'apprentissage et la maîtrise des techniques, et que la transformation alimentaire constitue une réelle opportunité économique pour les femmes.",
+    ],
     achievements: [
       {
         period: "Semestre",
@@ -332,6 +375,11 @@ const projects: NewsletterProject[] = [
     },
     emailSummary:
       "Une réunion d'orientation tenue les 16 et 17 mars 2026 a défini les orientations stratégiques, organisationnelles et méthodologiques des Assises nationales citoyennes.",
+    narrative: [
+      "Le programme porte un plaidoyer collectif et coordonné pour accélérer la réforme du Code de la famille sénégalais, en tenant compte des réalités sociales actuelles. Mis en œuvre dans les régions de Dakar et de Thiès, il cherche à créer un cadre de dialogue entre les parlementaires et les communautés, et en particulier les femmes.",
+      "Une réunion d'orientation s'est tenue [[les 16 et 17 mars 2026]] à Sama Hôtel, aux Almadies. Elle a permis de définir les orientations stratégiques, organisationnelles et méthodologiques du processus des Assises nationales citoyennes.",
+      "Les participants y ont validé la réorganisation des instances de gouvernance, avec un Comité technique chargé de l'orientation scientifique et un Comité de pilotage responsable de la coordination opérationnelle et des pré-assises régionales. Ils ont également identifié les thématiques qui structureront les consultations : accès aux ressources, réformes juridiques, autonomisation économique, santé, leadership, violences basées sur le genre, famille et justice climatique.",
+    ],
     achievements: [
       {
         period: "T1",
@@ -355,6 +403,10 @@ const projects: NewsletterProject[] = [
     href: "/assises",
     emailSummary:
       "La feuille de route des Assises a été élaborée, un comité technique composé d'expert·e·s a été créé et un atelier d'installation et de structuration du Comité de pilotage a été organisé.",
+    narrative: [
+      "Le processus préparatoire a été lancé au deuxième trimestre avec l'élaboration d'une feuille de route, qui rassemble l'ensemble des activités préalables conduisant à la tenue des Assises, dont l'organisation des pré-assises au niveau national.",
+      "Un comité technique composé d'expert·e·s a été créé pour accompagner la préparation, et un atelier d'installation et de structuration du Comité de pilotage des Assises nationales citoyennes sur les droits des femmes et des filles du Sénégal a été organisé.",
+    ],
     achievements: [
       {
         period: "T2",
