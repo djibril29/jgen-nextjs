@@ -6,11 +6,10 @@ import { NewsletterAxes } from "@/components/newsletter/newsletter-axes"
 import { NewsletterCta } from "@/components/newsletter/newsletter-cta"
 import { NewsletterHero } from "@/components/newsletter/newsletter-hero"
 import { NewsletterHighlights } from "@/components/newsletter/newsletter-highlights"
-import { NewsletterOrientations } from "@/components/newsletter/newsletter-orientations"
 import { NewsletterOutlook } from "@/components/newsletter/newsletter-outlook"
 import { NewsletterStats } from "@/components/newsletter/newsletter-stats"
 import { NewsletterTimeline } from "@/components/newsletter/newsletter-timeline"
-import { MagazineNav } from "@/components/patterns/magazine"
+import { MagazineNav } from "@/components/patterns/magazine-nav.client"
 import { newsletterSemesterOne2026 as data } from "@/content/newsletter-semestre-1-2026"
 import { resolveNewsletterImage } from "@/lib/newsletter-image"
 import { buildUrl } from "@/lib/site"
@@ -58,8 +57,7 @@ export default function NewsletterSemestreUn2026Page() {
 
       <MagazineNav
         chapters={[
-          { id: "orientations", label: "Six mois d'engagement" },
-          { id: "axes", label: "Les axes" },
+          { id: "axes", label: "Les axes d'intervention" },
           { id: "temps-forts", label: "Temps forts" },
           { id: "chronologie", label: "Chronologie" },
           { id: "chiffres", label: "Les chiffres" },
@@ -67,8 +65,6 @@ export default function NewsletterSemestreUn2026Page() {
           { id: "agir", label: "Agir" },
         ]}
       />
-
-      <NewsletterOrientations />
       <NewsletterAxes />
       <NewsletterHighlights />
       <NewsletterTimeline />

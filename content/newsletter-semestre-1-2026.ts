@@ -563,7 +563,7 @@ export const newsletterSemesterOne2026 = {
     {
       id: "axe-protection",
       number: 1,
-      title: "Protéger, accompagner et réparer",
+      title: "Prévenir les violences basées sur le genre et accompagner les survivantes",
       intro:
         "Prévenir les violences basées sur le genre, accompagner les survivantes et renforcer la résilience des communautés et des institutions locales.",
       projectIds: ["elles-aussi", "kiiray"],
@@ -574,7 +574,7 @@ export const newsletterSemesterOne2026 = {
     {
       id: "axe-sante",
       number: 2,
-      title: "Faire progresser la santé et la justice reproductive",
+      title: "Droits en santé sexuelle et reproductive (DSSR) et justice reproductive",
       intro:
         "Améliorer l'accès à une information fiable sur les droits et la santé sexuels et reproductifs, et porter un plaidoyer argumenté auprès de tous les acteurs.",
       projectIds: ["pas-a-pas", "jvssr"],
@@ -585,7 +585,7 @@ export const newsletterSemesterOne2026 = {
     {
       id: "axe-economie",
       number: 3,
-      title: "Favoriser l'autonomisation économique",
+      title: "Autonomisation économique des jeunes femmes et des filles au Sénégal",
       intro:
         "Former, structurer et accompagner des groupements de jeunes femmes vers des activités génératrices de revenus durables.",
       projectIds: ["liggeyal-eleg"],
@@ -596,7 +596,7 @@ export const newsletterSemesterOne2026 = {
     {
       id: "axe-plaidoyer",
       number: 4,
-      title: "Influencer les politiques et renforcer la participation citoyenne",
+      title: "Plaidoyer féministe : réforme du Code de la famille et participation citoyenne",
       intro:
         "Créer les conditions d'un dialogue entre les parlementaires, les institutions et les communautés, et faire avancer les réformes juridiques.",
       projectIds: ["naatal-jaboot-gui", "assises"],

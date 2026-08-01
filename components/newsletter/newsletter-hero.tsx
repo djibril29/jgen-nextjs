@@ -9,7 +9,9 @@ export function NewsletterHero() {
   const { header, intro, coverImage, links, cta } = data
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-jgen-plum to-[#2d1537] pt-28 pb-16 lg:pt-36 lg:pb-24">
+    // Premiere page du magazine : elle occupe tout l'ecran et s'y accroche.
+    // `pt-24` laisse passer l'en-tete fixe du site, rien de plus.
+    <section className="relative flex min-h-[100dvh] snap-start items-center overflow-hidden bg-gradient-to-br from-jgen-plum to-[#2d1537] pt-24 pb-12">
       {/* Formes décoratives, cohérentes avec les autres pages du site */}
       <div
         className="pointer-events-none absolute top-24 right-8 h-24 w-24 rotate-12 bg-jgen-jaune opacity-30"

@@ -4,6 +4,7 @@ import { ArrowRight, MapPin } from "lucide-react"
 import { RichText } from "@/components/patterns/editorial"
 import { EditorialColumn } from "@/components/patterns/layout"
 import { MagazineChapter } from "@/components/patterns/magazine"
+import { Reveal } from "@/components/patterns/reveal.client"
 import {
   newsletterSemesterOne2026 as data,
   type NewsletterProject,
@@ -30,8 +31,13 @@ function ProjectCard({ project, priority }: { project: NewsletterProject; priori
         priority={priority}
       />
 
-      <EditorialColumn>
-        <div className="py-12 lg:py-16">
+      {/* La prose occupe elle aussi une page entiere et s'accroche au
+          defilement : c'est ce qui donne la sensation de pages qui se
+          succedent plutot que d'un texte continu. `justify-center` centre le
+          bloc quand il est plus court que l'ecran, sans jamais le tronquer
+          quand il est plus long. */}
+      <EditorialColumn className="flex min-h-[100dvh] snap-start flex-col justify-center">
+        <Reveal variant="up" className="py-16">
           <p className="mb-6 text-lg leading-relaxed text-gray-700">{project.summary}</p>
 
           {project.locations && project.locations.length > 0 && (
@@ -69,7 +75,7 @@ function ProjectCard({ project, priority }: { project: NewsletterProject; priori
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           )}
-        </div>
+        </Reveal>
       </EditorialColumn>
     </article>
   )
@@ -111,8 +117,8 @@ export function NewsletterAxes() {
                 aria-labelledby={`${axis.id}-titre`}
                 className="scroll-mt-24"
               >
-                <EditorialColumn>
-                  <div className="border-l-4 border-jgen-jaune py-8 pl-5">
+                <EditorialColumn className="flex min-h-[100dvh] snap-start flex-col justify-center">
+                  <Reveal variant="left" className="border-l-4 border-jgen-jaune py-8 pl-5">
                     <p className="eyebrow mb-1 text-jgen-rose">Axe {axis.number}</p>
                     <h3
                       id={`${axis.id}-titre`}
@@ -121,7 +127,7 @@ export function NewsletterAxes() {
                       {axis.title}
                     </h3>
                     <p className="text-lg leading-relaxed text-gray-700">{axis.intro}</p>
-                  </div>
+                  </Reveal>
                 </EditorialColumn>
 
                 {axisProjects.map((project) => (
