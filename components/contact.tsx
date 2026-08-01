@@ -103,8 +103,8 @@ export function Contact() {
                 </div>
                 <div>
                   <h4 className="font-semibold mb-1">Téléphone</h4>
-                  <a href="tel:+221338689129" className="text-muted-foreground hover:text-primary transition-colors">
-                    33 868 91 29
+                  <a href="tel:+221338059139" className="text-muted-foreground hover:text-primary transition-colors">
+                    33 805 91 39
                   </a>
                 </div>
               </div>

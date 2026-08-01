@@ -19,23 +19,33 @@ export function OrganizationSchema() {
     "url": "https://jgen.sn",
     "logo": "https://jgen.sn/logo-jgen.png",
     "description": "Organisation féministe sénégalaise luttant contre les violences basées sur le genre",
+    // Adresse complète : c'est l'un des signaux par lesquels Google rattache un
+    // site à une organisation réelle. Source : en-tête des rapports trimestriels.
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "SN",
+      "streetAddress": "6781 Sicap Liberté 6, 2ᵉ étage gauche",
       "addressLocality": "Dakar",
+      "addressCountry": "SN",
     },
+    // Ces URL doivent rester identiques à celles du header et du footer :
+    // un `sameAs` qui pointe vers un compte inexistant affaiblit le
+    // rattachement de l'organisation au lieu de le renforcer.
     "sameAs": [
-      "https://facebook.com/jgensenegal",
-      "https://instagram.com/jgensenegal",
-      "https://linkedin.com/company/jgensenegal",
+      "https://www.facebook.com/JGENSenegal/",
+      "https://www.instagram.com/jgen.sn/",
+      "https://www.linkedin.com/company/jgen-women-global-entrepreneurship",
     ],
+    "email": "info@jgen.sn",
+    "telephone": "+221338059139",
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "customer support",
+      "telephone": "+221338059139",
+      "email": "info@jgen.sn",
       "areaServed": "SN",
       "availableLanguage": ["fr", "wo"]
     },
-    "foundingDate": "2020",
+    "foundingDate": "2016",
     "knowsAbout": [
       "Violences basées sur le genre",
       "Droits des femmes",

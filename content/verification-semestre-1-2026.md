@@ -28,61 +28,64 @@ officielle arrêtée.
 
 ---
 
-## 2. Numéro de téléphone — contradiction à lever
+## 2. Numéro de téléphone — TRANCHÉ, à confirmer une dernière fois
 
-- Les deux rapports trimestriels portent en pied de page : **(221) 33 805 91 39**
-- Le site affiche : **+221 33 868 91 29**
-  (dans `content/newsletter-semestre-1-2026.ts`, champ `organisation.phoneDisplay`)
+Le numéro des deux rapports a été retenu : **+221 33 805 91 39**, en remplacement
+du **+221 33 868 91 29** affiché jusqu'ici. Appliqué à quatre endroits :
 
-Les deux numéros ne peuvent pas être corrects simultanément. Un numéro erroné en
-pied de page d'un site institutionnel est une perte de contacts directe.
+- `content/newsletter-semestre-1-2026.ts` (`organisation.phoneDisplay` / `phoneHref`) ;
+- [app/contact/page.tsx](../app/contact/page.tsx) ;
+- [components/contact.tsx](../components/contact.tsx) ;
+- le balisage `OrganizationSchema`.
+
+⚠️ **Un numéro de téléphone public est une porte d'entrée : passez-lui un appel
+de vérification avant publication.** S'il fallait revenir en arrière, ces quatre
+emplacements sont les seuls concernés.
 
 ---
 
-## 3. Adresse postale — désormais établie, à reporter
+## 3. Adresse postale — TRANCHÉ
 
-Les rapports donnent l'adresse complète :
+L'adresse des rapports a été reportée :
 
 > 6781 Sicap Liberté 6, 2ᵉ étage gauche, Dakar, Sénégal
 
-Elle n'apparaît nulle part sur le site. Deux endroits à compléter :
-- le champ `organisation` de `content/newsletter-semestre-1-2026.ts` ;
-- le balisage `OrganizationSchema` de [components/structured-data.tsx](../components/structured-data.tsx),
-  dont le bloc `PostalAddress` ne contient aujourd'hui que la ville et le pays.
-  Une adresse postale complète est l'un des signaux que Google utilise pour
-  rattacher un site à une organisation réelle.
+Elle figure désormais dans `content/newsletter-semestre-1-2026.ts` et dans le
+bloc `PostalAddress` du balisage `OrganizationSchema`, qui ne contenait
+auparavant que la ville et le pays.
 
 ---
 
-## 4. Réseaux sociaux — deux jeux d'URL divergents
+## 4. Réseaux sociaux — TRANCHÉ
 
-`OrganizationSchema` déclare des comptes qui ne correspondent pas à ceux du
-fichier de contenu :
+Le balisage `OrganizationSchema` déclarait trois comptes qui n'existent pas. Il
+reprend désormais exactement les URL du header et du footer :
 
-| Réseau | Déclaré dans le balisage | Déclaré dans le contenu |
-|---|---|---|
-| Facebook | `facebook.com/jgensenegal` | `facebook.com/JGENSenegal` |
-| Instagram | `instagram.com/jgensenegal` | `instagram.com/jgen.sn` |
-| LinkedIn | `linkedin.com/company/jgensenegal` | `linkedin.com/company/jgen-women-global-entrepreneurship` |
+- `https://www.facebook.com/JGENSenegal/`
+- `https://www.instagram.com/jgen.sn/`
+- `https://www.linkedin.com/company/jgen-women-global-entrepreneurship`
 
-Un `sameAs` qui pointe vers un compte inexistant affaiblit le rattachement de
-l'organisation plutôt qu'il ne le renforce. Il faut retenir un seul jeu.
+Ces trois valeurs doivent rester synchronisées avec le header et le footer : un
+commentaire le rappelle dans le fichier.
 
 ---
 
-## 5. Date de fondation — incohérence
+## 5. Date de fondation — TRANCHÉ
 
-`OrganizationSchema` déclare `foundingDate: "2020"`. Les deux rapports indiquent
-que J-GEN œuvre « depuis plus de dix ans », ce qui situe la fondation en 2015 ou
-avant. À corriger dans [components/structured-data.tsx](../components/structured-data.tsx).
+`foundingDate` passe de `"2020"` à **`"2016"`**, cohérent avec le « depuis plus
+de dix ans » des deux rapports.
+
+Vous aviez formulé cette date avec un point d'interrogation : si l'année exacte
+diffère, elle se corrige en un endroit unique,
+[components/structured-data.tsx](../components/structured-data.tsx).
 
 ---
 
 ## 6. Adresse e-mail de contact
 
 Les rapports mentionnent deux adresses : `jgensenegal@gmail.com` et `info@jgen.sn`.
-Le site n'expose que `info@jgen.sn`. À confirmer : est-ce bien l'adresse de
-contact publique à privilégier ?
+Le site n'expose que `info@jgen.sn`, qui a été retenue dans le balisage. À
+confirmer : est-ce bien l'adresse de contact publique à privilégier ?
 
 ---
 
@@ -100,16 +103,32 @@ reste **prévisionnelle**. Si elle bouge, trois endroits sont à mettre à jour 
 
 ---
 
-## 8. Atelier Beijing +30 — aucun article écrit
+## 8. Atelier Beijing +30 — article écrit, deux manques
 
-Le rapport T2 mentionne, sous « Activités institutionnelles et de plaidoyer »,
-une seule ligne : « Un Atelier de restitution du rapport des 30 ans de Beijing ».
+Un article a été rédigé à partir de la publication Facebook de J-GEN Sénégal :
+`restitution-rapport-alternatif-beijing-30-senegal`.
 
-Ni date, ni lieu, ni participants, ni contenu. **Aucun article n'a été écrit sur
-cette activité** : il n'y avait pas matière à autre chose qu'un texte creux.
+Il établit l'objet de l'atelier (restitution du rapport alternatif de la société
+civile sur les douze domaines critiques du Programme d'action de Beijing), les
+participants, l'ambition politique du rapport, et les partenaires — la GIZ à
+travers le projet REDTRA et la Foundation for a Just Society.
 
-Si vous disposez d'un compte rendu de cet atelier, c'est un sujet à fort
-potentiel — Beijing +30 est une échéance internationale largement recherchée.
+**Deux éléments manquent et ne figurent donc pas dans l'article :**
+
+1. **La date exacte et le lieu.** Ni la publication Facebook ni le rapport T2 ne
+   les donnent ; le rapport situe seulement l'atelier au deuxième trimestre 2026.
+   L'article ne mentionne aucune date précise.
+2. **Un visuel.** Voir le point 12.
+
+C'est le sujet au plus fort potentiel de recherche de tout le lot — Beijing +30
+est une échéance internationale largement documentée. Il mérite d'être enrichi
+en priorité : nombre de participants, organisations présentes nommément,
+principales recommandations du rapport, et lien de téléchargement du rapport
+alternatif s'il est public.
+
+**Nouveaux partenaires à intégrer** : la GIZ (projet REDTRA) et la Foundation
+for a Just Society n'apparaissaient dans aucun des deux rapports trimestriels ni
+dans la liste des partenaires du site. À ajouter à la page partenaires.
 
 ---
 
@@ -147,7 +166,7 @@ passer à « En cours » et la période être mise à jour.
 
 ---
 
-## 12. Visuels manquants — 9 articles
+## 12. Visuels manquants — 10 articles
 
 Ces articles sont complets et publiables, mais sans image. Un article sans
 visuel perd en partage social et en taux de clic.
@@ -163,6 +182,7 @@ visuel perd en partage social et en taux de clic.
 | `deuxieme-atelier-defenseurs-droits-humains-saly-mars-2026` | Atelier DDH à Saly, 10-12 mars 2026 |
 | `quatre-dispositions-discriminatoires-code-famille-senegalais` | Visuel de plaidoyer Code de la famille |
 | `ce-que-les-jeunes-filles-de-yoff-disent-des-violences` | Cercle de sororité (une autre vue que celle déjà utilisée) |
+| `restitution-rapport-alternatif-beijing-30-senegal` | Atelier de restitution Beijing +30 |
 
 **Comment les ajouter** : déposez les fichiers dans `public/newsletters/semestre-1/`,
 complétez le tableau `ALT_TEXTS` de

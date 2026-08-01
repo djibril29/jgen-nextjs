@@ -65,7 +65,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Appelez-nous</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  33 868 91 29
+                  33 805 91 39
                   <br />
                   Lun-Ven : 9h - 17h
                 </p>

@@ -784,12 +784,14 @@ export const newsletterSemesterOne2026 = {
     name: "J-GEN Sénégal",
     tagline: "Agir pour les femmes et les filles au Sénégal",
     email: "info@jgen.sn",
-    phoneDisplay: "+221 33 868 91 29",
-    phoneHref: "tel:+221338689129",
-    // ⚠️  Le site ne mentionne que « Dakar, Sénégal ». L'adresse postale complète
-    //     est obligatoire pour Mailchimp — elle est injectée par le merge tag
-    //     *|HTML:LIST_ADDRESS_HTML|* et doit être renseignée dans les paramètres
-    //     de l'audience Mailchimp.
+    // Numéro figurant en en-tête des deux rapports trimestriels 2026, retenu
+    // contre celui affiché jusqu'ici sur le site (+221 33 868 91 29).
+    phoneDisplay: "+221 33 805 91 39",
+    phoneHref: "tel:+221338059139",
+    // Adresse complète établie par l'en-tête des rapports trimestriels.
+    // Mailchimp injecte par ailleurs sa propre adresse d'audience via le merge
+    // tag *|HTML:LIST_ADDRESS_HTML|*, qui doit rester renseignée de son côté.
+    streetAddress: "6781 Sicap Liberté 6, 2ᵉ étage gauche",
     cityCountry: "Dakar, Sénégal",
     social: {
       facebook: "https://www.facebook.com/JGENSenegal/",
