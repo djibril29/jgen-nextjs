@@ -1,3 +1,5 @@
+import type { Metadata } from "next"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -10,6 +12,8 @@ import { ProgramHeroImage } from "@/components/program-hero-image"
 import { CounterAnimation } from "@/components/counter-animation"
 import { ProgramsCTA } from "@/components/programs-cta"
 import { ProgramGallery } from "@/components/program-gallery"
+import { BreadcrumbSchema } from "@/components/structured-data"
+import { buildUrl } from "@/lib/site"
 
 // Fetch program from Sanity
 async function getProgram(slug: string) {
@@ -31,7 +35,17 @@ async function getProgram(slug: string) {
     nextSteps,
     partnersEngaged,
     projectsCompleted,
+    _updatedAt,
     relatedPosts[]->{
+      _id,
+      title,
+      "slug": slug.current,
+      image,
+      excerpt,
+      publishedAt,
+      "categories": categories[]->title
+    },
+    "linkedPosts": *[_type=="post" && program._ref == ^._id] | order(publishedAt desc){
       _id,
       title,
       "slug": slug.current,
@@ -44,6 +58,49 @@ async function getProgram(slug: string) {
   return client.fetch(query, { slug }, {
     next: { revalidate: 60 } // Revalidate every 60 seconds
   })
+}
+
+/**
+ * Métadonnées par programme. Ces pages sont les pages piliers du site : ce sont
+ * elles qui concentrent les liens venant de la newsletter et des articles, et
+ * elles doivent donc porter un titre et une description qui leur sont propres.
+ */
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const program = await getProgram(slug)
+
+  if (!program) {
+    return {
+      title: "Programme non trouvé",
+      robots: { index: false, follow: false },
+    }
+  }
+
+  const title = `${program.title} — Programme J-GEN Sénégal`
+  const description = program.summary?.trim() || undefined
+  const url = buildUrl(`/programs/${slug}`)
+  const image = program.featuredImage
+    ? urlFor(program.featuredImage).width(1200).height(630).url()
+    : undefined
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      images: image ? [{ url: image, alt: program.featuredImage?.alt || program.title }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: image ? [image] : undefined,
+    },
+  }
 }
 
 export default async function ProgramPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -69,12 +126,33 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
     )
   }
 
+  // Deux sources alimentent la liste d'articles : la sélection manuelle posée sur
+  // le programme (`relatedPosts`) et les articles qui référencent ce programme
+  // (`program`). On les fusionne en dédoublonnant, la sélection manuelle d'abord
+  // pour qu'elle garde la main sur l'ordre d'affichage.
+  const seenPostIds = new Set<string>()
+  const articles = [...(program.relatedPosts ?? []), ...(program.linkedPosts ?? [])].filter(
+    (post: any) => {
+      if (!post?._id || seenPostIds.has(post._id)) return false
+      seenPostIds.add(post._id)
+      return true
+    },
+  )
+
   return (
     <main className="min-h-screen">
+      <BreadcrumbSchema
+        items={[
+          { name: "Accueil", url: buildUrl("/") },
+          { name: "Programmes", url: buildUrl("/programs") },
+          { name: program.title, url: buildUrl(`/programs/${slug}`) },
+        ]}
+      />
+
       <Header />
 
       {/* Hero Section */}
-      <ProgramHeroImage 
+      <ProgramHeroImage
         image={program.featuredImage}
         title={program.title}
         summary={program.summary}
@@ -257,20 +335,20 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             )}
 
             {/* Related Posts */}
-            {program.relatedPosts && program.relatedPosts.length > 0 && (
+            {articles.length > 0 && (
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold mb-8">Actualités du Programme</h2>
                 <div className="grid md:grid-cols-2 gap-6">
-                  {program.relatedPosts.map((post: any) => (
+                  {articles.map((post: any) => (
                     <Link key={post._id} href={`/blog/${post.slug}`} className="group">
                       <div className="overflow-hidden rounded-lg border border-border hover:border-jgen-rose transition-all">
                         <div className="aspect-[16/9] overflow-hidden relative">
                           <img
                             src={post.image ? urlFor(post.image).width(800).height(450).url() : "/placeholder.svg"}
-                            alt={post.title}
+                            alt={post.image?.alt || post.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
-          </div>
+                        </div>
                         <div className="p-5">
                           <p className="text-xs text-muted-foreground mb-2">
                             {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('fr-FR', {

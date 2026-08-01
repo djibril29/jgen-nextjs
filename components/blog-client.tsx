@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Search } from "lucide-react"
@@ -28,13 +28,28 @@ export function BlogClient({ posts }: BlogClientProps) {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("Tous")
 
-  const categories = ["Tous", "Autonomisation", "Education", "Santé"]
+  // Les catégories sont dérivées des articles publiés, jamais écrites en dur :
+  // une liste figée finit toujours par désigner des catégories qui n'existent
+  // plus, et le filtre ne renvoie alors aucun résultat. Les libellés venant du
+  // CMS comportent parfois des espaces parasites, d'où le `trim()`.
+  const categories = useMemo(() => {
+    const labels = new Set<string>()
+    for (const post of posts) {
+      for (const category of post.categories ?? []) {
+        const label = category?.trim()
+        if (label) labels.add(label)
+      }
+    }
+    return ["Tous", ...Array.from(labels).sort((a, b) => a.localeCompare(b, "fr"))]
+  }, [posts])
 
   const filteredPosts = posts.filter((post) => {
     const matchesSearch =
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()))
-    const matchesCategory = selectedCategory === "Tous" || post.categories?.includes(selectedCategory)
+    const matchesCategory =
+      selectedCategory === "Tous" ||
+      post.categories?.some((category) => category?.trim() === selectedCategory)
     return matchesSearch && matchesCategory
   })
 

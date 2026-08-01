@@ -1,3 +1,15 @@
+/**
+ * Sérialise un objet JSON-LD pour insertion dans un `<script>`.
+ *
+ * `JSON.stringify` laisse passer `<` tel quel : un titre d'article contenant
+ * « </script> » fermerait le bloc et injecterait le reste dans le document.
+ * On échappe donc `<` sous forme d'échappement Unicode, que JSON comprend et
+ * que l'analyseur HTML ne voit pas comme une balise.
+ */
+function serializeJsonLd(schema: unknown): string {
+  return JSON.stringify(schema).replace(/</g, "\\u003c")
+}
+
 export function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
@@ -41,7 +53,7 @@ export function OrganizationSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   )
 }
@@ -70,7 +82,7 @@ export function WebsiteSchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   )
 }
@@ -90,7 +102,69 @@ export function BreadcrumbSchema({ items }: { items: Array<{ name: string; url: 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
+    />
+  )
+}
+
+/**
+ * Balisage d'un article.
+ *
+ * Les champs absents sont retirés avant sérialisation : un `Article` qui déclare
+ * une propriété vide vaut moins qu'un `Article` qui ne la déclare pas, et Google
+ * signale les valeurs nulles comme des erreurs dans son outil de test.
+ */
+export function ArticleSchema({
+  headline,
+  description,
+  url,
+  image,
+  datePublished,
+  dateModified,
+  authorName,
+  keywords,
+}: {
+  headline: string
+  description?: string
+  url: string
+  image?: string
+  datePublished?: string
+  dateModified?: string
+  authorName?: string
+  keywords?: string[]
+}) {
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    url,
+    inLanguage: "fr-SN",
+    publisher: {
+      "@type": "Organization",
+      name: "J-GEN SENEGAL",
+      url: "https://jgen.sn",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://jgen.sn/logo-jgen.png",
+      },
+    },
+    author: {
+      "@type": authorName && authorName !== "jgen" ? "Person" : "Organization",
+      name: authorName && authorName !== "jgen" ? authorName : "J-GEN SENEGAL",
+    },
+  }
+
+  if (description) schema.description = description
+  if (image) schema.image = [image]
+  if (datePublished) schema.datePublished = datePublished
+  if (dateModified) schema.dateModified = dateModified
+  if (keywords && keywords.length > 0) schema.keywords = keywords.join(", ")
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
     />
   )
 }

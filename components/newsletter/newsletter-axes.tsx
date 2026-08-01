@@ -60,14 +60,27 @@ function ProjectCard({ project, priority }: { project: NewsletterProject; priori
             </p>
           )}
 
-          {externalPageHref && (
+          {/* Bouton de section : il mène à la page pilier du projet, qui
+              présente le programme et agrège ses articles. Un seul appel à
+              l'action par section, pour ne pas diluer le clic. */}
+          {project.programHref ? (
             <Link
-              href={externalPageHref}
-              className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-jgen-rose underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jgen-rose"
+              href={project.programHref}
+              className="mt-8 inline-flex items-center gap-2 bg-jgen-plum px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-jgen-rose focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jgen-rose"
             >
-              En savoir plus sur {project.name}
+              {project.programCta ?? `Découvrir ${project.name}`}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
+          ) : (
+            externalPageHref && (
+              <Link
+                href={externalPageHref}
+                className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-jgen-rose underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jgen-rose"
+              >
+                En savoir plus sur {project.name}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            )
           )}
         </div>
       </EditorialColumn>

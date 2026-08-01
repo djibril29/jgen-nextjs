@@ -89,6 +89,15 @@ export type NewsletterProject = {
    * page newsletter. Aucune page projet fictive n'est créée.
    */
   href?: string
+  /**
+   * Page vers laquelle mène le bouton de la section, sur le web comme dans
+   * l'e-mail. C'est la page pilier du projet : elle présente le programme ET
+   * liste ses articles, ce qui concentre les liens entrants sur une seule URL
+   * forte au lieu de les disperser entre plusieurs pages.
+   */
+  programHref?: string
+  /** Libellé du bouton. Reste court : c'est un appel à l'action, pas un titre. */
+  programCta?: string
   /** Résumé court réservé à l'e-mail (2-3 phrases) */
   emailSummary?: string
 }
@@ -149,6 +158,8 @@ const projects: NewsletterProject[] = [
       "Mis en œuvre dans la région de Fatick, ELLES AUSSI vise à renforcer la prévention des violences basées sur le genre et à améliorer la prise en charge communautaire des survivantes.",
     locations: ["Fatick", "Diouroup", "Niakhar"],
     href: "#elles-aussi",
+    programHref: "/programs/elles-aussi",
+    programCta: "Découvrir le programme ELLES AUSSI",
     image: {
       name: "elles-aussi",
       alt: "Cercle de guérison réunissant des participantes dans un espace d'écoute à Niakhar",
@@ -189,6 +200,8 @@ const projects: NewsletterProject[] = [
       "Ouakam/Sacré-Cœur",
     ],
     href: "#kiiray",
+    programHref: "/programs/kiiray",
+    programCta: "Découvrir le programme KIIRAY",
     // Fichier fourni : bajenugox.png — rattaché à l'atelier national du T2 sur le
     // rôle des Bajenu Gox. ⚠️ À confirmer par J-GEN : les Bajenu Gox interviennent
     // aussi comme association encadrante dans Liggeyal Ëlëg.
@@ -237,6 +250,8 @@ const projects: NewsletterProject[] = [
     locations: ["Pikine", "Tivaouane Peulh", "Patte d'Oie"],
     partnerNames: ["IPAS", "AmplifyChange"],
     href: "#pas-a-pas",
+    programHref: "/programs/pas-a-pas-vers-une-justice-reproductive-au-senegal",
+    programCta: "Découvrir le programme PAS À PAS",
     // Fichier fourni : pasapas1.png (un second visuel pasapas2.png est disponible
     // dans le dossier et peut être substitué en changeant ce seul nom).
     image: {
@@ -285,6 +300,8 @@ const projects: NewsletterProject[] = [
     locations: ["Yoff", "Ndenatte", "Therme Nord"],
     partnerNames: ["Speak Up Africa", "Initiative Voix Essentielles"],
     href: "#jvssr",
+    programHref: "/programs/jeunes-volontaires-pour-la-sante-sexuelle-et-reproductive",
+    programCta: "Découvrir le projet JVSSR",
     image: {
       name: "jvssr1",
       alt: "Cercle de sororité réunissant des jeunes femmes à Yoff",
@@ -333,6 +350,8 @@ const projects: NewsletterProject[] = [
       "Association des Bajenu Gox de Fatick",
     ],
     href: "#liggeyal-eleg",
+    programHref: "/programs/liggeeyal-eleg",
+    programCta: "Découvrir le projet LIGGEEYAL ËLËG",
     image: {
       name: "euleug",
       alt: "Session de formation professionnelle réunissant des membres d'un GIE de jeunes femmes",
@@ -369,6 +388,8 @@ const projects: NewsletterProject[] = [
     summary:
       "Le programme vise notamment à soutenir le plaidoyer en faveur de la révision des dispositions discriminatoires du Code de la famille. Il cherche à créer un dialogue entre les parlementaires et les communautés, particulièrement les femmes.",
     href: "#naatal-jaboot-gui",
+    programHref: "/programs/naatal-jaboot-gui-un-plaidoyer-pour-la-reforme-du-code-de-la-famille",
+    programCta: "Découvrir le programme Naatal Jaboot Gui",
     image: {
       name: "assises1",
       alt: "Réunion d'orientation réunissant les parties prenantes du programme Naatal Jaboot Gui",
@@ -401,6 +422,8 @@ const projects: NewsletterProject[] = [
       "Les Assises nationales citoyennes sur les droits des femmes et des filles constituent un processus national de dialogue, préparé tout au long du semestre par la mise en place de ses instances de gouvernance.",
     // URL réelle : la page /assises existe déjà sur le site.
     href: "/assises",
+    programHref: "/assises",
+    programCta: "Suivre les Assises nationales citoyennes",
     emailSummary:
       "La feuille de route des Assises a été élaborée, un comité technique composé d'expert·e·s a été créé et un atelier d'installation et de structuration du Comité de pilotage a été organisé.",
     narrative: [

@@ -133,6 +133,17 @@ function projectUrl(project: NewsletterProject): string {
     : `${pageUrl}${anchor}`
 }
 
+/**
+ * Destination du bouton de section : la page pilier du projet.
+ *
+ * On préfère cette page au lien profond vers la newsletter, parce qu'elle mène
+ * au programme ET à ses articles. À défaut de page pilier déclarée, on retombe
+ * sur le lien profond, qui existe toujours.
+ */
+function projectProgramUrl(project: NewsletterProject): string {
+  return project.programHref ? withNewsletterUtm(project.programHref) : projectUrl(project)
+}
+
 /** Chiffres retenus pour l'e-mail (5 sur les 7 de la page). */
 const emailStatistics = data.statistics.filter((stat) => stat.inEmail)
 
@@ -408,18 +419,14 @@ export function NewsletterSemestreOne2026Email() {
                 >
                   {project.emailSummary ?? project.summary}
                 </Text>
-                <Link
-                  href={projectUrl(project)}
-                  style={{
-                    color: CRIMSON,
-                    fontFamily: FONT_STACK,
-                    fontSize: "14px",
-                    fontWeight: 700,
-                    textDecoration: "underline",
-                  }}
+                {/* Un seul appel à l'action par section, vers la page pilier du
+                    projet : c'est là que se trouvent le programme et ses articles. */}
+                <Button
+                  href={projectProgramUrl(project)}
+                  style={{ ...primaryButton, fontSize: "14px", padding: "12px 22px" }}
                 >
-                  Lire les réalisations de {project.name}
-                </Link>
+                  {project.programCta ?? `Découvrir ${project.name}`}
+                </Button>
               </Section>
             ))}
           </Section>

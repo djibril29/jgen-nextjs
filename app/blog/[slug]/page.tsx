@@ -1,3 +1,5 @@
+import type { Metadata } from "next"
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -7,20 +9,78 @@ import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
 import { PortableText } from "@portabletext/react"
 import { BlogHeroImage } from "@/components/blog-hero-image"
+import { ArticleSchema, BreadcrumbSchema } from "@/components/structured-data"
+import { buildUrl } from "@/lib/site"
 
 async function getPost(slug: string) {
   const query = `*[_type=="post" && slug.current==$slug][0]{
     _id,
     title,
     publishedAt,
+    _updatedAt,
     image,
     excerpt,
     body,
-    "categories": categories[]->title
+    metaTitle,
+    metaDescription,
+    keywords,
+    noIndex,
+    "categories": categories[]->title,
+    "author": author->name,
+    program->{ title, "slug": slug.current }
   }`
   return client.fetch(query, { slug }, {
     next: { revalidate: 60 } // Revalidate every 60 seconds
   })
+}
+
+/**
+ * Métadonnées par article.
+ *
+ * Sans cette fonction, Next.js retombe sur le `metadata` du layout racine : tous
+ * les articles partagent alors le même titre et la même description, ce qui les
+ * rend indistinguables pour un moteur de recherche. Les champs `metaTitle` et
+ * `metaDescription` de Sanity priment ; à défaut on retombe sur le titre et
+ * l'accroche de l'article.
+ */
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = await getPost(slug)
+
+  if (!post) {
+    return {
+      title: "Article non trouvé",
+      robots: { index: false, follow: false },
+    }
+  }
+
+  const title = post.metaTitle || post.title
+  const description = post.metaDescription || post.excerpt || undefined
+  const url = buildUrl(`/blog/${slug}`)
+  const image = post.image ? urlFor(post.image).width(1200).height(630).url() : undefined
+
+  return {
+    title,
+    description,
+    keywords: post.keywords,
+    alternates: { canonical: url },
+    robots: post.noIndex ? { index: false, follow: true } : undefined,
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      publishedTime: post.publishedAt,
+      modifiedTime: post._updatedAt,
+      images: image ? [{ url: image, alt: post.image?.alt || post.title }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: image ? [image] : undefined,
+    },
+  }
 }
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -43,14 +103,37 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     )
   }
 
+  const url = buildUrl(`/blog/${slug}`)
+  const image = post.image ? urlFor(post.image).width(1200).height(630).url() : undefined
+
   return (
     <main className="min-h-screen">
+      {/* Balisage Article : c'est ce qui permet à Google d'identifier la page
+          comme un article daté et attribué, plutôt que comme une page générique. */}
+      <ArticleSchema
+        headline={post.metaTitle || post.title}
+        description={post.metaDescription || post.excerpt}
+        url={url}
+        image={image}
+        datePublished={post.publishedAt}
+        dateModified={post._updatedAt}
+        authorName={post.author}
+        keywords={post.keywords}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Accueil", url: buildUrl("/") },
+          { name: "Actualités", url: buildUrl("/blog") },
+          { name: post.title, url },
+        ]}
+      />
+
       <Header />
 
       {/* Hero Image */}
-      <BlogHeroImage 
-        image={post.image} 
-        alt={post.title}
+      <BlogHeroImage
+        image={post.image}
+        alt={post.image?.alt || post.title}
       />
 
       {/* Article Content */}
@@ -95,6 +178,22 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <div className="prose prose-lg max-w-none">
               <PortableText value={post.body} />
             </div>
+
+            {/* Rattachement au programme. Ce lien de retour ferme la boucle du
+                maillage interne : la page programme liste ses articles, chaque
+                article renvoie à son programme. */}
+            {post.program?.slug && (
+              <div className="mt-12 border-l-4 border-jgen-jaune bg-gray-50 p-6">
+                <p className="text-sm text-gray-600">Cet article s'inscrit dans le programme</p>
+                <Link
+                  href={`/programs/${post.program.slug}`}
+                  className="mt-1 inline-flex items-center gap-2 text-lg font-bold text-jgen-plum underline-offset-4 hover:underline"
+                >
+                  {post.program.title}
+                  <ArrowLeft className="h-4 w-4 rotate-180" aria-hidden="true" />
+                </Link>
+              </div>
+            )}
 
             {/* Share Section */}
             <div className="mt-12 pt-8 border-t">

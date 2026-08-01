@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { client } from '@/sanity/lib/client'
 
-export default async function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://jgen.sn'
 
   // Pages statiques
@@ -9,8 +9,10 @@ export default async function sitemap(): MetadataRoute.Sitemap {
     '',
     '/about',
     '/about/careers',
+    '/assises',
     '/blog',
     '/newsletter/semestre-1-2026',
+    '/petition',
     '/programs',
     '/resources',
     '/contact',
