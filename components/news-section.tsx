@@ -3,7 +3,10 @@ import { Suspense } from "react"
 import { NewsSectionClient, NewsItem } from "./news-section.client"
 
 export async function NewsSection() {
-  const query = `*[_type=="post"]|order(publishedAt desc)[0...3]{
+  // Deux rangées de trois. Le semestre 1 2026 a fait passer le blog de huit à
+  // trente et un articles : trois vignettes ne donnaient plus la mesure de ce
+  // qui est couvert.
+  const query = `*[_type=="post"]|order(publishedAt desc)[0...6]{
     _id,
     title,
     excerpt,

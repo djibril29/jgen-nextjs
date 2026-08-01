@@ -18,10 +18,6 @@ export interface NewsItem {
 
 export function NewsSectionClient({ items }: { items: NewsItem[] }) {
   const titleReveal = useScrollReveal({ threshold: 0.2 })
-  const card1Reveal = useScrollReveal({ threshold: 0.1 })
-  const card2Reveal = useScrollReveal({ threshold: 0.1 })
-  const card3Reveal = useScrollReveal({ threshold: 0.1 })
-  const cardReveals = [card1Reveal, card2Reveal, card3Reveal]
 
   return (
     <section className="py-20 lg:py-32">
@@ -39,45 +35,9 @@ export function NewsSectionClient({ items }: { items: NewsItem[] }) {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          {items.map((item, index) => {
-            const reveal = cardReveals[index]
-            return (
-              <Link key={item._id} href={`/blog/${item.slug}`} className="group">
-                <div
-                  ref={reveal.ref}
-                  className={`scroll-reveal delay-${(index + 1) * 100} ${reveal.isVisible ? "is-visible" : ""}`}
-                >
-                  <Card className="h-full border-0 shadow-md hover:shadow-2xl transition-all overflow-hidden">
-                    <div className="aspect-[16/10] overflow-hidden relative">
-                      <img
-                        src={item.image ? urlFor(item.image).width(1200).height(750).url() : "/placeholder.svg"}
-                        alt={item.title}
-                        className="w-full h-full object-cover image-zoom group-hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className="absolute top-3 left-3 flex gap-2">
-                        {item.tags?.map((tag, idx) => (
-                          <Badge key={idx} variant="secondary" className="bg-background/90 backdrop-blur">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                    <CardContent className="p-6">
-                      <p className="text-sm text-muted-foreground mb-2 font-medium">
-                        {item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('fr-FR') : ''}
-                      </p>
-                      <h3 className="text-xl md:text-2xl font-bold mb-2 text-balance group-hover:text-primary transition-colors line-clamp-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-base md:text-lg text-muted-foreground leading-relaxed line-clamp-2">
-                        {item.excerpt}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </Link>
-            )
-          })}
+          {items.map((item, index) => (
+            <NewsCard key={item._id} item={item} index={index} />
+          ))}
         </div>
 
         <div className="text-center mt-8 sm:hidden">
@@ -87,5 +47,65 @@ export function NewsSectionClient({ items }: { items: NewsItem[] }) {
         </div>
       </div>
     </section>
+  )
+}
+
+/**
+ * Décalages écrits en toutes lettres : Tailwind ne génère une utilitaire que
+ * s'il en lit le nom dans les sources, et une classe composée à l'exécution lui
+ * échappe.
+ */
+const REVEAL_DELAYS = ["delay-100", "delay-200", "delay-300"] as const
+
+/**
+ * Une carte par article. Le hook d'apparition vit ici plutôt que dans le parent :
+ * un hook ne peut pas être appelé dans une boucle, et la grille n'a plus un
+ * nombre d'articles fixe.
+ */
+function NewsCard({ item, index }: { item: NewsItem; index: number }) {
+  const reveal = useScrollReveal({ threshold: 0.1 })
+
+  // Le décalage suit la colonne, pas le rang : la seconde rangée entre dans le
+  // champ de vision séparément et reprend donc le même balayage de gauche à
+  // droite.
+  const delay = REVEAL_DELAYS[index % REVEAL_DELAYS.length]
+
+  return (
+    <Link href={`/blog/${item.slug}`} className="group">
+      <div
+        ref={reveal.ref}
+        className={`scroll-reveal ${delay} ${reveal.isVisible ? "is-visible" : ""}`}
+      >
+        <Card className="h-full border-0 shadow-md hover:shadow-2xl transition-all overflow-hidden">
+          <div className="aspect-[16/10] overflow-hidden relative">
+            <img
+              src={item.image ? urlFor(item.image).width(1200).height(750).url() : "/placeholder.svg"}
+              alt={item.title}
+              className="w-full h-full object-cover image-zoom group-hover:scale-110 transition-transform duration-500"
+            />
+            <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+              {/* Deux étiquettes au plus : plusieurs des nouveaux articles en
+                  portent trois, qui recouvraient le tiers haut de l'image. */}
+              {item.tags?.slice(0, 2).map((tag, idx) => (
+                <Badge key={idx} variant="secondary" className="bg-background/90 backdrop-blur">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </div>
+          <CardContent className="p-6">
+            <p className="text-sm text-muted-foreground mb-2 font-medium">
+              {item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('fr-FR') : ''}
+            </p>
+            <h3 className="text-xl md:text-2xl font-bold mb-2 text-balance group-hover:text-primary transition-colors line-clamp-2">
+              {item.title}
+            </h3>
+            <p className="text-base md:text-lg text-muted-foreground leading-relaxed line-clamp-2">
+              {item.excerpt}
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    </Link>
   )
 }
