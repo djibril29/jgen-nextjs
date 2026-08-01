@@ -212,19 +212,30 @@ vérification qu'ils ne signent aucun article existant.
 
 ---
 
-## 14. Ordre de publication à respecter
+## 14. Ordre de publication — CONTRAIGNANT, pas indicatif
 
-Les nouveaux articles référencent le programme **KIIRAY** et trois nouvelles
-catégories (**Autonomisation économique**, **Gouvernance locale**, **Bajenu Gox**)
-qui n'existent encore qu'en brouillon. Ces références sont posées en **liens
-faibles**, ce qui permet de publier dans n'importe quel ordre sans erreur.
+Les nouveaux articles référencent le programme **KIIRAY** et trois catégories
+(**Autonomisation économique**, **Gouvernance locale**, **Bajenu Gox**).
 
-Pour que les liens s'affichent correctement, publiez néanmoins dans cet ordre :
+Ces références sont stockées en **liens faibles**, ce qui a permis de créer les
+brouillons dans n'importe quel ordre. **Mais cela ne vaut pas pour la
+publication.** Le schéma déclare ces champs comme des références fortes : au
+moment de publier, Sanity « renforce » la référence et exige que la cible existe
+en version publiée. Publier un article avant sa catégorie renvoie donc une
+erreur 409 `documentReferenceDoesNotExistError`.
 
-1. les **3 catégories** et le **programme KIIRAY** ;
-2. les **6 programmes** mis à jour ;
-3. les **articles**, par vagues de trois ou quatre sur deux à trois semaines.
+**L'ordre suivant est donc obligatoire :**
 
-L'étalement des publications est délibéré : dix-huit articles mis en ligne le
-même jour se lisent comme un déversement de contenu, ce que les moteurs de
-recherche traitent moins favorablement qu'une parution régulière.
+1. les **3 catégories** — Autonomisation économique, Gouvernance locale,
+   Bajenu Gox ;
+2. le **programme KIIRAY** ;
+3. les **6 autres programmes** mis à jour ;
+4. les **articles**, par vagues de trois ou quatre sur deux à trois semaines.
+
+Une fois l'étape 1 et 2 faites, plus aucun article ne peut se heurter à ce
+blocage : tous les autres programmes et catégories qu'ils référencent sont déjà
+publiés de longue date.
+
+L'étalement des publications à l'étape 4 est délibéré : dix-neuf articles mis en
+ligne le même jour se lisent comme un déversement de contenu, ce que les moteurs
+de recherche traitent moins favorablement qu'une parution régulière.
