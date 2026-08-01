@@ -64,6 +64,7 @@ const IMAGE = {
   codeFamille: 'image-28863918f036e6d5b9242b3de00581ed39dfe116-2048x1152-jpg',
   copil: 'image-3d520954b9fa5db9df39a6423692f7fccbc45bcf-1600x900-jpg',
   perception: 'image-125030ed0812cf0ad2a8cefd472ea1c5f7a259de-1600x900-jpg',
+  kiirayTravail: 'image-fc23417c1f5d73722353506bd78b6a86af229184-1600x900-jpg',
 }
 
 /** Date de mise en ligne, conformément au choix éditorial retenu : les articles
@@ -659,8 +660,8 @@ const articles: Article[] = [
     program: PROGRAM.kiiray,
     categories: [CATEGORY.gouvernanceLocale, CATEGORY.violencesSexuelles, CATEGORY.programme],
     image: {
-      asset: IMAGE.bajenugox2,
-      alt: "Participantes à l'atelier national des Bajenu Gox consacré à la prévention des violences basées sur le genre",
+      asset: IMAGE.kiirayTravail,
+      alt: "Séance de travail participative réunissant acteurs communautaires et institutionnels dans le cadre du programme KIIRAY",
     },
     body: [
       "Une politique publique se lit dans un budget avant de se lire dans un discours. C'est le principe de départ du budget sensible au genre, et c'est ce qui fonde la méthode du programme KIIRAY au Sénégal.",

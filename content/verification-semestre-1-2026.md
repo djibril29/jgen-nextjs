@@ -190,6 +190,11 @@ Sept visuels ont été ajoutés et rattachés. Restent cinq articles sans image 
   LIGGEEYAL ËLËG, mais côté Kaolack, où l'article porte déjà `euleug.jpg` dont la
   banderole nomme le GIE et le métier. Il reste disponible pour la galerie du
   programme.
+- **`bejenugox.jpg` et `bajenugox2.jpg` ne sont plus rattachés à aucun article.**
+  L'article « Budget sensible au genre » portait `bajenugox2.jpg` ; il porte
+  désormais `kiiray1.jpg`, une séance de travail mixte qui correspond mieux à un
+  sujet de finances locales. Les deux photos d'atelier Bajenu Gox restent dans la
+  bibliothèque Sanity, disponibles pour la page programme KIIRAY.
 
 **Comment ajouter les visuels manquants** : déposez les fichiers dans
 `public/newsletters/semestre-1/`, ajoutez une ligne par image dans le tableau

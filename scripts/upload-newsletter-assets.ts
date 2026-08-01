@@ -58,6 +58,8 @@ const ALT_TEXTS: Record<string, string> = {
     "Participantes d'un GIE de Kaolack en tenue de formation lors d'une session de pâtisserie du projet LIGGEEYAL ËLËG, supervisée par l'AADS",
   kiiray:
     "Lancement officiel du programme KIIRAY dans une collectivité territoriale de la région de Dakar",
+  kiiray1:
+    "Séance de travail participative réunissant acteurs communautaires et institutionnels dans le cadre du programme KIIRAY",
   'pas-a-pas':
     "Session de formation de jeunes leaders sur les droits en santé sexuelle et reproductive, programme PAS À PAS",
   'pas-a-pas2':
