@@ -193,7 +193,7 @@ const projects: NewsletterProject[] = [
     // rôle des Bajenu Gox. ⚠️ À confirmer par J-GEN : les Bajenu Gox interviennent
     // aussi comme association encadrante dans Liggeyal Ëlëg.
     image: {
-      name: "bajenugox",
+      name: "kiiray",
       alt: "Atelier national consacré au rôle des Bajenu Gox dans le cadre du programme KIIRAY",
     },
     emailSummary:
@@ -240,7 +240,7 @@ const projects: NewsletterProject[] = [
     // Fichier fourni : pasapas1.png (un second visuel pasapas2.png est disponible
     // dans le dossier et peut être substitué en changeant ce seul nom).
     image: {
-      name: "pasapas1",
+      name: "pas-a-pas",
       alt: "Session de formation de jeunes leaders sur les droits et la santé sexuels et reproductifs",
     },
     emailSummary:
@@ -286,7 +286,7 @@ const projects: NewsletterProject[] = [
     partnerNames: ["Speak Up Africa", "Initiative Voix Essentielles"],
     href: "#jvssr",
     image: {
-      name: "jvssr",
+      name: "jvssr1",
       alt: "Cercle de sororité réunissant des jeunes femmes à Yoff",
     },
     emailSummary:
@@ -334,7 +334,7 @@ const projects: NewsletterProject[] = [
     ],
     href: "#liggeyal-eleg",
     image: {
-      name: "liggeyal-eleg",
+      name: "euleug",
       alt: "Session de formation professionnelle réunissant des membres d'un GIE de jeunes femmes",
     },
     emailSummary:
@@ -370,7 +370,7 @@ const projects: NewsletterProject[] = [
       "Le programme vise notamment à soutenir le plaidoyer en faveur de la révision des dispositions discriminatoires du Code de la famille. Il cherche à créer un dialogue entre les parlementaires et les communautés, particulièrement les femmes.",
     href: "#naatal-jaboot-gui",
     image: {
-      name: "naatal-jaboot-gui",
+      name: "assises1",
       alt: "Réunion d'orientation réunissant les parties prenantes du programme Naatal Jaboot Gui",
     },
     emailSummary:
@@ -450,7 +450,7 @@ export const newsletterSemesterOne2026 = {
 
   /** Visuel principal — sert aussi d'image Open Graph si le fichier existe. */
   coverImage: {
-    name: "cover",
+    name: "8mars",
     alt: "Rassemblement de femmes et de filles lors d'une activité communautaire de J-GEN Sénégal",
   } satisfies NewsletterImageRef,
 
@@ -638,7 +638,7 @@ export const newsletterSemesterOne2026 = {
         "Le mémorandum réaffirme notamment la demande de reconnaissance juridique du féminicide et le renforcement des mécanismes de protection et d'accès à la justice.",
       ],
       image: {
-        name: "8-mars-guediawaye",
+        name: "8mars",
         alt: "Mobilisation du 7 mars 2026 à Guédiawaye pour la Journée internationale des droits des femmes",
       },
     },

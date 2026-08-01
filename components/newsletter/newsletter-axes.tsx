@@ -1,48 +1,38 @@
 import Link from "next/link"
 import { ArrowRight, MapPin } from "lucide-react"
 
-import { NewsletterFigure } from "@/components/newsletter/newsletter-figure"
 import { RichText } from "@/components/patterns/editorial"
 import { EditorialColumn } from "@/components/patterns/layout"
+import { MagazineChapter } from "@/components/patterns/magazine"
 import {
   newsletterSemesterOne2026 as data,
   type NewsletterProject,
 } from "@/content/newsletter-semestre-1-2026"
 
-function ProjectCard({ project }: { project: NewsletterProject }) {
+function ProjectCard({ project, priority }: { project: NewsletterProject; priority?: boolean }) {
   // On ne rend un lien que vers une page réellement existante du site.
   // Les `href` en ancre (« #elles-aussi ») désignent cette section elle-même :
   // ils servent aux liens profonds depuis l'e-mail, pas à un lien interne circulaire.
   const externalPageHref = project.href?.startsWith("/") ? project.href : undefined
 
+  // Le premier paragraphe sert d'accroche sur l'ouverture plein ecran ; il
+  // n'est donc pas repete dans la prose qui suit.
+  const [lead, ...body] = project.narrative ?? []
+
   return (
-    <article
-      id={project.id}
-      aria-labelledby={`${project.id}-titre`}
-      className="scroll-mt-24"
-    >
-      <div className="grid gap-6 lg:grid-cols-5 lg:gap-10">
-        <NewsletterFigure
-          image={project.image}
-          sizes="(max-width: 1024px) 100vw, 40vw"
-          className="aspect-[16/10] w-full lg:col-span-2 lg:aspect-[4/3]"
-        />
+    <article>
+      <MagazineChapter
+        id={project.id}
+        image={project.image}
+        eyebrow={project.category}
+        title={project.name}
+        lead={lead}
+        priority={priority}
+      />
 
-        {/* Le contenu coule sur la page : plus de fond blanc ni de liseré
-            gris, qui ne faisaient qu'enfermer sans rien apporter. */}
-        <div className="lg:col-span-3">
-          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-jgen-rose">
-            {project.category}
-          </p>
-
-          <h4
-            id={`${project.id}-titre`}
-            className="mb-4 text-2xl font-black tracking-tight text-jgen-plum sm:text-3xl"
-          >
-            {project.name}
-          </h4>
-
-          <p className="mb-5 text-base leading-relaxed text-gray-700">{project.summary}</p>
+      <EditorialColumn>
+        <div className="py-12 lg:py-16">
+          <p className="mb-6 text-lg leading-relaxed text-gray-700">{project.summary}</p>
 
           {project.locations && project.locations.length > 0 && (
             <p className="mb-6 flex items-start gap-2 text-sm text-gray-600">
@@ -59,7 +49,7 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
               fichier de contenu ressortent en surlignage. Le releve factuel
               d'origine reste dans `project.achievements`, comme reference de
               verification. */}
-          {project.narrative?.map((paragraph, index) => (
+          {body.map((paragraph, index) => (
             <RichText key={index}>{paragraph}</RichText>
           ))}
 
@@ -80,7 +70,7 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
             </Link>
           )}
         </div>
-      </div>
+      </EditorialColumn>
     </article>
   )
 }
@@ -88,65 +78,76 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
 export function NewsletterAxes() {
   const { axes, projects, assisesPlannedDates } = data
 
+  // Les ouvertures de chapitre sont pleine largeur : elles ne peuvent pas etre
+  // enfermees dans la colonne editoriale. Seuls les intertitres d'axe et la
+  // prose le sont.
+  let chapterIndex = 0
+
   return (
-    <EditorialColumn size="wide">
-      <section id="axes" aria-labelledby="axes-titre" className="scroll-mt-24 py-10 lg:py-14">
+    <>
+      <section id="axes" aria-labelledby="axes-titre" className="scroll-mt-24">
+        <EditorialColumn size="wide">
+          <div className="py-10 lg:py-14">
+            <h2
+              id="axes-titre"
+              className="mb-3 text-3xl font-extrabold tracking-tight text-jgen-plum sm:text-4xl"
+            >
+              Les grands axes d&apos;intervention
+            </h2>
+            <div className="h-1 w-20 bg-jgen-rose" aria-hidden="true" />
+          </div>
+        </EditorialColumn>
+
         <div>
-          <h2
-            id="axes-titre"
-            className="mb-3 text-3xl font-extrabold tracking-tight text-jgen-plum sm:text-4xl"
-          >
-            Les grands axes d&apos;intervention
-          </h2>
-          <div className="mb-14 h-1 w-20 bg-jgen-rose" aria-hidden="true" />
+          {axes.map((axis) => {
+            const axisProjects = axis.projectIds
+              .map((id) => projects.find((project) => project.id === id))
+              .filter((project): project is NewsletterProject => Boolean(project))
 
-          <div className="space-y-16 lg:space-y-20">
-            {axes.map((axis) => {
-              const axisProjects = axis.projectIds
-                .map((id) => projects.find((project) => project.id === id))
-                .filter((project): project is NewsletterProject => Boolean(project))
-
-              return (
-                <section
-                  key={axis.id}
-                  id={axis.id}
-                  aria-labelledby={`${axis.id}-titre`}
-                  className="scroll-mt-24"
-                >
-                  <div className="mb-8 border-l-4 border-jgen-jaune pl-5">
-                    <p className="mb-1 text-xs font-bold uppercase tracking-wide text-jgen-rose">
-                      Axe {axis.number}
-                    </p>
+            return (
+              <section
+                key={axis.id}
+                id={axis.id}
+                aria-labelledby={`${axis.id}-titre`}
+                className="scroll-mt-24"
+              >
+                <EditorialColumn>
+                  <div className="border-l-4 border-jgen-jaune py-8 pl-5">
+                    <p className="eyebrow mb-1 text-jgen-rose">Axe {axis.number}</p>
                     <h3
                       id={`${axis.id}-titre`}
-                      className="mb-3 text-2xl font-black tracking-tight text-jgen-plum sm:text-3xl"
+                      className="mb-3 text-2xl font-extrabold tracking-tight text-jgen-plum sm:text-3xl"
                     >
                       {axis.title}
                     </h3>
-                    <p className="max-w-3xl text-lg leading-relaxed text-gray-700">{axis.intro}</p>
+                    <p className="text-lg leading-relaxed text-gray-700">{axis.intro}</p>
                   </div>
+                </EditorialColumn>
 
-                  <div className="space-y-8">
-                    {axisProjects.map((project) => (
-                      <ProjectCard key={project.id} project={project} />
-                    ))}
-                  </div>
+                {axisProjects.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    priority={chapterIndex++ === 0}
+                  />
+                ))}
 
-                  {/* Les dates des Assises sont prévisionnelles : mention explicite. */}
-                  {axis.projectIds.includes("assises") && (
-                    <p className="mt-8 border-l-2 border-jgen-jaune py-1 pl-5 text-sm leading-relaxed text-gray-700">
+                {/* Les dates des Assises sont prévisionnelles : mention explicite. */}
+                {axis.projectIds.includes("assises") && (
+                  <EditorialColumn>
+                    <p className="mb-12 border-l-2 border-jgen-jaune py-1 pl-5 text-sm leading-relaxed text-gray-700">
                       <span className="font-bold text-jgen-plum">
                         {assisesPlannedDates.label} : {assisesPlannedDates.value}.
                       </span>{" "}
                       {assisesPlannedDates.disclaimer}
                     </p>
-                  )}
-                </section>
-              )
-            })}
-          </div>
+                  </EditorialColumn>
+                )}
+              </section>
+            )
+          })}
         </div>
       </section>
-    </EditorialColumn>
+    </>
   )
 }

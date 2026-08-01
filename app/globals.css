@@ -231,6 +231,27 @@
     letter-spacing: 0.12em;
   }
 
+  /* Mise en page magazine.
+     Le snap doit etre porte par le scroller reel, qui est le document : le
+     poser sur un conteneur interne obligerait a lui donner une hauteur fixe,
+     ce qui casserait la retractation de la barre d'adresse sur mobile.
+     `:has()` limite la regle a la seule page magazine.
+     `proximity` et non `mandatory` : le snap accroche les ouvertures de
+     chapitre sans confisquer le defilement dans les zones de prose. */
+  html:has(.magazine-page) {
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+  }
+
+  /* Un defilement detourne peut provoquer nausees et malaises chez les
+     personnes sensibles au mouvement. On le desactive entierement. */
+  @media (prefers-reduced-motion: reduce) {
+    html:has(.magazine-page) {
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+    }
+  }
+
   /* Chiffres a chasse fixe : sans cela, les compteurs animes tressautent
      lateralement pendant toute l'animation, le « 1 » etant plus etroit que le
      « 8 ». */

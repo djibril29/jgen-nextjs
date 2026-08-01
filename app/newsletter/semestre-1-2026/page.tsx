@@ -10,6 +10,7 @@ import { NewsletterOrientations } from "@/components/newsletter/newsletter-orien
 import { NewsletterOutlook } from "@/components/newsletter/newsletter-outlook"
 import { NewsletterStats } from "@/components/newsletter/newsletter-stats"
 import { NewsletterTimeline } from "@/components/newsletter/newsletter-timeline"
+import { MagazineNav } from "@/components/patterns/magazine"
 import { newsletterSemesterOne2026 as data } from "@/content/newsletter-semestre-1-2026"
 import { resolveNewsletterImage } from "@/lib/newsletter-image"
 import { buildUrl } from "@/lib/site"
@@ -44,13 +45,28 @@ export const metadata: Metadata = {
 
 export default function NewsletterSemestreUn2026Page() {
   return (
-    <main className="min-h-screen bg-white">
+    // `magazine-page` active le defilement magnetique (voir globals.css). La
+    // classe est portee ici et nulle part ailleurs : aucune autre page du site
+    // n'est affectee.
+    <main className="magazine-page min-h-screen bg-white">
       <Header />
 
       {/* Seule bande pleine largeur de l'en-tete : elle annonce la page. Tout
           ce qui suit court dans une colonne editoriale unique, ou les aplats
           de couleur ponctuent au lieu de segmenter. */}
       <NewsletterHero />
+
+      <MagazineNav
+        chapters={[
+          { id: "orientations", label: "Six mois d'engagement" },
+          { id: "axes", label: "Les axes" },
+          { id: "temps-forts", label: "Temps forts" },
+          { id: "chronologie", label: "Chronologie" },
+          { id: "chiffres", label: "Les chiffres" },
+          { id: "enseignements", label: "Enseignements" },
+          { id: "agir", label: "Agir" },
+        ]}
+      />
 
       <NewsletterOrientations />
       <NewsletterAxes />
