@@ -3,12 +3,17 @@ import { Suspense } from "react"
 import { PrioritiesClient, ProgramCard } from "./priorities.client"
 
 export async function Priorities() {
+  // Quatre programmes, soit deux rangées de deux cartes. Le bouton « Voir tous
+  // nos programmes » mène aux quatre autres.
   const query = `*[_type=="program"]|order(_createdAt desc)[0...4]{
     _id,
     title,
     summary,
     "slug": slug.current,
-    featuredImage
+    featuredImage,
+    status,
+    executionPeriod,
+    location
   }`
   const programs = await client.fetch<ProgramCard[]>(query, {}, {
     next: { revalidate: 60 } // Revalidate every 60 seconds

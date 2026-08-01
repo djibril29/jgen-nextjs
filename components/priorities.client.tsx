@@ -1,17 +1,9 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
+import { ArrowRight, CalendarDays, MapPin } from "lucide-react"
 import Link from "next/link"
-import Autoplay from "embla-carousel-autoplay"
 import { useScrollReveal } from "@/hooks/use-scroll-reveal"
 import { urlFor } from "@/sanity/lib/image"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from "@/components/ui/carousel"
 
 export interface ProgramCard {
   _id: string
@@ -19,38 +11,27 @@ export interface ProgramCard {
   summary?: string
   slug: string
   featuredImage?: any
+  status?: "upcoming" | "ongoing" | "completed"
+  executionPeriod?: string
+  location?: string
 }
+
+/** Libellés du champ `status` du schéma Sanity, repris tels quels. */
+const STATUS_LABELS: Record<NonNullable<ProgramCard["status"]>, string> = {
+  upcoming: "À venir",
+  ongoing: "En cours",
+  completed: "Terminé",
+}
+
+const REVEAL_DELAYS = ["delay-100", "delay-200"] as const
 
 export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
   const titleReveal = useScrollReveal({ threshold: 0.2 })
-  const [api, setApi] = useState<CarouselApi>()
-  const [canScrollPrev, setCanScrollPrev] = useState(false)
-  const [canScrollNext, setCanScrollNext] = useState(false)
-
-  const autoplay = useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })
-  )
-
-  // Track which arrows should be enabled
-  useEffect(() => {
-    if (!api) return
-    const onSelect = () => {
-      setCanScrollPrev(api.canScrollPrev())
-      setCanScrollNext(api.canScrollNext())
-    }
-    api.on("select", onSelect)
-    api.on("reInit", onSelect)
-    onSelect()
-    return () => {
-      api.off("select", onSelect)
-    }
-  }, [api])
 
   return (
-    <section className="py-100 my-20 lg:py-32 bg-white overflow-hidden ">
+    <section className="py-20 lg:py-32 bg-white">
       <div className="container mx-auto px-4 lg:px-8">
 
-        {/* Header — title only */}
         <div
           ref={titleReveal.ref}
           className={`mb-12 scroll-reveal-scale ${titleReveal.isVisible ? "is-visible" : ""}`}
@@ -61,85 +42,13 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
           <div className="w-24 h-1 bg-primary mt-4" />
         </div>
 
-        {/* Carousel — peek effect via card basis */}
-        <Carousel
-          setApi={setApi}
-          plugins={[autoplay.current]}
-          opts={{ align: "start", loop: false }}
-        >
-          <CarouselContent className="-ml-5">
-            {programs.map((program) => (
-              <CarouselItem
-                key={program._id}
-                // Peek: mobile 78%, tablet 44%, desktop 28%
-                className="pl-5 basis-[78%] sm:basis-[44%] lg:basis-[28%]"
-              >
-                <Link href={`/programs/${program.slug}`} className="group block h-full">
-                  <div className="relative h-full">
-                    {/* Decorative squares */}
-                    <div className="absolute -top-3 -left-3 w-14 h-14 bg-jgen-rose opacity-80 z-0" />
-                    <div className="absolute -bottom-3 -right-3 w-16 h-16 bg-jgen-jaune opacity-90 z-0 rotate-12" />
-                    <div className="absolute top-1/2 -right-2 w-10 h-10 bg-jgen-violet opacity-70 z-0" />
+        <div className="grid lg:grid-cols-2 gap-6">
+          {programs.map((program, index) => (
+            <ProgramTile key={program._id} program={program} index={index} />
+          ))}
+        </div>
 
-                    {/* Card */}
-                    <div className="relative z-10 h-full bg-white shadow-lg group-hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
-                      {/* Image — 4/3 ratio instead of square to reduce height */}
-                      <div className="aspect-[4/3] overflow-hidden flex-shrink-0">
-                        <img
-                          src={
-                            program.featuredImage
-                              ? urlFor(program.featuredImage).width(600).height(450).url()
-                              : "/placeholder.svg"
-                          }
-                          alt={program.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-4 flex flex-col flex-grow">
-                        <h3 className="text-base md:text-lg font-bold mb-2 leading-tight text-gray-900 group-hover:text-jgen-rose transition-colors line-clamp-2">
-                          {program.title}
-                        </h3>
-                        {program.summary && (
-                          <p className="text-sm text-gray-600 leading-relaxed line-clamp-2 flex-grow">
-                            {program.summary}
-                          </p>
-                        )}
-                        <div className="mt-3 inline-flex items-center gap-2 text-jgen-rose font-bold text-xs uppercase tracking-wide opacity-0 group-hover:opacity-100 transition-opacity">
-                          <span>En savoir plus</span>
-                          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
-
-        {/* Bottom bar — arrows left, CTA right */}
-        <div className="flex items-center justify-between mt-10">
-          <div className="flex gap-3">
-            <button
-              onClick={() => api?.scrollPrev()}
-              disabled={!canScrollPrev}
-              aria-label="Programme précédent"
-              className="w-11 h-11 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-600 hover:border-jgen-rose hover:text-jgen-rose disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              onClick={() => api?.scrollNext()}
-              disabled={!canScrollNext}
-              aria-label="Programme suivant"
-              className="w-11 h-11 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-600 hover:border-jgen-rose hover:text-jgen-rose disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
-
+        <div className="mt-10">
           <Link
             href="/programs"
             className="inline-flex items-center gap-3 bg-jgen-rose hover:bg-jgen-rose/90 text-white font-bold text-sm px-7 py-3 transition-colors"
@@ -151,5 +60,80 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
 
       </div>
     </section>
+  )
+}
+
+/**
+ * Carte scindée : le visuel occupe la gauche, un aplat prune porte le texte à
+ * droite. Les deux moitiés sont d'égale hauteur — d'où `items-stretch` sur la
+ * carte et `h-full` sur l'image, sans quoi une vignette basse laisserait un
+ * blanc sous elle.
+ */
+function ProgramTile({ program, index }: { program: ProgramCard; index: number }) {
+  const reveal = useScrollReveal({ threshold: 0.1 })
+  const delay = REVEAL_DELAYS[index % REVEAL_DELAYS.length]
+  const statusLabel = program.status ? STATUS_LABELS[program.status] : undefined
+
+  return (
+    <div
+      ref={reveal.ref}
+      className={`scroll-reveal ${delay} ${reveal.isVisible ? "is-visible" : ""}`}
+    >
+      <Link href={`/programs/${program.slug}`} className="group block h-full">
+        <article className="flex flex-col sm:flex-row sm:items-stretch h-full overflow-hidden">
+
+          {/* Visuel */}
+          <div className="sm:w-2/5 flex-shrink-0 bg-gray-100 overflow-hidden aspect-[4/3] sm:aspect-auto">
+            <img
+              src={
+                program.featuredImage
+                  ? urlFor(program.featuredImage).width(700).height(700).url()
+                  : "/placeholder.svg"
+              }
+              alt={program.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+
+          {/* Aplat de texte */}
+          <div className="sm:w-3/5 bg-jgen-plum text-white p-6 lg:p-8 flex flex-col">
+            {statusLabel && (
+              <span className="self-start bg-jgen-jaune text-jgen-plum text-xs font-bold uppercase tracking-wide px-3 py-1 mb-4">
+                {statusLabel}
+              </span>
+            )}
+
+            <h3 className="text-xl lg:text-2xl font-bold leading-tight text-balance group-hover:text-jgen-jaune transition-colors line-clamp-3">
+              {program.title}
+            </h3>
+
+            {program.summary && (
+              <p className="mt-3 text-sm lg:text-base text-white/80 leading-relaxed line-clamp-3">
+                {program.summary}
+              </p>
+            )}
+
+            {/* Repoussée en bas pour que toutes les cartes alignent leur méta. */}
+            {(program.executionPeriod || program.location) && (
+              <div className="mt-auto pt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/70">
+                {program.executionPeriod && (
+                  <span className="inline-flex items-center gap-2">
+                    <CalendarDays className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                    {program.executionPeriod}
+                  </span>
+                )}
+                {program.location && (
+                  <span className="inline-flex items-center gap-2">
+                    <MapPin className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                    {program.location}
+                  </span>
+                )}
+              </div>
+            )}
+          </div>
+
+        </article>
+      </Link>
+    </div>
   )
 }
