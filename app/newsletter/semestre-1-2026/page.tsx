@@ -46,12 +46,21 @@ export default function NewsletterSemestreUn2026Page() {
   return (
     <main className="min-h-screen bg-white">
       <Header />
+
+      {/* Seule bande pleine largeur de l'en-tete : elle annonce la page. Tout
+          ce qui suit court dans une colonne editoriale unique, ou les aplats
+          de couleur ponctuent au lieu de segmenter. */}
       <NewsletterHero />
-      <NewsletterStats />
+
       <NewsletterOrientations />
       <NewsletterAxes />
       <NewsletterHighlights />
       <NewsletterTimeline />
+
+      {/* Le bilan chiffre ferme la narration plutot que de l'ouvrir : on lit
+          d'abord ce qui a ete fait, on en voit la somme ensuite. */}
+      <NewsletterStats />
+
       <NewsletterOutlook />
       <NewsletterCta />
       <Footer />

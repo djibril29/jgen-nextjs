@@ -1,28 +1,31 @@
 import { Calendar, MapPin } from "lucide-react"
 
 import { NewsletterFigure } from "@/components/newsletter/newsletter-figure"
+import { EditorialColumn } from "@/components/patterns/layout"
 import { newsletterSemesterOne2026 as data } from "@/content/newsletter-semestre-1-2026"
 
 export function NewsletterHighlights() {
   const { highlights } = data
 
   return (
-    <section
-      id="temps-forts"
-      aria-labelledby="temps-forts-titre"
-      className="bg-gray-50 py-16 lg:py-24"
-    >
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+    <EditorialColumn size="wide">
+      <section
+        id="temps-forts"
+        aria-labelledby="temps-forts-titre"
+        className="scroll-mt-24 py-10 lg:py-14"
+      >
+        <div>
           <h2
             id="temps-forts-titre"
-            className="mb-3 text-3xl font-black tracking-tight text-jgen-plum sm:text-4xl"
+            className="mb-3 text-3xl font-extrabold tracking-tight text-jgen-plum sm:text-4xl"
           >
             Les temps forts
           </h2>
           <div className="mb-12 h-1 w-20 bg-jgen-rose" aria-hidden="true" />
 
-          <div className="grid gap-8 lg:grid-cols-3">
+          {/* Deux colonnes plutot que trois : dans une colonne editoriale, une
+              grille de trois cartes redevient une rangee de blocs serres. */}
+          <div className="grid gap-6 sm:grid-cols-2">
             {highlights.map((highlight) => (
               <article
                 key={highlight.id}
@@ -82,7 +85,7 @@ export function NewsletterHighlights() {
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </EditorialColumn>
   )
 }

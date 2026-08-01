@@ -1,3 +1,4 @@
+import { EditorialColumn } from "@/components/patterns/layout"
 import { newsletterSemesterOne2026 as data } from "@/content/newsletter-semestre-1-2026"
 
 /**
@@ -9,16 +10,12 @@ export function NewsletterTimeline() {
   const { timeline } = data
 
   return (
-    <section
-      id="chronologie"
-      aria-labelledby="chronologie-titre"
-      className="bg-white py-16 lg:py-24"
-    >
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+    <EditorialColumn size="wide">
+      <section id="chronologie" aria-labelledby="chronologie-titre" className="scroll-mt-24 py-10 lg:py-14">
+        <div>
           <h2
             id="chronologie-titre"
-            className="mb-3 text-3xl font-black tracking-tight text-jgen-plum sm:text-4xl"
+            className="mb-3 text-3xl font-extrabold tracking-tight text-jgen-plum sm:text-4xl"
           >
             Chronologie du semestre
           </h2>
@@ -55,7 +52,7 @@ export function NewsletterTimeline() {
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </EditorialColumn>
   )
 }

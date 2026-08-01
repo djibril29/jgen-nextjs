@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight, MapPin } from "lucide-react"
 
 import { NewsletterFigure } from "@/components/newsletter/newsletter-figure"
+import { EditorialColumn } from "@/components/patterns/layout"
 import {
   newsletterSemesterOne2026 as data,
   type NewsletterProject,
@@ -100,12 +101,12 @@ export function NewsletterAxes() {
   const { axes, projects, assisesPlannedDates } = data
 
   return (
-    <section id="axes" aria-labelledby="axes-titre" className="bg-white py-16 lg:py-24">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+    <EditorialColumn size="wide">
+      <section id="axes" aria-labelledby="axes-titre" className="scroll-mt-24 py-10 lg:py-14">
+        <div>
           <h2
             id="axes-titre"
-            className="mb-3 text-3xl font-black tracking-tight text-jgen-plum sm:text-4xl"
+            className="mb-3 text-3xl font-extrabold tracking-tight text-jgen-plum sm:text-4xl"
           >
             Les grands axes d&apos;intervention
           </h2>
@@ -157,7 +158,7 @@ export function NewsletterAxes() {
             })}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </EditorialColumn>
   )
 }
