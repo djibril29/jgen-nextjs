@@ -60,6 +60,10 @@ const IMAGE = {
   pasAPas: 'image-d28ee8beda8a7555789ed665dd1194869b01812e-2048x1152-jpg',
   pasAPas2: 'image-8baf427881cbf756280be3a16710d6510139a6d8-2048x1152-jpg',
   pasAPas3: 'image-a328d2c83efaece50e7989a40a2712015e3c524e-2048x1152-jpg',
+  cercles: 'image-d373af03a0d12a16fbd8c3278ac7e7b7e7837d46-1162x821-jpg',
+  codeFamille: 'image-28863918f036e6d5b9242b3de00581ed39dfe116-2048x1152-jpg',
+  copil: 'image-3d520954b9fa5db9df39a6423692f7fccbc45bcf-1600x900-jpg',
+  perception: 'image-125030ed0812cf0ad2a8cefd472ea1c5f7a259de-1600x900-jpg',
 }
 
 /** Date de mise en ligne, conformément au choix éditorial retenu : les articles
@@ -338,6 +342,10 @@ const articles: Article[] = [
       "Après la validation de son plan d'action et le recrutement d'un consultant, le projet JVSSR a réalisé une étude sur les perceptions de la communauté de Yoff, dont les résultats ont été restitués aux parties prenantes.",
     program: PROGRAM.jvssr,
     categories: [CATEGORY.santeReproductive, CATEGORY.societeCivile],
+    image: {
+      asset: IMAGE.perception,
+      alt: "Session de restitution de l'enquête de base sur les perceptions communautaires à Yoff, le 24 juin 2026 à la mairie de Yoff",
+    },
     body: [
       "Intervenir sans données revient à agir sur des suppositions. Le projet Jeunes Volontaires pour la Santé Sexuelle et Reproductive a fait de la production de données probantes l'un de ses axes structurants pour sa deuxième phase à Yoff.",
       '## Une préparation méthodique',
@@ -346,9 +354,11 @@ const articles: Article[] = [
       '## Une étude réalisée au deuxième trimestre',
       "Au deuxième trimestre, les activités de terrain ont été lancées. Une étude portant sur les perceptions de la communauté de Yoff en matière de droits en santé sexuelle et reproductive et de violences basées sur le genre a été réalisée.",
       "Interroger les perceptions plutôt que les seuls comportements est un choix qui a des conséquences pratiques. Ce sont les représentations partagées — sur ce qui se dit, ce qui se tait, ce qui est jugé acceptable — qui déterminent si une jeune fille osera consulter, se confier ou porter plainte.",
-      '## Une restitution aux parties prenantes',
-      "Les résultats de cette étude ont fait l'objet d'un atelier de restitution réunissant l'ensemble des parties prenantes du projet. Cette restitution a permis d'orienter les interventions en fonction des besoins identifiés.",
-      "Restituer publiquement les résultats engage : une fois les constats partagés avec la municipalité, les acteurs communautaires et les partenaires, ils deviennent une base commune sur laquelle chacun peut être interpellé.",
+      '## Une restitution publique, le 24 juin 2026 à la mairie de Yoff',
+      "Les résultats ont fait l'objet d'une session de restitution le mercredi 24 juin 2026, dans la salle de réunion de la mairie de Yoff, réunissant l'ensemble des parties prenantes du projet.",
+      "L'intitulé retenu pour cette session dit précisément ce qui a été mesuré : la perception communautaire à Yoff sur l'accès des jeunes et des femmes aux services liés aux DSSR et à la prévention des violences basées sur le genre. Il ne s'agit donc pas seulement de savoir ce que les habitants pensent de ces sujets, mais de savoir ce qui, dans ces représentations, empêche ou permet le recours effectif à un service.",
+      "Restituer publiquement les résultats engage : une fois les constats partagés avec la municipalité, les acteurs communautaires et les partenaires, ils deviennent une base commune sur laquelle chacun peut être interpellé. Tenir cette séance dans les locaux de la mairie plutôt que dans un cadre associatif accentue cet engagement.",
+      "Cette restitution a permis d'orienter les interventions du projet en fonction des besoins identifiés.",
       '## Ce que l\'étude a rendu possible',
       "C'est sur cette base que se sont ensuite tenus les cercles de sororité de Ndenatte et de Therme Nord, ainsi que le travail d'animation d'espaces sûrs qui constitue le second axe de cette deuxième phase.",
       "Le projet vise à consolider les acquis des interventions précédentes et à renforcer la pérennité des mécanismes communautaires favorisant la protection, l'autonomisation et la participation des adolescentes et des jeunes femmes.",
@@ -487,6 +497,10 @@ const articles: Article[] = [
       "Le processus préparatoire des Assises nationales citoyennes a été lancé au deuxième trimestre 2026 : feuille de route élaborée, comité technique d'expert·e·s créé, comité de pilotage installé.",
     program: PROGRAM.naatal,
     categories: [CATEGORY.plaidoyer, CATEGORY.societeCivile],
+    image: {
+      asset: IMAGE.copil,
+      alt: "Séance de travail des membres du comité de pilotage des Assises nationales citoyennes sur les droits des femmes et des filles",
+    },
     body: [
       "Après la réunion d'orientation de mars 2026, le deuxième trimestre a été consacré à transformer des décisions de principe en dispositif opérationnel. Trois étapes ont été franchies.",
       '## Une feuille de route',
@@ -600,6 +614,10 @@ const articles: Article[] = [
       "Les acteurs communautaires du programme KIIRAY ont identifié quatre dispositions du Code de la famille sénégalais dont ils demandent la révision. Ces quatre points recoupent le plaidoyer porté par le programme Naatal Jaboot Gui.",
     program: PROGRAM.naatal,
     categories: [CATEGORY.plaidoyer, CATEGORY.feminisme, CATEGORY.societeCivile],
+    image: {
+      asset: IMAGE.codeFamille,
+      alt: "Rassemblement communautaire de femmes lors d'une rencontre de plaidoyer de J-GEN Sénégal",
+    },
     body: [
       "Adopté en 1972, le Code de la famille sénégalais régit depuis plus de cinquante ans la vie familiale et les rapports entre hommes, femmes et enfants. Le plaidoyer pour sa révision est ancien. Ce qui est plus récent, c'est la précision avec laquelle les acteurs de terrain désignent aujourd'hui les dispositions à modifier.",
       "Au terme du deuxième trimestre 2026, les recommandations issues du programme KIIRAY — porté par des collectivités territoriales, des Bajenu Gox et des acteurs communautaires — nomment quatre points précis.",
@@ -682,6 +700,10 @@ const articles: Article[] = [
       "Lors des cercles de sororité de Ndenatte et Therme Nord, ce sont les participantes elles-mêmes qui ont nommé les principaux défis auxquels elles font face. Leur liste constitue un diagnostic.",
     program: PROGRAM.jvssr,
     categories: [CATEGORY.violencesSexuelles, CATEGORY.santeReproductive, CATEGORY.feminisme],
+    image: {
+      asset: IMAGE.cercles,
+      alt: "Travaux de groupe lors d'un cercle de sororité du projet JVSSR à Yoff",
+    },
     body: [
       "Les diagnostics sur les violences faites aux filles sont le plus souvent établis par des personnes qui ne les subissent pas. À Yoff, au deuxième trimestre 2026, la liste a été dressée par les intéressées elles-mêmes.",
       "Lors de deux cercles de sororité organisés dans les quartiers de Ndenatte et de Therme Nord, des adolescentes et de jeunes femmes ont identifié les principaux défis auxquels elles sont confrontées dans leurs communautés : les mariages précoces et forcés, les abandons scolaires, les violences conjugales, psychologiques, verbales et économiques, ainsi que les normes sociales discriminatoires.",

@@ -113,12 +113,15 @@ civile sur les douze domaines critiques du Programme d'action de Beijing), les
 participants, l'ambition politique du rapport, et les partenaires — la GIZ à
 travers le projet REDTRA et la Foundation for a Just Society.
 
-**Deux éléments manquent et ne figurent donc pas dans l'article :**
+La banderole photographiée établit désormais **le lieu et le mois** : l'atelier
+s'est tenu à l'**Hôtel Ndiambour, à Dakar**, un **mardi de juin 2026**. L'article
+et son visuel ont été mis à jour en conséquence.
 
-1. **La date exacte et le lieu.** Ni la publication Facebook ni le rapport T2 ne
-   les donnent ; le rapport situe seulement l'atelier au deuxième trimestre 2026.
-   L'article ne mentionne aucune date précise.
-2. **Un visuel.** Voir le point 12.
+**Il manque encore le quantième exact.** Le chiffre est masqué sur la photo.
+L'article dit donc « en juin 2026 » sans préciser le jour. Les mardis de juin
+2026 sont les 2, 9, 16, 23 et 30 ; le 23 est le plus probable puisque la
+restitution de l'enquête de Yoff a eu lieu le mercredi 24 — mais **je ne l'ai pas
+inscrit sans confirmation de votre part**.
 
 C'est le sujet au plus fort potentiel de recherche de tout le lot — Beijing +30
 est une échéance internationale largement documentée. Il mérite d'être enrichi
@@ -166,32 +169,33 @@ passer à « En cours » et la période être mise à jour.
 
 ---
 
-## 12. Visuels manquants — 10 articles
+## 12. Visuels manquants — 5 articles
 
-Ces articles sont complets et publiables, mais sans image. Un article sans
-visuel perd en partage social et en taux de clic.
+Sept visuels ont été ajoutés et rattachés. Restent cinq articles sans image :
 
 | Article | Visuel souhaitable |
 |---|---|
-| `cercles-de-guerison-niakhar-38-survivantes-violences-sexuelles` | Cercle de guérison à Niakhar — **aucune photo ELLES AUSSI disponible** |
+| `cercles-de-guerison-niakhar-38-survivantes-violences-sexuelles` | Cercle de guérison à Niakhar — **aucune photo ELLES AUSSI dans le dépôt** |
+| `liggeeyal-eleg-fatick-teinture-patisserie-trois-gie` | Formation teinture ou pâtisserie **côté Fatick** — `euleug.jpg` et `patisserie.jpg` portent tous deux la mention Kaolack |
+| `deuxieme-atelier-defenseurs-droits-humains-saly-mars-2026` | Atelier DDH à Saly, 10-12 mars 2026 — signalé introuvable |
 | `dialogues-intergenerationnels-grand-dakar-ouakam-violences` | Dialogue intergénérationnel, Biscuiterie ou Ouakam |
 | `enrolement-soixante-jeunes-leaders-justice-reproductive` | Séance d'enrôlement des jeunes leaders |
-| `etude-perceptions-communaute-yoff-dssr-vbg` | Atelier de restitution de l'étude à Yoff |
-| `liggeeyal-eleg-fatick-teinture-patisserie-trois-gie` | Formation teinture ou pâtisserie à Fatick, Diouroup ou Niakhar |
-| `feuille-de-route-comite-pilotage-assises-nationales-citoyennes` | Atelier d'installation du comité de pilotage |
-| `deuxieme-atelier-defenseurs-droits-humains-saly-mars-2026` | Atelier DDH à Saly, 10-12 mars 2026 |
-| `quatre-dispositions-discriminatoires-code-famille-senegalais` | Visuel de plaidoyer Code de la famille |
-| `ce-que-les-jeunes-filles-de-yoff-disent-des-violences` | Cercle de sororité (une autre vue que celle déjà utilisée) |
-| `restitution-rapport-alternatif-beijing-30-senegal` | Atelier de restitution Beijing +30 |
 
-**Comment les ajouter** : déposez les fichiers dans `public/newsletters/semestre-1/`,
-complétez le tableau `ALT_TEXTS` de
-[scripts/upload-newsletter-assets.ts](../scripts/upload-newsletter-assets.ts),
+### Deux constats sur les fichiers fournis
+
+- **`jvssr1.jpeg` et `jvssr2.jpeg` sont le même fichier.** Sanity déduplique par
+  empreinte et leur a attribué un identifiant identique. L'un des deux peut être
+  supprimé du dépôt.
+- **`patisserie.jpg` n'est pas utilisé.** Il montre bien une formation de
+  LIGGEEYAL ËLËG, mais côté Kaolack, où l'article porte déjà `euleug.jpg` dont la
+  banderole nomme le GIE et le métier. Il reste disponible pour la galerie du
+  programme.
+
+**Comment ajouter les visuels manquants** : déposez les fichiers dans
+`public/newsletters/semestre-1/`, ajoutez une ligne par image dans le tableau
+`ALT_TEXTS` de [scripts/upload-newsletter-assets.ts](../scripts/upload-newsletter-assets.ts),
 puis lancez `npx sanity exec scripts/upload-newsletter-assets.ts --with-user-token`.
-Les images se rattachent ensuite depuis le Studio.
-
-Le générateur d'e-mail signale par ailleurs un visuel attendu et absent :
-`atelier-defenseurs-saly`.
+Le script est idempotent : le relancer ne crée pas de doublons.
 
 ---
 

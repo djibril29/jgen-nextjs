@@ -42,6 +42,20 @@ const ALT_TEXTS: Record<string, string> = {
     "Session de formation aux métiers d'un GIE de jeunes femmes, projet LIGGEEYAL ËLËG",
   jvssr1:
     "Cercle de sororité réunissant des adolescentes et de jeunes femmes à Yoff, projet JVSSR",
+  jvssr2:
+    "Participantes d'un cercle de sororité de la deuxième phase du projet JVSSR, dans la commune de Yoff",
+  cercles:
+    "Travaux de groupe lors d'un cercle de sororité du projet JVSSR à Yoff",
+  perception:
+    "Session de restitution de l'enquête de base sur les perceptions communautaires à Yoff, le 24 juin 2026 à la mairie de Yoff",
+  beijing30:
+    "Panel d'ouverture de l'atelier de restitution du rapport alternatif Beijing +30, à l'Hôtel Ndiambour à Dakar",
+  copil:
+    "Séance de travail des membres du comité de pilotage des Assises nationales citoyennes sur les droits des femmes et des filles",
+  codefamille:
+    "Rassemblement communautaire de femmes lors d'une rencontre de plaidoyer de J-GEN Sénégal",
+  patisserie:
+    "Participantes d'un GIE de Kaolack en tenue de formation lors d'une session de pâtisserie du projet LIGGEEYAL ËLËG, supervisée par l'AADS",
   kiiray:
     "Lancement officiel du programme KIIRAY dans une collectivité territoriale de la région de Dakar",
   'pas-a-pas':

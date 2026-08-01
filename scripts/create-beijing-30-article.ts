@@ -9,8 +9,11 @@
  * (« Activités institutionnelles et de plaidoyer »), qui en situe la tenue au
  * deuxième trimestre 2026.
  *
- * ⚠️  La date exacte et le lieu de l'atelier ne sont établis par aucune de ces
- * deux sources. L'article ne les mentionne donc pas. Voir le point 8 de
+ * La banderole photographiée sur place établit le lieu et le mois : l'atelier
+ * s'est tenu à l'Hôtel Ndiambour, à Dakar, un mardi de juin 2026.
+ *
+ * ⚠️  Le QUANTIÈME exact reste masqué sur la photo. L'article dit donc
+ * « en juin 2026 » sans donner de jour. Voir le point 8 de
  * content/verification-semestre-1-2026.md.
  *
  * L'article est créé en BROUILLON.
@@ -36,11 +39,19 @@ const document = {
     {_type: 'reference', _key: 'c1', _ref: '33447e91-37e2-4852-8834-7520682a1e9b'}, // Société civile
     {_type: 'reference', _key: 'c2', _ref: '0681b765-b017-45aa-91cd-796cd65ed05d'}, // Féminisme
   ],
+  image: {
+    _type: 'image',
+    asset: {
+      _type: 'reference',
+      _ref: 'image-2188f406f543526a80e6e67e7773b4586523939a-1600x900-jpg',
+    },
+    alt: "Panel d'ouverture de l'atelier de restitution du rapport alternatif Beijing +30, à l'Hôtel Ndiambour à Dakar",
+  },
   excerpt:
-    "Trente ans après la Conférence de Pékin, J-GEN Sénégal a organisé un atelier de restitution du rapport alternatif de la société civile sur la mise en œuvre du Programme d'action de Beijing, autour de ses douze domaines critiques.",
+    "En juin 2026 à l'Hôtel Ndiambour de Dakar, J-GEN Sénégal a organisé la restitution du rapport alternatif de la société civile sur trente ans de mise en œuvre du Programme d'action de Beijing au Sénégal, autour de ses douze domaines critiques.",
   metaTitle: 'Beijing +30 : le rapport alternatif de la société civile',
   metaDescription:
-    "Trente ans après Beijing 1995, J-GEN Sénégal a restitué le rapport alternatif de la société civile sur les droits des femmes : avancées, défis persistants et recommandations.",
+    "En juin 2026 à Dakar, J-GEN Sénégal a restitué le rapport alternatif de la société civile sur trente ans de mise en œuvre du Programme d'action de Beijing : avancées, défis et recommandations.",
   keywords: [
     'Beijing +30 Sénégal',
     "Programme d'action de Beijing",
@@ -49,7 +60,7 @@ const document = {
     'droits des femmes Sénégal 2026',
   ],
   body: [
-    "Trente ans après la quatrième Conférence mondiale sur les femmes, tenue à Pékin en 1995, une question reste entière : que sont devenus les engagements pris alors ? C'est à cette question que la société civile sénégalaise a entrepris de répondre par elle-même, avec un rapport alternatif dont J-GEN Sénégal a organisé la restitution.",
+    "Trente ans après la quatrième Conférence mondiale sur les femmes, tenue à Pékin en 1995, une question reste entière : que sont devenus les engagements pris alors ? C'est à cette question que la société civile sénégalaise a entrepris de répondre par elle-même, avec un rapport alternatif dont J-GEN Sénégal a organisé la restitution en juin 2026, à l'Hôtel Ndiambour de Dakar.",
 
     '## Pourquoi un rapport « alternatif »',
     "Un rapport alternatif est un rapport produit par les organisations de la société civile, en parallèle du rapport officiel remis par un État. Sa fonction n'est pas de contredire par principe, mais de rendre compte de ce que les institutions mesurent mal : l'écart entre un droit inscrit dans un texte et son effectivité dans la vie des femmes et des filles.",
@@ -106,7 +117,7 @@ async function main() {
   await client.createOrReplace({...document, _id: draftId})
 
   console.log(`  ${existing ? '↻' : '+'} ${SLUG}`)
-  console.log("\nL'article est en BROUILLON. Il lui manque un visuel et la date exacte de l'atelier.")
+  console.log("\nL'article est en BROUILLON. Il lui manque le quantième exact de l'atelier.")
 }
 
 main().catch((error) => {
