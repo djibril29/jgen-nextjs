@@ -217,7 +217,27 @@ vérification qu'ils ne signent aucun article existant.
 
 ---
 
-## 14. Ordre de publication — CONTRAIGNANT, pas indicatif
+## 14. Ordre de publication — FAIT le 1er août 2026
+
+Tout est publié : 17 catégories et l'auteur, puis 6 programmes (dont KIIRAY),
+puis les 23 articles. Il ne reste aucun brouillon, et aucune référence cassée.
+
+⚠️ **Le code n'est pas encore déployé.** Les articles sont en ligne, mais la
+branche `contenu-semestre-1-2026` — qui porte les balises `generateMetadata`, le
+balisage `Article` et `BreadcrumbList`, le lien retour vers le programme et la
+correction du filtre de catégories du blog — n'est pas fusionnée dans `main`.
+Tant qu'elle ne l'est pas, les articles se présentent aux moteurs de recherche
+sans leur balisage, et le filtre du blog ne propose que ses quatre catégories
+codées en dur. **À déployer sans attendre.**
+
+L'ordre suivi, conservé ici pour mémoire :
+
+1. les catégories ;
+2. le programme KIIRAY ;
+3. les autres programmes ;
+4. les articles.
+
+Le raisonnement qui l'imposait :
 
 Les nouveaux articles référencent le programme **KIIRAY** et trois catégories
 (**Autonomisation économique**, **Gouvernance locale**, **Bajenu Gox**).
@@ -229,18 +249,17 @@ moment de publier, Sanity « renforce » la référence et exige que la cible ex
 en version publiée. Publier un article avant sa catégorie renvoie donc une
 erreur 409 `documentReferenceDoesNotExistError`.
 
-**L'ordre suivant est donc obligatoire :**
+Cette contrainte est levée : les catégories et KIIRAY étant publiés, plus aucun
+article ne peut s'y heurter.
 
-1. les **3 catégories** — Autonomisation économique, Gouvernance locale,
-   Bajenu Gox ;
-2. le **programme KIIRAY** ;
-3. les **6 autres programmes** mis à jour ;
-4. les **articles**, par vagues de trois ou quatre sur deux à trois semaines.
+**Un point d'attention subsiste, cette fois éditorial.** La recommandation
+initiale était d'étaler les mises en ligne par vagues de trois ou quatre sur deux
+à trois semaines : vingt-trois articles parus le même jour se lisent comme un
+déversement de contenu, ce que les moteurs de recherche traitent moins
+favorablement qu'une parution régulière. La publication ayant eu lieu en une
+fois, deux mesures compensent utilement :
 
-Une fois l'étape 1 et 2 faites, plus aucun article ne peut se heurter à ce
-blocage : tous les autres programmes et catégories qu'ils référencent sont déjà
-publiés de longue date.
-
-L'étalement des publications à l'étape 4 est délibéré : dix-neuf articles mis en
-ligne le même jour se lisent comme un déversement de contenu, ce que les moteurs
-de recherche traitent moins favorablement qu'une parution régulière.
+- soumettre le sitemap dans la Search Console **une fois la branche déployée**,
+  pas avant, pour que le premier passage du robot voie déjà le balisage ;
+- échelonner la mise en avant sur les réseaux sociaux, plutôt que de tout
+  relayer le même jour.
