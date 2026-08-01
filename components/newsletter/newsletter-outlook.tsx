@@ -1,3 +1,4 @@
+import { TricolorRule } from "@/components/patterns/editorial"
 import { EditorialColumn } from "@/components/patterns/layout"
 import { newsletterSemesterOne2026 as data } from "@/content/newsletter-semestre-1-2026"
 
@@ -15,21 +16,28 @@ export function NewsletterOutlook() {
     <section
       id="partenaires"
       aria-labelledby="partenaires-titre"
-      className="mt-10 bg-jgen-plum py-16 lg:py-20"
+      className="scroll-mt-32 bg-jgen-plum py-16 lg:py-20 xl:scroll-mt-44"
     >
       <EditorialColumn size="wide">
-        <div>
-          <h2 id="partenaires-titre" className="eyebrow mb-4 text-jgen-jaune">
-            Partenaires cités dans les rapports du semestre
-          </h2>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2">
-            {partners.map((partner) => (
-              <li key={partner} className="text-sm text-white/85">
-                {partner}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <h2 id="partenaires-titre" className="eyebrow text-jgen-jaune">
+          Partenaires cités dans les rapports du semestre
+        </h2>
+
+        <TricolorRule className="mt-5" />
+
+        {/* Colonnes plutot qu'une ligne qui se replie : les noms d'associations
+            depassent la demi-largeur, et cotes a cotes ils se lisaient comme une
+            seule enumeration continue. */}
+        <ul className="mt-8 grid list-none gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
+          {partners.map((partner) => (
+            <li
+              key={partner}
+              className="border-t border-white/20 py-3.5 text-base leading-snug text-white/85"
+            >
+              {partner}
+            </li>
+          ))}
+        </ul>
       </EditorialColumn>
     </section>
   )

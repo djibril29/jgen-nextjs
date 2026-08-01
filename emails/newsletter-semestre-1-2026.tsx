@@ -18,17 +18,24 @@ import {
 
 import {
   newsletterSemesterOne2026 as data,
+  type NewsletterImageRef,
   type NewsletterProject,
 } from "@/content/newsletter-semestre-1-2026"
-import { resolveNewsletterImage } from "@/lib/newsletter-image"
+import {
+  resolveNewsletterImage,
+  type ResolvedNewsletterImage,
+} from "@/lib/newsletter-image"
 import { buildUrl, withNewsletterUtm } from "@/lib/site"
 
 /**
  * ============================================================================
  * NEWSLETTER SEMESTRIELLE J-GEN SÉNÉGAL — VERSION E-MAIL
  * ----------------------------------------------------------------------------
- * Version volontairement CONDENSÉE : elle ne reproduit pas la page web, elle y
- * conduit. Tout le contenu provient de content/newsletter-semestre-1-2026.ts.
+ * L'e-mail suit désormais le même déroulé que la page web : les quatre axes
+ * d'intervention, puis CHACUNE des activités du semestre, illustrée par une
+ * photographie, résumée en quelques lignes et refermée par un bouton vers sa
+ * page programme. Les temps forts institutionnels suivent le même principe.
+ * Tout le contenu provient de content/newsletter-semestre-1-2026.ts.
  *
  * Contraintes respectées :
  *  - styles 100 % inline, largeur 600 px, polices système ;
@@ -100,6 +107,48 @@ const sectionTitle: React.CSSProperties = {
   margin: "0 0 6px",
 }
 
+/** Surtitre d'un bloc : catégorie de projet, date et lieu d'un temps fort. */
+const eyebrow: React.CSSProperties = {
+  color: CRIMSON,
+  fontFamily: FONT_STACK,
+  fontSize: "11px",
+  fontWeight: 700,
+  letterSpacing: "0.06em",
+  lineHeight: "16px",
+  margin: "0 0 6px",
+  textTransform: "uppercase",
+}
+
+const blockTitle: React.CSSProperties = {
+  color: PURPLE,
+  fontFamily: FONT_STACK,
+  fontSize: "18px",
+  fontWeight: 800,
+  lineHeight: "26px",
+  margin: "0 0 8px",
+}
+
+/** Légende de photographie, sous l'illustration. */
+const captionText: React.CSSProperties = {
+  color: MUTED,
+  fontFamily: FONT_STACK,
+  fontSize: "12px",
+  fontStyle: "italic",
+  lineHeight: "18px",
+  margin: "0 0 12px",
+}
+
+/** Image pleine largeur : elle se réduit avec le conteneur sur mobile. */
+const fullWidthImage: React.CSSProperties = {
+  border: 0,
+  display: "block",
+  height: "auto",
+  maxWidth: "100%",
+  outline: "none",
+  textDecoration: "none",
+  width: "100%",
+}
+
 /** Boutons : hauteur confortable au doigt (>= 44 px avec le padding). */
 const primaryButton: React.CSSProperties = {
   backgroundColor: CRIMSON,
@@ -123,6 +172,9 @@ const secondaryButton: React.CSSProperties = {
 // --- Données dérivées --------------------------------------------------------
 
 const pageUrl = withNewsletterUtm(data.pagePath)
+/** L'API `URL` place le fragment après les paramètres UTM, comme il se doit. */
+const highlightsUrl = withNewsletterUtm(`${data.pagePath}#temps-forts`)
+const programsUrl = withNewsletterUtm(data.links.programs)
 const logoUrl = buildUrl("/logo-jgen.png")
 
 /** Lien profond vers la section d'un projet sur la page complète. */
@@ -147,17 +199,115 @@ function projectProgramUrl(project: NewsletterProject): string {
 /** Chiffres retenus pour l'e-mail (5 sur les 7 de la page). */
 const emailStatistics = data.statistics.filter((stat) => stat.inEmail)
 
-/** Trois projets mis en avant dans l'e-mail. */
-const featuredProjectIds = ["elles-aussi", "liggeyal-eleg", "jvssr"]
-const featuredProjects = featuredProjectIds
-  .map((id) => data.projects.find((project) => project.id === id))
-  .filter((project): project is NewsletterProject => Boolean(project))
+/**
+ * Attribution des visuels.
+ *
+ * Chaque photographie n'est utilisée qu'UNE FOIS dans l'e-mail : la couverture
+ * réutilise le cliché du 8 mars, le temps fort correspondant s'ouvre donc sans
+ * image plutôt que de répéter la même vue quelques écrans plus bas.
+ *
+ * L'attribution est faite ici, au chargement du module, et non pendant le
+ * rendu : le composant reste pur et l'aperçu `email dev` produit exactement le
+ * même résultat que le script de génération, quel que soit le nombre de rendus.
+ */
+const claimedImagePaths = new Set<string>()
+
+function claimImage(ref: NewsletterImageRef | undefined): ResolvedNewsletterImage | undefined {
+  if (!ref) return undefined
+
+  const resolved = resolveNewsletterImage(ref.name, ref.alt)
+  if (!resolved || claimedImagePaths.has(resolved.publicPath)) return undefined
+
+  claimedImagePaths.add(resolved.publicPath)
+  return resolved
+}
+
+const coverImage = claimImage(data.coverImage)
+
+/**
+ * Une illustration par activité : la photo principale du projet, ou à défaut
+ * son premier visuel secondaire. Les projets dont aucun fichier n'a encore été
+ * fourni s'ouvrent sur un bandeau typographique (voir `Illustration`).
+ */
+const projectImages = new Map(
+  data.projects.map((project) => [
+    project.id,
+    claimImage(project.image) ?? claimImage(project.media?.[0]),
+  ]),
+)
+
+const highlightImages = new Map(
+  data.highlights.map((highlight) => [highlight.id, claimImage(highlight.image)]),
+)
+
+/** Activités rattachées à chaque axe, dans l'ordre déclaré par l'axe. */
+const projectsByAxis = new Map(
+  data.axes.map((axis) => [
+    axis.id,
+    axis.projectIds
+      .map((id) => data.projects.find((project) => project.id === id))
+      .filter((project): project is NewsletterProject => Boolean(project)),
+  ]),
+)
+
+// --- Sous-composants ---------------------------------------------------------
+
+/**
+ * Illustration pleine largeur d'une activité.
+ *
+ * Sans photographie disponible, on n'insère AUCUNE balise `<img>` — une URL
+ * absente renverrait une 404 dans la boîte de réception. Un bandeau
+ * typographique aux couleurs de J-GEN tient alors lieu d'ouverture, comme sur
+ * la page web.
+ */
+function Illustration({
+  image,
+  label,
+}: {
+  image: ResolvedNewsletterImage | undefined
+  label: string
+}) {
+  if (image) {
+    return <Img src={image.absoluteUrl} alt={image.alt} width="600" style={fullWidthImage} />
+  }
+
+  return (
+    <Section style={{ backgroundColor: PURPLE, padding: "34px 24px", textAlign: "center" }}>
+      <Text
+        style={{
+          color: YELLOW,
+          fontFamily: FONT_STACK,
+          fontSize: "11px",
+          fontWeight: 700,
+          letterSpacing: "0.14em",
+          lineHeight: "16px",
+          margin: "0 0 8px",
+          textAlign: "center",
+          textTransform: "uppercase",
+        }}
+      >
+        J-GEN Sénégal
+      </Text>
+      <Text
+        style={{
+          color: "#ffffff",
+          fontFamily: FONT_STACK,
+          fontSize: "22px",
+          fontWeight: 800,
+          lineHeight: "30px",
+          margin: 0,
+          textAlign: "center",
+        }}
+      >
+        {label}
+      </Text>
+    </Section>
+  )
+}
 
 // --- Composant ---------------------------------------------------------------
 
 export function NewsletterSemestreOne2026Email() {
-  const cover = resolveNewsletterImage(data.coverImage.name, data.coverImage.alt)
-
   return (
     <Html lang="fr" dir="ltr">
       <Head>
@@ -256,20 +406,12 @@ export function NewsletterSemestreOne2026Email() {
 
           {/* ---- Visuel principal (zone image éditable dans Mailchimp) ---- */}
           <Section data-mc-edit="hero_image" style={{ padding: 0 }}>
-            {cover ? (
+            {coverImage ? (
               <Img
-                src={cover.absoluteUrl}
-                alt={cover.alt}
+                src={coverImage.absoluteUrl}
+                alt={coverImage.alt}
                 width="600"
-                style={{
-                  border: 0,
-                  display: "block",
-                  height: "auto",
-                  maxWidth: "100%",
-                  outline: "none",
-                  textDecoration: "none",
-                  width: "100%",
-                }}
+                style={fullWidthImage}
               />
             ) : (
               // Aucune photographie n'a encore été fournie : on n'insère AUCUNE
@@ -338,97 +480,186 @@ export function NewsletterSemestreOne2026Email() {
 
           <Hr style={{ borderColor: BORDER, margin: "28px 24px" }} />
 
-          {/* ---- Axes d'intervention ---- */}
-          <Section style={{ ...gutter, paddingBottom: "8px" }}>
+          {/* ---- Axes d'intervention et activités ---- */}
+          <Section style={{ ...gutter, paddingBottom: "4px" }}>
             <Heading as="h2" style={sectionTitle}>
-              Nos axes d&apos;intervention
+              Les activités du semestre
             </Heading>
-            <Text style={{ ...smallText, margin: "0 0 20px" }}>
-              Quatre priorités ont structuré le travail du semestre.
+            <Text style={{ ...smallText, margin: 0 }}>
+              Quatre axes d&apos;intervention, {data.projects.length} projets conduits entre janvier
+              et juin 2026.
             </Text>
-
-            {data.axes.map((axis) => (
-              <Section key={axis.id} style={{ marginBottom: "18px" }}>
-                <Text
-                  style={{
-                    color: PURPLE,
-                    fontFamily: FONT_STACK,
-                    fontSize: "16px",
-                    fontWeight: 700,
-                    lineHeight: "24px",
-                    margin: "0 0 4px",
-                  }}
-                >
-                  {axis.emailTitle}
-                </Text>
-                <Text style={{ ...paragraph, fontSize: "15px", lineHeight: "24px", margin: 0 }}>
-                  {axis.emailSummary}
-                </Text>
-              </Section>
-            ))}
           </Section>
 
-          <Hr style={{ borderColor: BORDER, margin: "28px 24px" }} />
-
-          {/* ---- Projets mis en avant ---- */}
-          <Section style={{ ...gutter, paddingBottom: "8px" }}>
-            <Heading as="h2" style={sectionTitle}>
-              Trois projets du semestre
-            </Heading>
-            <Text style={{ ...smallText, margin: "0 0 20px" }}>
-              Un aperçu — l&apos;ensemble des réalisations est présenté sur le site.
-            </Text>
-
-            {featuredProjects.map((project) => (
+          {data.axes.map((axis, axisIndex) => (
+            <React.Fragment key={axis.id}>
+              {/* Bandeau d'axe, jaune puis vert en alternance — comme sur la page. */}
               <Section
-                key={project.id}
                 style={{
-                  border: `1px solid ${BORDER}`,
-                  marginBottom: "16px",
-                  padding: "18px",
+                  backgroundColor: axisIndex % 2 === 0 ? YELLOW : TEAL,
+                  marginTop: "20px",
+                  padding: "22px 24px",
                 }}
               >
                 <Text
                   style={{
-                    color: CRIMSON,
+                    color: PURPLE,
                     fontFamily: FONT_STACK,
                     fontSize: "11px",
                     fontWeight: 700,
-                    letterSpacing: "0.06em",
+                    letterSpacing: "0.14em",
                     lineHeight: "16px",
                     margin: "0 0 6px",
                     textTransform: "uppercase",
                   }}
                 >
-                  {project.category}
+                  Axe n° {axis.number}
                 </Text>
                 <Text
                   style={{
                     color: PURPLE,
                     fontFamily: FONT_STACK,
-                    fontSize: "18px",
+                    fontSize: "20px",
                     fontWeight: 800,
-                    lineHeight: "26px",
+                    lineHeight: "28px",
                     margin: "0 0 8px",
                   }}
                 >
-                  {project.name}
+                  {axis.emailTitle}
                 </Text>
                 <Text
-                  style={{ ...paragraph, fontSize: "15px", lineHeight: "24px", margin: "0 0 14px" }}
+                  style={{
+                    color: PURPLE,
+                    fontFamily: FONT_STACK,
+                    fontSize: "14px",
+                    lineHeight: "22px",
+                    margin: 0,
+                  }}
                 >
-                  {project.emailSummary ?? project.summary}
+                  {axis.emailSummary}
                 </Text>
-                {/* Un seul appel à l'action par section, vers la page pilier du
-                    projet : c'est là que se trouvent le programme et ses articles. */}
-                <Button
-                  href={projectProgramUrl(project)}
-                  style={{ ...primaryButton, fontSize: "14px", padding: "12px 22px" }}
-                >
-                  {project.programCta ?? `Découvrir ${project.name}`}
-                </Button>
               </Section>
-            ))}
+
+              {(projectsByAxis.get(axis.id) ?? []).map((project) => {
+                const image = projectImages.get(project.id)
+
+                return (
+                  <React.Fragment key={project.id}>
+                    <Illustration image={image} label={project.name} />
+
+                    <Section style={{ ...gutter, paddingTop: "18px", paddingBottom: "26px" }}>
+                      {image && project.imageCaption ? (
+                        <Text style={captionText}>{project.imageCaption}</Text>
+                      ) : null}
+
+                      <Text style={eyebrow}>{project.category}</Text>
+
+                      {/* Sans photographie, le bandeau typographique porte déjà le
+                          nom du projet : le répéter ici ferait doublon. */}
+                      {image ? <Text style={blockTitle}>{project.name}</Text> : null}
+
+                      {project.locations && project.locations.length > 0 ? (
+                        <Text style={{ ...smallText, margin: "0 0 10px" }}>
+                          {project.locations.join("  ·  ")}
+                        </Text>
+                      ) : null}
+
+                      <Text
+                        style={{
+                          ...paragraph,
+                          fontSize: "15px",
+                          lineHeight: "24px",
+                          margin: "0 0 16px",
+                        }}
+                      >
+                        {project.emailSummary ?? project.summary}
+                      </Text>
+
+                      {/* Un seul appel à l'action par activité, vers sa page pilier :
+                          c'est là que se trouvent le programme et ses articles. */}
+                      <Button
+                        href={projectProgramUrl(project)}
+                        style={{ ...primaryButton, fontSize: "14px", padding: "12px 22px" }}
+                      >
+                        {project.programCta ?? `Découvrir ${project.name}`}
+                      </Button>
+                    </Section>
+                  </React.Fragment>
+                )
+              })}
+            </React.Fragment>
+          ))}
+
+          <Hr style={{ borderColor: BORDER, margin: "12px 24px 28px" }} />
+
+          {/* ---- Temps forts institutionnels ---- */}
+          <Section style={{ ...gutter, paddingBottom: "4px" }}>
+            <Heading as="h2" style={sectionTitle}>
+              Les temps forts
+            </Heading>
+            <Text style={{ ...smallText, margin: 0 }}>
+              Mobilisations et rencontres institutionnelles du semestre.
+            </Text>
+          </Section>
+
+          {data.highlights.map((highlight) => {
+            const image = highlightImages.get(highlight.id)
+            const meta = [highlight.date, highlight.place].filter(Boolean).join("  ·  ")
+
+            const body = (
+              <React.Fragment>
+                {meta ? <Text style={eyebrow}>{meta}</Text> : null}
+                <Text style={blockTitle}>{highlight.title}</Text>
+                <Text style={{ ...paragraph, fontSize: "15px", lineHeight: "24px", margin: 0 }}>
+                  {highlight.body}
+                </Text>
+              </React.Fragment>
+            )
+
+            return (
+              <React.Fragment key={highlight.id}>
+                {image ? (
+                  <Section style={{ paddingTop: "20px" }}>
+                    <Img
+                      src={image.absoluteUrl}
+                      alt={image.alt}
+                      width="600"
+                      style={fullWidthImage}
+                    />
+                  </Section>
+                ) : null}
+
+                <Section style={{ ...gutter, paddingTop: "18px", paddingBottom: "8px" }}>
+                  {image ? (
+                    body
+                  ) : (
+                    // Sans photographie, un filet jaune tient lieu de repère
+                    // visuel : le bloc se distingue du précédent aussi nettement
+                    // que le ferait une image.
+                    <Row>
+                      <Column
+                        style={{
+                          borderLeft: `4px solid ${YELLOW}`,
+                          paddingLeft: "14px",
+                          verticalAlign: "top",
+                        }}
+                      >
+                        {body}
+                      </Column>
+                    </Row>
+                  )}
+                </Section>
+              </React.Fragment>
+            )
+          })}
+
+          <Section style={{ ...gutter, paddingTop: "18px", paddingBottom: "28px" }}>
+            <Button
+              href={highlightsUrl}
+              style={{ ...secondaryButton, fontSize: "14px", padding: "12px 22px" }}
+            >
+              Lire le détail des temps forts
+            </Button>
           </Section>
 
           {/* ---- Appel à lire la version complète ---- */}
@@ -454,6 +685,20 @@ export function NewsletterSemestreOne2026Email() {
             <Button href={pageUrl} style={primaryButton}>
               {data.cta.emailPrimary}
             </Button>
+            <Text style={{ margin: "16px 0 0", textAlign: "center" }}>
+              <Link
+                href={programsUrl}
+                style={{
+                  color: YELLOW,
+                  fontFamily: FONT_STACK,
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  textDecoration: "underline",
+                }}
+              >
+                {data.cta.projects}
+              </Link>
+            </Text>
           </Section>
 
           {/* ---- Conclusion éditoriale ---- */}

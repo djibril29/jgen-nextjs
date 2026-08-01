@@ -1,5 +1,6 @@
 import Image from "next/image"
 
+import { TricolorRule } from "@/components/patterns/editorial"
 import { EditorialColumn } from "@/components/patterns/layout"
 import { newsletterSemesterOne2026 as data } from "@/content/newsletter-semestre-1-2026"
 import { resolveNewsletterImage } from "@/lib/newsletter-image"
@@ -41,7 +42,7 @@ export function NewsletterHero() {
           {header.title}
         </h1>
 
-        <div className="mt-7 mb-7 h-1 w-24 bg-jgen-jaune" aria-hidden="true" />
+        <TricolorRule className="mt-7 mb-7" />
 
         <p className="max-w-[52ch] text-lg leading-relaxed text-pretty text-white/90">
           {intro.web[0]}

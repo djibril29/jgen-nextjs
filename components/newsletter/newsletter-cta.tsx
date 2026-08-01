@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { TricolorRule } from "@/components/patterns/editorial"
 import { EditorialColumn } from "@/components/patterns/layout"
 import { Button } from "@/components/ui/button"
 import { newsletterSemesterOne2026 as data } from "@/content/newsletter-semestre-1-2026"
@@ -8,16 +9,20 @@ export function NewsletterCta() {
   const { conclusion, links, cta } = data
 
   return (
-    <section id="agir" aria-labelledby="agir-titre" className="py-16 lg:py-20">
+    <section
+      id="agir"
+      aria-labelledby="agir-titre"
+      className="scroll-mt-32 py-16 lg:py-24 xl:scroll-mt-44"
+    >
       <EditorialColumn>
-        <div className="text-center">
+        <div className="mx-auto max-w-3xl text-center">
           <h2
             id="agir-titre"
-            className="mb-3 text-3xl font-extrabold tracking-tight text-jgen-plum sm:text-4xl"
+            className="text-3xl font-extrabold tracking-tight text-jgen-plum sm:text-4xl lg:text-5xl"
           >
             Poursuivons ensemble
           </h2>
-          <div className="mx-auto mb-8 h-1 w-20 bg-jgen-rose" aria-hidden="true" />
+          <TricolorRule align="center" className="mt-7 mb-8" />
 
           <p className="mb-10 text-lg leading-relaxed text-pretty text-gray-700">{conclusion}</p>
 

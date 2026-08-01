@@ -61,6 +61,22 @@ export function decodeHtmlEntities(html: string): string {
 }
 
 /**
+ * Retire l'indentation ajoutée par `pretty()`.
+ *
+ * Elle pèse près de 40 % du fichier, pour un HTML que personne ne relit ligne à
+ * ligne : il est copié tel quel dans Mailchimp. Les sauts de ligne sont
+ * conservés — ils suffisent à s'y repérer — et le poids gagné éloigne la
+ * troncature de Gmail, qui amputerait la fin de l'e-mail.
+ *
+ * Le rendu est inchangé : un saut de ligne subsiste entre deux éléments en
+ * ligne, et une suite d'espaces s'y réduisait de toute façon à un seul.
+ * L'e-mail ne contient aucun bloc `<pre>`, où l'indentation serait signifiante.
+ */
+export function stripIndentation(html: string): string {
+  return html.replace(/^[ \t]+/gm, "")
+}
+
+/**
  * Normalise un texte avant comparaison :
  *  - décodage des entités HTML ;
  *  - suppression des caractères invisibles insérés par <Preview> pour caler la

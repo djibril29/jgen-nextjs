@@ -6,7 +6,7 @@
  *
  * Étapes :
  *   1. rendu du template React Email               → render()
- *   2. mise en forme lisible                       → pretty()
+ *   2. mise en forme lisible, sans indentation     → pretty() + stripIndentation()
  *   3. conversion data-mc-edit → mc:edit           → convertMailchimpAttributes()
  *   4. validation stricte du HTML produit          → validateHtml()
  *   5. version texte                               → toPlainText()
@@ -44,11 +44,26 @@ import {
   ValidationError,
   convertMailchimpAttributes,
   extractEditableRegions,
+  stripIndentation,
   validateHtml,
 } from "./newsletter-html"
 
 const OUTPUT_DIRECTORY = "generated-emails"
 const OUTPUT_BASENAME = "newsletter-semestre-1-2026"
+
+/**
+ * Gmail tronque les messages dépassant environ 102 ko et affiche à la place un
+ * lien « Message tronqué ». La fin de l'e-mail — dont le lien de désabonnement,
+ * légalement obligatoire — disparaîtrait alors de l'affichage.
+ *
+ * Deux précautions : la mise en forme est produite SANS indentation (les sauts
+ * de ligne suffisent à la relecture et l'indentation pesait près de 40 % du
+ * fichier), et le poids obtenu est contrôlé ci-dessous.
+ */
+const GMAIL_CLIPPING_LIMIT_BYTES = 102 * 1024
+
+/** Marge de sécurité : Mailchimp réécrit les liens en URL de suivi, plus longues. */
+const SIZE_WARNING_RATIO = 0.8
 
 async function main(): Promise<void> {
   const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -67,10 +82,19 @@ async function main(): Promise<void> {
   }
 
   const rawHtml = await render(<NewsletterSemestreOne2026Email />)
-  const formattedHtml = await pretty(rawHtml)
+  const formattedHtml = stripIndentation(await pretty(rawHtml))
   const mailchimpHtml = convertMailchimpAttributes(formattedHtml)
 
   validateHtml(mailchimpHtml)
+
+  const htmlBytes = Buffer.byteLength(mailchimpHtml, "utf8")
+  if (htmlBytes > GMAIL_CLIPPING_LIMIT_BYTES) {
+    throw new Error(
+      `Le HTML pèse ${(htmlBytes / 1024).toFixed(1)} ko, au-delà de la limite de troncature ` +
+        `de Gmail (${GMAIL_CLIPPING_LIMIT_BYTES / 1024} ko). Retirez des sections ou des ` +
+        "activités avant de générer la campagne.",
+    )
+  }
 
   const plainText = toPlainText(mailchimpHtml)
 
@@ -80,6 +104,18 @@ async function main(): Promise<void> {
 
   console.log("\n✔ Validation réussie.")
   console.log(`  Zones éditables : ${extractEditableRegions(mailchimpHtml).join(", ")}`)
+  console.log(
+    `  Poids du HTML : ${(htmlBytes / 1024).toFixed(1)} ko ` +
+      `(limite de troncature Gmail : ${GMAIL_CLIPPING_LIMIT_BYTES / 1024} ko)`,
+  )
+
+  if (htmlBytes > GMAIL_CLIPPING_LIMIT_BYTES * SIZE_WARNING_RATIO) {
+    console.log(
+      "\n⚠ Le HTML approche la limite de troncature de Gmail. Mailchimp allongera " +
+        "encore les liens en y ajoutant son suivi : envoyez un test à une adresse " +
+        "Gmail et vérifiez que le pied de page reste visible.",
+    )
+  }
   console.log("\nFichiers produits :")
   console.log(`  HTML  ${path.relative(projectRoot, htmlPath)}`)
   console.log(`  Texte ${path.relative(projectRoot, textPath)}`)

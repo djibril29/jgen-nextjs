@@ -32,6 +32,53 @@ const TONES = {
 export type Tone = keyof typeof TONES
 
 /**
+ * Filet segmente tricolore. Il remplace le filet rose uni sous les titres :
+ * trois couleurs de la palette au lieu d'une, c'est le meme trait mais il
+ * signe la page au lieu de simplement souligner.
+ */
+export function TricolorRule({
+  align = "left",
+  className,
+}: {
+  align?: "left" | "center"
+  className?: string
+}) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn("flex h-1 w-28 gap-1", align === "center" && "mx-auto", className)}
+    >
+      <span className="flex-[3] bg-jgen-jaune" />
+      <span className="flex-[2] bg-jgen-vert" />
+      <span className="flex-1 bg-jgen-rose" />
+    </span>
+  )
+}
+
+/**
+ * Separateur entre deux chapitres d'un meme axe. Il marque une respiration la
+ * ou deux blocs de prose se succederaient sans transition, sans introduire le
+ * liseré gris pleine largeur que le reste de la page evite.
+ *
+ * Segments carres : le reste du site est a angles vifs (--radius: 0), une pastille
+ * ronde y ferait tache.
+ */
+export function ChapterDivider({ className }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={cn("flex items-center justify-center gap-1.5 py-12 lg:py-16", className)}
+    >
+      <span className="h-1 w-1.5 bg-jgen-vert" />
+      <span className="h-1 w-6 bg-jgen-rose" />
+      <span className="h-1 w-14 bg-jgen-jaune" />
+      <span className="h-1 w-6 bg-jgen-vert" />
+      <span className="h-1 w-1.5 bg-jgen-rose" />
+    </div>
+  )
+}
+
+/**
  * Chiffre mis en valeur au fil d'un paragraphe : « Nous avons forme
  * <KeyFigure>68 jeunes filles</KeyFigure> a Kolda ».
  *
@@ -140,11 +187,7 @@ export function StatBlock({
         <span className="font-heading tnum block text-6xl font-extrabold leading-none text-jgen-plum sm:text-7xl">
           {value}
         </span>
-        <span aria-hidden="true" className="mt-3 flex h-1 w-24 gap-1">
-          <span className="flex-[3] bg-jgen-jaune" />
-          <span className="flex-[2] bg-jgen-vert" />
-          <span className="flex-1 bg-jgen-rose" />
-        </span>
+        <TricolorRule className="mt-3 w-24" />
       </div>
       <p className="max-w-[22ch] pt-1 text-base leading-snug text-jgen-plum">{label}</p>
     </div>

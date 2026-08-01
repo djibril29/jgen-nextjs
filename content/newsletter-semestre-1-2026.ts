@@ -43,6 +43,20 @@ export type NewsletterImageRef = {
   alt: string
 }
 
+/**
+ * Visuel secondaire, inséré au fil du récit d'un projet.
+ *
+ * `alt` décrit la photo pour les lecteurs d'écran, `caption` est la légende
+ * visible sous la photo — plus courte, elle complète le texte au lieu de le
+ * répéter. Les deux sont tirées des descriptions vérifiées de
+ * `scripts/upload-newsletter-assets.ts`, établies d'après les banderoles
+ * photographiées et les rapports trimestriels : aucune légende n'ajoute un fait
+ * que la photo ou les rapports n'établissent pas.
+ */
+export type NewsletterMedia = NewsletterImageRef & {
+  caption: string
+}
+
 export type NewsletterStatistic = {
   id: string
   value: string
@@ -84,6 +98,21 @@ export type NewsletterProject = {
   locations?: string[]
   partnerNames?: string[]
   image?: NewsletterImageRef
+  /**
+   * Légende du visuel principal, affichée lorsque le chapitre s'ouvre sur une
+   * composition photo + texte. L'ouverture en bandeau, elle, pose le titre du
+   * projet sur la photo : elle n'a pas besoin de légende.
+   *
+   * Plus courte que `image.alt`, qui reste la description destinée aux lecteurs
+   * d'écran.
+   */
+  imageCaption?: string
+  /**
+   * Visuels secondaires, inserés entre les paragraphes du récit pour aérer la
+   * lecture. Zéro, une ou deux entrées : au-delà, la photo cesse d'illustrer le
+   * texte et devient une galerie.
+   */
+  media?: NewsletterMedia[]
   /**
    * Lien sortant. Soit une URL réelle du site, soit une ancre interne à la
    * page newsletter. Aucune page projet fictive n'est créée.
@@ -160,6 +189,11 @@ const projects: NewsletterProject[] = [
     href: "#elles-aussi",
     programHref: "/programs/elles-aussi",
     programCta: "Découvrir le programme ELLES AUSSI",
+    // Aucune photo d'ELLES AUSSI n'existe encore dans le dépôt (voir
+    // content/verification-semestre-1-2026.md, point 12). La référence est
+    // conservée : déposer `elles-aussi.jpg` suffira à illustrer le chapitre, qui
+    // s'ouvre d'ici là sur un bandeau typographique plutôt que sur un visuel de
+    // remplacement.
     image: {
       name: "elles-aussi",
       alt: "Cercle de guérison réunissant des participantes dans un espace d'écoute à Niakhar",
@@ -202,13 +236,28 @@ const projects: NewsletterProject[] = [
     href: "#kiiray",
     programHref: "/programs/kiiray",
     programCta: "Découvrir le programme KIIRAY",
-    // Fichier fourni : bajenugox.png — rattaché à l'atelier national du T2 sur le
-    // rôle des Bajenu Gox. ⚠️ À confirmer par J-GEN : les Bajenu Gox interviennent
-    // aussi comme association encadrante dans Liggeyal Ëlëg.
+    // La banderole photographiée porte « LANCEMENT DES ACTIVITÉS DU PROGRAMME
+    // KIIRAY » : le visuel documente donc un lancement officiel, et non l'atelier
+    // Bajenu Gox du T2, qui dispose de ses propres photos plus bas.
     image: {
       name: "kiiray",
-      alt: "Atelier national consacré au rôle des Bajenu Gox dans le cadre du programme KIIRAY",
+      alt: "Lancement officiel du programme KIIRAY, réunissant élus, acteurs communautaires et populations autour de la banderole du programme",
     },
+    imageCaption: "Lancement officiel du programme KIIRAY dans une collectivité territoriale.",
+    media: [
+      {
+        name: "bejenugox",
+        alt: "Atelier national de renforcement des capacités des Bajenu Gox, programme KIIRAY",
+        caption:
+          "Atelier national de renforcement des capacités et de plaidoyer des Bajenu Gox.",
+      },
+      {
+        name: "kiiray1",
+        alt: "Séance de travail participative réunissant acteurs communautaires et institutionnels dans le cadre du programme KIIRAY",
+        caption:
+          "Séance de travail réunissant acteurs communautaires et institutionnels.",
+      },
+    ],
     emailSummary:
       "Trois plans d'action locaux ont été élaborés et budgétisés à Fatick, Diamaguène Sicap Mbao et Yoff. Un atelier national a été consacré au rôle des Bajenu Gox, et des dialogues intergénérationnels ont été organisés à Dakar.",
     narrative: [
@@ -258,6 +307,19 @@ const projects: NewsletterProject[] = [
       name: "pas-a-pas",
       alt: "Session de formation de jeunes leaders sur les droits et la santé sexuels et reproductifs",
     },
+    imageCaption: "Session de formation des jeunes leaders sur les DSSR.",
+    media: [
+      {
+        name: "pas-a-pas2",
+        alt: "Travaux de groupe lors d'une formation du programme PAS À PAS à Pikine, Tivaouane Peulh et Patte d'Oie",
+        caption: "Travaux de groupe pendant une session de formation des jeunes leaders.",
+      },
+      {
+        name: "pas-a-pas3",
+        alt: "Échanges entre participantes et formatrices lors d'une session du programme PAS À PAS",
+        caption: "Échanges entre participantes et formatrices.",
+      },
+    ],
     emailSummary:
       "L'argumentaire religieux a été enrichi et validé avec les acteurs religieux, et 60 jeunes leaders ont été enrôlés. Des formations à Pikine, Tivaouane Peulh et Patte d'Oie ont renforcé leurs compétences en plaidoyer.",
     narrative: [
@@ -306,6 +368,22 @@ const projects: NewsletterProject[] = [
       name: "jvssr1",
       alt: "Cercle de sororité réunissant des jeunes femmes à Yoff",
     },
+    imageCaption: "Cercle de sororité réunissant des adolescentes et de jeunes femmes à Yoff.",
+    // `jvssr2.jpeg` est le même fichier que `jvssr1.jpeg` (Sanity leur a attribué
+    // un identifiant d'asset identique) : il n'est donc pas repris ici.
+    media: [
+      {
+        name: "perception",
+        alt: "Session de restitution de l'enquête de base sur les perceptions communautaires à Yoff, le 24 juin 2026 à la mairie de Yoff",
+        caption:
+          "Restitution de l'enquête de base aux parties prenantes, le 24 juin 2026 à la mairie de Yoff.",
+      },
+      {
+        name: "cercles",
+        alt: "Travaux de groupe lors d'un cercle de sororité du projet JVSSR à Yoff",
+        caption: "Travaux de groupe lors d'un cercle de sororité.",
+      },
+    ],
     emailSummary:
       "Une étude sur les perceptions de la communauté de Yoff en matière de DSSR et de VBG a été réalisée puis restituée aux parties prenantes. Deux cercles de sororité ont été organisés à Ndenatte et Therme Nord.",
     narrative: [
@@ -356,6 +434,17 @@ const projects: NewsletterProject[] = [
       name: "euleug",
       alt: "Session de formation professionnelle réunissant des membres d'un GIE de jeunes femmes",
     },
+    imageCaption: "Session de formation aux métiers d'un GIE de jeunes femmes.",
+    // Les deux visuels disponibles portent la mention Kaolack. Aucune photo des
+    // sessions de Fatick n'a été fournie : les légendes ne situent donc que ce
+    // que les banderoles établissent.
+    media: [
+      {
+        name: "patisserie",
+        alt: "Participantes d'un GIE de Kaolack en tenue de formation lors d'une session de pâtisserie du projet LIGGEEYAL ËLËG, supervisée par l'AADS",
+        caption: "Session de pâtisserie d'un GIE de Kaolack, supervisée par l'AADS.",
+      },
+    ],
     emailSummary:
       "Six GIE ont été créés et formalisés à Fatick et Kaolack. Des formations ont été organisées en pâtisserie, saponification, restauration et teinture, sous la supervision de partenaires associatifs locaux.",
     narrative: [
@@ -394,6 +483,17 @@ const projects: NewsletterProject[] = [
       name: "assises1",
       alt: "Réunion d'orientation réunissant les parties prenantes du programme Naatal Jaboot Gui",
     },
+    imageCaption:
+      "Réunion d'orientation des Assises nationales citoyennes, les 16 et 17 mars 2026 aux Almadies.",
+    media: [
+      {
+        // La photo montre un rassemblement de plaidoyer ; les rapports n'en
+        // précisent pas l'objet. La légende n'en dit donc pas davantage.
+        name: "codefamille",
+        alt: "Rassemblement communautaire de femmes lors d'une rencontre de plaidoyer de J-GEN Sénégal",
+        caption: "Rassemblement communautaire lors d'une rencontre de plaidoyer.",
+      },
+    ],
     emailSummary:
       "Une réunion d'orientation tenue les 16 et 17 mars 2026 a défini les orientations stratégiques, organisationnelles et méthodologiques des Assises nationales citoyennes.",
     narrative: [
@@ -416,7 +516,8 @@ const projects: NewsletterProject[] = [
   },
   {
     id: "assises",
-    name: "Assises nationales citoyennes",
+    // Intitulé officiel complet, identique à celui de la page /assises.
+    name: "Assises nationales citoyennes sur les droits des femmes et des filles au Sénégal",
     category: "Processus national de dialogue citoyen",
     summary:
       "Les Assises nationales citoyennes sur les droits des femmes et des filles constituent un processus national de dialogue, préparé tout au long du semestre par la mise en place de ses instances de gouvernance.",
@@ -424,6 +525,11 @@ const projects: NewsletterProject[] = [
     href: "/assises",
     programHref: "/assises",
     programCta: "Suivre les Assises nationales citoyennes",
+    image: {
+      name: "copil",
+      alt: "Séance de travail des membres du comité de pilotage des Assises nationales citoyennes sur les droits des femmes et des filles",
+    },
+    imageCaption: "Séance de travail du comité de pilotage des Assises nationales citoyennes.",
     emailSummary:
       "La feuille de route des Assises a été élaborée, un comité technique composé d'expert·e·s a été créé et un atelier d'installation et de structuration du Comité de pilotage a été organisé.",
     narrative: [
@@ -689,6 +795,12 @@ export const newsletterSemesterOne2026 = {
       //     cet atelier. Aucune date, aucun nombre de participant·e·s et aucun
       //     résultat ne figurent dans le document : ne rien ajouter ici.
       body: "Le rapport du deuxième trimestre mentionne la tenue d'un atelier de restitution du rapport des 30 ans de Beijing. Aucun détail supplémentaire n'est fourni dans le document source.",
+      // Seule la banderole photographiée situe l'atelier : Hôtel Ndiambour, à
+      // Dakar. Le quantième reste masqué sur la photo, il n'est donc pas énoncé.
+      image: {
+        name: "beijing30",
+        alt: "Panel d'ouverture de l'atelier de restitution du rapport alternatif Beijing +30, à l'Hôtel Ndiambour à Dakar",
+      },
     },
   ] satisfies NewsletterHighlight[],
 
@@ -890,6 +1002,9 @@ export const NEWSLETTER_IMAGE_NAMES = [
   ...newsletterSemesterOne2026.projects
     .map((project) => project.image?.name)
     .filter((name): name is string => Boolean(name)),
+  ...newsletterSemesterOne2026.projects.flatMap(
+    (project) => project.media?.map((medium) => medium.name) ?? [],
+  ),
   ...newsletterSemesterOne2026.highlights
     .map((highlight) => highlight.image?.name)
     .filter((name): name is string => Boolean(name)),

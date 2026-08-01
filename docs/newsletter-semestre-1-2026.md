@@ -5,7 +5,7 @@ Cette newsletter existe sous deux formes, alimentées par **un seul fichier de c
 | Forme | Fichier | Adresse |
 |---|---|---|
 | Page web complète | `app/newsletter/semestre-1-2026/page.tsx` | `/newsletter/semestre-1-2026` |
-| E-mail condensé (Mailchimp) | `emails/newsletter-semestre-1-2026.tsx` | `generated-emails/newsletter-semestre-1-2026.html` |
+| E-mail (Mailchimp) | `emails/newsletter-semestre-1-2026.tsx` | `generated-emails/newsletter-semestre-1-2026.html` |
 
 > **Le contenu ne se modifie qu'à un seul endroit :**
 > `content/newsletter-semestre-1-2026.ts`.
@@ -46,6 +46,25 @@ Le port 3001 a été retenu parce qu'aucun script du projet ne l'utilise
 
 L'aperçu se recharge à chaque enregistrement et propose des vues bureau et mobile.
 
+### Ce que contient l'e-mail
+
+L'e-mail reprend le déroulé de la page web, en plus court :
+
+1. en-tête, titre, introduction et bouton principal ;
+2. visuel de couverture (zone `hero_image`, remplaçable dans Mailchimp) ;
+3. les cinq chiffres clés marqués `inEmail: true` ;
+4. **les activités du semestre** — les quatre axes d'intervention, et sous chacun
+   d'eux **chaque projet** : une photographie, sa légende, le territoire couvert,
+   un résumé de deux ou trois phrases (`emailSummary`) et **un bouton vers la page
+   du programme** (`programHref`) ;
+5. **les temps forts** — même principe, refermés par un lien vers la section
+   correspondante de la page web ;
+6. rappel vers le bilan complet et vers `/programs`, mot de conclusion, pied de page.
+
+Une même photographie n'est jamais utilisée deux fois : le cliché du 8 mars sert
+de couverture, le temps fort correspondant s'ouvre donc sans image. Un projet
+sans photographie s'ouvre sur un bandeau typographique portant son nom (voir §6).
+
 ## 3. Générer le HTML pour Mailchimp
 
 ```bash
@@ -75,6 +94,17 @@ page complète, des quatre merge tags Mailchimp et des cinq zones `mc:edit`
 Les fonctions de transformation et de validation sont isolées dans
 `scripts/newsletter-html.ts` afin de rester importables et testables sans
 déclencher de rendu.
+
+### Poids du HTML
+
+Le script affiche le poids du fichier produit et **refuse de l'écrire au-delà de
+102 ko**, seuil à partir duquel Gmail tronque le message et masque tout ce qui
+suit — dont le lien de désabonnement. Un avertissement apparaît dès 80 % de cette
+limite : Mailchimp allonge encore les liens en y ajoutant son suivi, il faut donc
+garder de la marge. L'e-mail actuel pèse environ 55 ko.
+
+Ce poids ne concerne que le HTML. Les photographies, elles, sont chargées depuis
+le site au moment de l'ouverture (voir §6 sur leur compression).
 
 ---
 
@@ -183,18 +213,28 @@ résultat, **sans aucune modification de code**.
 
 ### État des visuels
 
-| Nom de base | Visuel | Statut |
+Une photographie par activité est reprise dans l'e-mail. Le nom de base indiqué
+est celui du champ `image.name` correspondant, dans le fichier de contenu.
+
+| Nom de base | Visuel | Repris dans l'e-mail |
 |---|---|---|
-| `bajenugox` | Atelier national sur le rôle des Bajenu Gox (**KIIRAY**) | ✅ fourni |
-| `jvssr` | Cercles de sororité, Yoff | ✅ fourni |
-| `pasapas1` | Formations DSSR des jeunes leaders | ✅ fourni |
-| `pasapas2` | Second visuel PAS À PAS | 🟡 en réserve, non utilisé |
-| `cover` | Visuel principal + image de partage (Open Graph) | ⬜ à fournir |
-| `elles-aussi` | Cercles de guérison, Niakhar | ⬜ à fournir |
-| `liggeyal-eleg` | Formations des GIE, Fatick / Kaolack | ⬜ à fournir |
-| `naatal-jaboot-gui` | Réunion d'orientation / COPIL | ⬜ à fournir |
-| `8-mars-guediawaye` | Journée internationale des droits des femmes | ⬜ à fournir |
-| `atelier-defenseurs-saly` | Atelier des défenseur·e·s, Saly | ⬜ à fournir |
+| `8mars` | Couverture + image de partage (Open Graph) | ✅ en couverture |
+| `elles-aussi` | Cercles de guérison, Niakhar (**ELLES AUSSI**) | ⬜ **à fournir** |
+| `kiiray` | Lancement officiel du programme (**KIIRAY**) | ✅ |
+| `pas-a-pas` | Formation des jeunes leaders aux DSSR (**PAS À PAS**) | ✅ |
+| `jvssr1` | Cercle de sororité, Yoff (**JVSSR**) | ✅ |
+| `euleug` | Formation aux métiers d'un GIE (**Liggeyal Ëlëg**) | ✅ |
+| `assises1` | Réunion d'orientation (**Naatal Jaboot Gui**) | ✅ |
+| `copil` | Comité de pilotage (**Assises nationales citoyennes**) | ✅ |
+| `beijing30` | Atelier de restitution du rapport Beijing +30 | ✅ |
+| `atelier-defenseurs-saly` | Atelier des défenseur·e·s, Saly | ⬜ **à fournir** |
+| `bejenugox`, `kiiray1`, `pas-a-pas2`, `pas-a-pas3`, `perception`, `cercles`, `patisserie`, `codefamille` | Visuels secondaires | Page web uniquement |
+| `bajenugox2`, `jvssr2` | Doublons | 🟡 en réserve, référencés nulle part |
+
+Deux visuels manquent donc encore : sans eux, **ELLES AUSSI** s'ouvre sur un
+bandeau typographique et le temps fort de Saly sur un simple filet jaune. Déposer
+`elles-aussi.jpg` et `atelier-defenseurs-saly.jpg` suffit à les illustrer, sans
+aucune modification de code.
 
 `npm run email:generate` affiche à chaque exécution la liste à jour des visuels
 manquants **et** des fichiers présents que plus aucun contenu ne référence
@@ -203,14 +243,15 @@ manquants **et** des fichiers présents que plus aucun contenu ne référence
 Ces noms sont **modifiables** : ils se changent en une ligne dans le champ
 `image.name` du projet ou du temps fort concerné, dans le fichier de contenu.
 
-> ⚠️ **À confirmer :** `bajenugox` a été rattaché à **KIIRAY** (atelier national du
+> ⚠️ **À confirmer :** `bejenugox` a été rattaché à **KIIRAY** (atelier national du
 > T2 sur le rôle des Bajenu Gox). Les Bajenu Gox interviennent aussi comme
 > association encadrante dans **Liggeyal Ëlëg** — à arbitrer par J-GEN.
 
 > 💡 **Poids des fichiers :** pensez à compresser les visuels avant dépôt. La page
 > web les optimise automatiquement via `next/image`, mais **l'e-mail utilise le
-> fichier d'origine**. Au-delà de ~200 Ko par image, l'e-mail devient lourd à
-> charger (`bajenugox.png` pèse actuellement 909 Ko).
+> fichier d'origine**. Les huit photographies de l'e-mail pèsent aujourd'hui
+> environ 1,5 Mo au total : les compresser sous 150 Ko chacune accélérerait
+> nettement l'affichage sur une connexion mobile.
 
 ### Tant qu'une image n'est pas fournie
 
@@ -218,7 +259,8 @@ Ces noms sont **modifiables** : ils se changent en une ligne dans le champ
   parti pris graphique, pas un message d'erreur — la page reste complète et
   élégante sans aucune photographie.
 - **E-mail** : **aucune balise `<img>` n'est insérée**. On ne produit jamais une
-  URL qui renverrait une erreur 404.
+  URL qui renverrait une erreur 404. Un projet reçoit à la place un bandeau
+  typographique portant son nom ; un temps fort, un filet jaune.
 - Le script liste à chaque exécution les visuels encore manquants.
 
 ### ⚠️ Déployer avant d'envoyer
@@ -273,9 +315,9 @@ Ces points sont également listés, avec leur contexte, dans le tableau
 | **Graphie des programmes** | Les rapports emploient des formes concurrentes (« Naatal Ndiabote Gui » / « Naatal Jaboot Gui » / « Naatal Jaboot Gi », « KIIRAY » / « KIIRAAY », « Bajenu Gox » / « Badienou Gox »). Aucune graphie officielle n'existait sur le site. Les formes provisoires retenues — **Naatal Jaboot Gui**, **KIIRAY**, **Bajenu Gox**, **Liggeyal Ëlëg** — doivent être confirmées. |
 | **Dates des Assises** | Les rapports annoncent les Assises « prévues du 25 au 27 novembre 2026 ». C'est une **information future**, affichée comme telle avec un avertissement. À vérifier avant publication. |
 | **Beijing +30** | Le rapport du T2 mentionne l'atelier de restitution **sans aucun détail** : ni date, ni nombre de participant·e·s, ni résultat. Seule son existence est mentionnée. Fournir les informations si la rubrique doit être développée. |
-| **Visuels et crédits** | Aucune photographie des activités n'est encore disponible. Voir §6. Communiquer également les crédits photographiques. |
+| **Visuels et crédits** | Il manque encore une photographie d'**ELLES AUSSI** et une de l'**atelier de Saly**. Voir §6. Communiquer également les crédits photographiques. |
 | **Adresse postale** | Le site ne mentionne que « Dakar, Sénégal ». Mailchimp exige une **adresse physique complète**, à renseigner dans les paramètres de l'audience — elle est injectée par `*|HTML:LIST_ADDRESS_HTML|*`. |
-| **URL des pages projets** | Seule `/assises` existe. Les autres projets renvoient vers l'ancre de leur section. Renseigner le champ `href` dès qu'une page dédiée est publiée. |
+| **URL des pages projets** | Les six pages programmes et `/assises` existent désormais : chaque activité de l'e-mail a son bouton (`programHref`). Vérifier que ces pages sont bien publiées avant l'envoi. |
 | **Bénéficiaires Liggeyal Ëlëg** | Communiquer le nombre effectivement accompagné lorsqu'il sera consolidé (120 est une cible). |
 
 ---
@@ -283,6 +325,7 @@ Ces points sont également listés, avec leur contexte, dans le tableau
 ## 9. Envoi de test — liste de contrôle
 
 - [ ] `npm run email:generate` se termine sans erreur
+- [ ] Poids du HTML annoncé **sans avertissement** de troncature
 - [ ] Aperçu **ordinateur** correct dans Mailchimp
 - [ ] Aperçu **mobile** correct dans Mailchimp
 - [ ] E-mail de test reçu sur **Gmail**
@@ -291,6 +334,8 @@ Ces points sont également listés, avec leur contexte, dans le tableau
 - [ ] Le **preheader** s'affiche dans la liste des messages
 - [ ] Lien « Voir cet e-mail dans votre navigateur » fonctionnel
 - [ ] Tous les liens vers le site aboutissent sur la bonne section
+- [ ] Les **sept boutons d'activité** ouvrent bien la page de leur programme
+- [ ] Le message n'est **pas tronqué** dans Gmail (pied de page visible)
 - [ ] Lien de **désabonnement** fonctionnel
 - [ ] Lien de **mise à jour des préférences** fonctionnel
 - [ ] **Adresse physique** affichée en pied de page
