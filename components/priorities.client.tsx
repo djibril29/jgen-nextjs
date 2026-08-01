@@ -77,9 +77,9 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
                 <Link href={`/programs/${program.slug}`} className="group block h-full">
                   <div className="relative h-full">
                     {/* Decorative squares */}
-                    <div className="absolute -top-3 -left-3 w-14 h-14 bg-[#c61d4d] opacity-80 z-0" />
-                    <div className="absolute -bottom-3 -right-3 w-16 h-16 bg-[#ffd23f] opacity-90 z-0 rotate-12" />
-                    <div className="absolute top-1/2 -right-2 w-10 h-10 bg-[#8c80f7] opacity-70 z-0" />
+                    <div className="absolute -top-3 -left-3 w-14 h-14 bg-jgen-rose opacity-80 z-0" />
+                    <div className="absolute -bottom-3 -right-3 w-16 h-16 bg-jgen-jaune opacity-90 z-0 rotate-12" />
+                    <div className="absolute top-1/2 -right-2 w-10 h-10 bg-jgen-violet opacity-70 z-0" />
 
                     {/* Card */}
                     <div className="relative z-10 h-full bg-white shadow-lg group-hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col">
@@ -98,7 +98,7 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
 
                       {/* Content */}
                       <div className="p-4 flex flex-col flex-grow">
-                        <h3 className="text-base md:text-lg font-bold mb-2 leading-tight text-gray-900 group-hover:text-[#c61d4d] transition-colors line-clamp-2">
+                        <h3 className="text-base md:text-lg font-bold mb-2 leading-tight text-gray-900 group-hover:text-jgen-rose transition-colors line-clamp-2">
                           {program.title}
                         </h3>
                         {program.summary && (
@@ -106,7 +106,7 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
                             {program.summary}
                           </p>
                         )}
-                        <div className="mt-3 inline-flex items-center gap-2 text-[#c61d4d] font-bold text-xs uppercase tracking-wide opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="mt-3 inline-flex items-center gap-2 text-jgen-rose font-bold text-xs uppercase tracking-wide opacity-0 group-hover:opacity-100 transition-opacity">
                           <span>En savoir plus</span>
                           <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                         </div>
@@ -126,7 +126,7 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
               onClick={() => api?.scrollPrev()}
               disabled={!canScrollPrev}
               aria-label="Programme précédent"
-              className="w-11 h-11 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-600 hover:border-[#c61d4d] hover:text-[#c61d4d] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="w-11 h-11 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-600 hover:border-jgen-rose hover:text-jgen-rose disabled:opacity-30 disabled:cursor-not-allowed transition-all"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -134,7 +134,7 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
               onClick={() => api?.scrollNext()}
               disabled={!canScrollNext}
               aria-label="Programme suivant"
-              className="w-11 h-11 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-600 hover:border-[#c61d4d] hover:text-[#c61d4d] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="w-11 h-11 rounded-full border-2 border-gray-200 flex items-center justify-center text-gray-600 hover:border-jgen-rose hover:text-jgen-rose disabled:opacity-30 disabled:cursor-not-allowed transition-all"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -142,7 +142,7 @@ export function PrioritiesClient({ programs }: { programs: ProgramCard[] }) {
 
           <Link
             href="/programs"
-            className="inline-flex items-center gap-3 bg-[#c61d4d] hover:bg-[#c61d4d]/90 text-white font-bold text-sm px-7 py-3 transition-colors"
+            className="inline-flex items-center gap-3 bg-jgen-rose hover:bg-jgen-rose/90 text-white font-bold text-sm px-7 py-3 transition-colors"
           >
             Voir tous nos programmes
             <ArrowRight className="h-4 w-4" />

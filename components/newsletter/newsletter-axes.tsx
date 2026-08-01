@@ -27,13 +27,13 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
         />
 
         <div className="p-6 sm:p-8 lg:col-span-3">
-          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-[#c61d4d]">
+          <p className="mb-2 text-xs font-bold uppercase tracking-wide text-jgen-rose">
             {project.category}
           </p>
 
           <h4
             id={`${project.id}-titre`}
-            className="mb-4 text-2xl font-black tracking-tight text-[#3d1f47] sm:text-3xl"
+            className="mb-4 text-2xl font-black tracking-tight text-jgen-plum sm:text-3xl"
           >
             {project.name}
           </h4>
@@ -42,7 +42,7 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
 
           {project.locations && project.locations.length > 0 && (
             <p className="mb-6 flex items-start gap-2 text-sm text-gray-600">
-              <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#00d4aa]" aria-hidden="true" />
+              <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-jgen-vert" aria-hidden="true" />
               <span>
                 <span className="font-semibold">Territoires : </span>
                 {project.locations.join(", ")}
@@ -52,14 +52,14 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
 
           {project.achievements.map((group) => (
             <div key={group.period} className="mb-6 last:mb-0">
-              <h5 className="mb-3 border-b border-gray-200 pb-2 text-sm font-bold uppercase tracking-wide text-[#3d1f47]">
+              <h5 className="mb-3 border-b border-gray-200 pb-2 text-sm font-bold uppercase tracking-wide text-jgen-plum">
                 {group.periodLabel}
               </h5>
               <ul className="space-y-2">
                 {group.items.map((item, index) => (
                   <li key={index} className="flex gap-3 text-base leading-relaxed text-gray-700">
                     <span
-                      className="mt-2 h-1.5 w-1.5 flex-shrink-0 bg-[#c61d4d]"
+                      className="mt-2 h-1.5 w-1.5 flex-shrink-0 bg-jgen-rose"
                       aria-hidden="true"
                     />
                     <span>{item}</span>
@@ -71,7 +71,7 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
 
           {project.partnerNames && project.partnerNames.length > 0 && (
             <p className="mt-6 border-t border-gray-200 pt-4 text-sm text-gray-600">
-              <span className="font-semibold text-[#3d1f47]">Partenaires : </span>
+              <span className="font-semibold text-jgen-plum">Partenaires : </span>
               {project.partnerNames.join(" · ")}
             </p>
           )}
@@ -79,7 +79,7 @@ function ProjectCard({ project }: { project: NewsletterProject }) {
           {externalPageHref && (
             <Link
               href={externalPageHref}
-              className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-[#c61d4d] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#c61d4d]"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-jgen-rose underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jgen-rose"
             >
               En savoir plus sur {project.name}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -100,11 +100,11 @@ export function NewsletterAxes() {
         <div className="mx-auto max-w-7xl">
           <h2
             id="axes-titre"
-            className="mb-3 text-3xl font-black tracking-tight text-[#3d1f47] sm:text-4xl"
+            className="mb-3 text-3xl font-black tracking-tight text-jgen-plum sm:text-4xl"
           >
             Les grands axes d&apos;intervention
           </h2>
-          <div className="mb-14 h-1 w-20 bg-[#c61d4d]" aria-hidden="true" />
+          <div className="mb-14 h-1 w-20 bg-jgen-rose" aria-hidden="true" />
 
           <div className="space-y-16 lg:space-y-20">
             {axes.map((axis) => {
@@ -119,13 +119,13 @@ export function NewsletterAxes() {
                   aria-labelledby={`${axis.id}-titre`}
                   className="scroll-mt-24"
                 >
-                  <div className="mb-8 border-l-4 border-[#ffd23f] pl-5">
-                    <p className="mb-1 text-xs font-bold uppercase tracking-wide text-[#c61d4d]">
+                  <div className="mb-8 border-l-4 border-jgen-jaune pl-5">
+                    <p className="mb-1 text-xs font-bold uppercase tracking-wide text-jgen-rose">
                       Axe {axis.number}
                     </p>
                     <h3
                       id={`${axis.id}-titre`}
-                      className="mb-3 text-2xl font-black tracking-tight text-[#3d1f47] sm:text-3xl"
+                      className="mb-3 text-2xl font-black tracking-tight text-jgen-plum sm:text-3xl"
                     >
                       {axis.title}
                     </h3>
@@ -140,8 +140,8 @@ export function NewsletterAxes() {
 
                   {/* Les dates des Assises sont prévisionnelles : mention explicite. */}
                   {axis.projectIds.includes("assises") && (
-                    <p className="mt-6 border-l-4 border-[#ffd23f] bg-[#fffbee] p-5 text-sm leading-relaxed text-gray-700">
-                      <span className="font-bold text-[#3d1f47]">
+                    <p className="mt-6 border-l-4 border-jgen-jaune bg-[#fffbee] p-5 text-sm leading-relaxed text-gray-700">
+                      <span className="font-bold text-jgen-plum">
                         {assisesPlannedDates.label} : {assisesPlannedDates.value}.
                       </span>{" "}
                       {assisesPlannedDates.disclaimer}

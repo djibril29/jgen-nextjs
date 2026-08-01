@@ -236,7 +236,7 @@ export function PetitionForm({ initialCount }: PetitionFormProps) {
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium mb-1">
-                  Prénom <span className="text-[#c61d4d]">*</span>
+                  Prénom <span className="text-jgen-rose">*</span>
                 </label>
                 <Input
                   id="firstName"
@@ -249,7 +249,7 @@ export function PetitionForm({ initialCount }: PetitionFormProps) {
               </div>
               <div>
                 <label htmlFor="lastName" className="block text-sm font-medium mb-1">
-                  Nom <span className="text-[#c61d4d]">*</span>
+                  Nom <span className="text-jgen-rose">*</span>
                 </label>
                 <Input
                   id="lastName"
@@ -263,7 +263,7 @@ export function PetitionForm({ initialCount }: PetitionFormProps) {
             </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium mb-1">
-                Email <span className="text-[#c61d4d]">*</span>
+                Email <span className="text-jgen-rose">*</span>
               </label>
               <Input
                 id="email"
@@ -298,7 +298,7 @@ export function PetitionForm({ initialCount }: PetitionFormProps) {
             <Button
               type="submit"
               disabled={status === 'submitting'}
-              className="w-full bg-[#c61d4d] hover:bg-[#a8173f] text-white font-bold py-3 text-base"
+              className="w-full bg-jgen-rose hover:bg-[#a8173f] text-white font-bold py-3 text-base"
             >
               {status === 'submitting' ? (
                 <span className="flex items-center gap-2">
@@ -317,7 +317,7 @@ export function PetitionForm({ initialCount }: PetitionFormProps) {
       <div className="space-y-6">
         <div className="bg-white rounded-2xl shadow-sm border p-6">
           <div className="flex items-end gap-2 mb-1">
-            <span className="text-5xl font-bold text-[#3d1f47] tabular-nums">
+            <span className="text-5xl font-bold text-jgen-plum tabular-nums">
               {animatedCount.toLocaleString('fr-SN')}
             </span>
             <span className="text-muted-foreground mb-1 text-sm">signatures</span>
@@ -327,7 +327,7 @@ export function PetitionForm({ initialCount }: PetitionFormProps) {
           </p>
           <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
             <div
-              className="h-full rounded-full bg-[#c61d4d] transition-all duration-700 ease-out"
+              className="h-full rounded-full bg-jgen-rose transition-all duration-700 ease-out"
               style={{ width: `${progressPercent}%` }}
             />
           </div>

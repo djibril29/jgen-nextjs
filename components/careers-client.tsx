@@ -78,18 +78,18 @@ export function CareersClient({ careers }: CareersClientProps) {
   return (
     <>
       {/* Hero Section - Violet avec carrés décoratifs */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-[#3d1f47] to-[#2d1537] relative overflow-hidden">
+      <section className="pt-32 pb-16 bg-gradient-to-br from-jgen-plum to-[#2d1537] relative overflow-hidden">
         {/* Decorative squares */}
-        <div className="absolute top-20 right-10 w-24 h-24 bg-[#ffd23f] opacity-40 z-0 rotate-12" />
-        <div className="absolute bottom-10 left-10 w-28 h-28 bg-[#00d4aa] opacity-30 z-0 -rotate-12" />
-        <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-[#8c80f7] opacity-20 z-0" />
+        <div className="absolute top-20 right-10 w-24 h-24 bg-jgen-jaune opacity-40 z-0 rotate-12" />
+        <div className="absolute bottom-10 left-10 w-28 h-28 bg-jgen-vert opacity-30 z-0 -rotate-12" />
+        <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-jgen-violet opacity-20 z-0" />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6">
               Opportunités d'emploi
             </h1>
-            <div className="w-24 h-1 bg-[#ffd23f] mx-auto mb-6" />
+            <div className="w-24 h-1 bg-jgen-jaune mx-auto mb-6" />
             <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               Rejoignez J-GEN SENEGAL et contribuez à un avenir plus juste et égalitaire.
             </p>
@@ -100,8 +100,8 @@ export function CareersClient({ careers }: CareersClientProps) {
       {/* Search and Filters Section - Blanc avec carrés décoratifs */}
       <section className="py-12 bg-white border-b border-gray-200 relative overflow-hidden">
         {/* Decorative squares */}
-        <div className="absolute top-5 left-5 w-16 h-16 bg-[#c61d4d] opacity-20 z-0" />
-        <div className="absolute bottom-5 right-5 w-20 h-20 bg-[#8c80f7] opacity-20 z-0 rotate-45" />
+        <div className="absolute top-5 left-5 w-16 h-16 bg-jgen-rose opacity-20 z-0" />
+        <div className="absolute bottom-5 right-5 w-20 h-20 bg-jgen-violet opacity-20 z-0 rotate-45" />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -114,7 +114,7 @@ export function CareersClient({ careers }: CareersClientProps) {
                   placeholder="Rechercher des opportunités d'emploi"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 h-14 text-base bg-white border-2 border-gray-300 focus:ring-2 focus:ring-[#c61d4d] focus:border-[#c61d4d] shadow-sm rounded-full"
+                  className="pl-12 h-14 text-base bg-white border-2 border-gray-300 focus:ring-2 focus:ring-jgen-rose focus:border-jgen-rose shadow-sm rounded-full"
                 />
               </div>
             </div>
@@ -158,9 +158,9 @@ export function CareersClient({ careers }: CareersClientProps) {
       {/* Job Listings - Blanc avec carrés décoratifs */}
       <section className="py-16 bg-white relative overflow-hidden">
         {/* Decorative squares */}
-        <div className="absolute top-40 right-10 w-24 h-24 bg-[#ffd23f] opacity-30 z-0 rotate-12" />
+        <div className="absolute top-40 right-10 w-24 h-24 bg-jgen-jaune opacity-30 z-0 rotate-12" />
         <div className="absolute bottom-40 left-10 w-28 h-28 bg-[#a42c64] opacity-25 z-0" />
-        <div className="absolute top-1/2 right-1/4 w-20 h-20 bg-[#00d4aa] opacity-20 z-0 -rotate-12" />
+        <div className="absolute top-1/2 right-1/4 w-20 h-20 bg-jgen-vert opacity-20 z-0 -rotate-12" />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">

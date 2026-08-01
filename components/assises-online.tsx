@@ -31,16 +31,16 @@ const SESSIONS: OnlineSession[] = [
 
 const ACCENTS = {
   purple: {
-    card: "from-[#3d1f47] to-[#2a1432]",
-    badge: "bg-[#ffd23f] text-[#3d1f47]",
-    button: "bg-[#ffd23f] hover:bg-white text-[#3d1f47]",
-    glow: "bg-[#c61d4d]/40",
+    card: "from-jgen-plum to-[#2a1432]",
+    badge: "bg-jgen-jaune text-jgen-plum",
+    button: "bg-jgen-jaune hover:bg-white text-jgen-plum",
+    glow: "bg-jgen-rose/40",
   },
   crimson: {
-    card: "from-[#c61d4d] to-[#8a1438]",
-    badge: "bg-[#ffd23f] text-[#3d1f47]",
-    button: "bg-white hover:bg-[#ffd23f] text-[#c61d4d] hover:text-[#3d1f47]",
-    glow: "bg-[#ffd23f]/30",
+    card: "from-jgen-rose to-[#8a1438]",
+    badge: "bg-jgen-jaune text-jgen-plum",
+    button: "bg-white hover:bg-jgen-jaune text-jgen-rose hover:text-jgen-plum",
+    glow: "bg-jgen-jaune/30",
   },
 } as const
 
@@ -52,19 +52,19 @@ export function AssisesOnline() {
     >
       <div
         aria-hidden
-        className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-[#3d1f47]/[0.03] blur-3xl pointer-events-none"
+        className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-jgen-plum/[0.03] blur-3xl pointer-events-none"
       />
 
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
-          <span className="inline-flex items-center gap-2 text-[#c61d4d] text-xs font-bold uppercase tracking-[0.25em] mb-4">
+          <span className="inline-flex items-center gap-2 text-jgen-rose text-xs font-bold uppercase tracking-[0.25em] mb-4">
             <Globe className="h-3.5 w-3.5" />
             Participer en ligne
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#3d1f47] leading-tight mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-jgen-plum leading-tight mb-6">
             Rejoindre la réunion
           </h2>
-          <div className="w-20 h-1 bg-[#c61d4d] mx-auto mb-6 rounded-full" />
+          <div className="w-20 h-1 bg-jgen-rose mx-auto mb-6 rounded-full" />
           <p className="text-muted-foreground text-lg leading-relaxed">
             Vous ne pouvez pas être présent·e sur place&nbsp;? Rejoignez les
             travaux du Comité de pilotage à distance via Microsoft Teams.
@@ -136,7 +136,7 @@ export function AssisesOnline() {
               href="https://www.microsoft.com/fr-fr/microsoft-teams/download-app"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#c61d4d] hover:text-[#3d1f47] font-semibold underline underline-offset-4 transition-colors"
+              className="text-jgen-rose hover:text-jgen-plum font-semibold underline underline-offset-4 transition-colors"
             >
               l&apos;application Microsoft Teams
             </a>{" "}

@@ -192,14 +192,14 @@ function AgendaTable({ day }: { day: AgendaDay }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-[#3d1f47]/10 bg-white shadow-[0_10px_40px_-15px_rgba(61,31,71,0.2)]">
-      <div className="bg-[#3d1f47] text-white px-6 py-5 lg:px-8 lg:py-6 relative overflow-hidden">
+    <div className="overflow-hidden rounded-2xl border border-jgen-plum/10 bg-white shadow-[0_10px_40px_-15px_rgba(61,31,71,0.2)]">
+      <div className="bg-jgen-plum text-white px-6 py-5 lg:px-8 lg:py-6 relative overflow-hidden">
         <div
           aria-hidden
-          className="absolute top-0 right-0 w-40 h-40 rounded-full bg-[#c61d4d]/30 blur-3xl -translate-y-12 translate-x-12"
+          className="absolute top-0 right-0 w-40 h-40 rounded-full bg-jgen-rose/30 blur-3xl -translate-y-12 translate-x-12"
         />
         <div className="flex flex-wrap items-center gap-3 relative">
-          <span className="inline-block bg-[#ffd23f] text-[#3d1f47] text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full">
+          <span className="inline-block bg-jgen-jaune text-jgen-plum text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full">
             {day.number}
           </span>
           <span className="text-white/70 text-xs font-semibold uppercase tracking-[0.18em]">
@@ -215,7 +215,7 @@ function AgendaTable({ day }: { day: AgendaDay }) {
       <div role="table" aria-label={`${day.number} — ${day.title}`}>
         <div
           role="row"
-          className="hidden md:grid grid-cols-[200px_1fr_220px_56px] items-center gap-4 px-6 py-3 bg-[#faf6f0] border-b border-[#3d1f47]/10 text-[11px] font-bold uppercase tracking-[0.18em] text-[#3d1f47]/70"
+          className="hidden md:grid grid-cols-[200px_1fr_220px_56px] items-center gap-4 px-6 py-3 bg-[#faf6f0] border-b border-jgen-plum/10 text-[11px] font-bold uppercase tracking-[0.18em] text-jgen-plum/70"
         >
           <div role="columnheader">Heure</div>
           <div role="columnheader">Activité</div>
@@ -225,7 +225,7 @@ function AgendaTable({ day }: { day: AgendaDay }) {
           </div>
         </div>
 
-        <ul className="divide-y divide-[#3d1f47]/10">
+        <ul className="divide-y divide-jgen-plum/10">
           {day.items.map((item, index) => {
             const isOpen = openIndex === index
             const isInfo = item.type === "break" || item.type === "meal"
@@ -245,12 +245,12 @@ function AgendaTable({ day }: { day: AgendaDay }) {
                     "grid grid-cols-1 md:grid-cols-[200px_1fr_220px_56px] md:items-center gap-2 md:gap-4 px-6 py-4 lg:py-5",
                     hasDetails ? "hover:bg-[#faf6f0]" : "cursor-default",
                     isOpen && "bg-[#faf6f0]",
-                    isInfo && "bg-[#ffd23f]/5",
+                    isInfo && "bg-jgen-jaune/5",
                   )}
                 >
                   <div
                     role="cell"
-                    className="flex items-center gap-2 text-[#c61d4d] font-bold text-sm whitespace-nowrap"
+                    className="flex items-center gap-2 text-jgen-rose font-bold text-sm whitespace-nowrap"
                   >
                     <Clock className="h-4 w-4 flex-shrink-0" />
                     <time>{item.time}</time>
@@ -264,16 +264,16 @@ function AgendaTable({ day }: { day: AgendaDay }) {
                       className={cn(
                         "mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full",
                         isInfo
-                          ? "bg-[#ffd23f]/20 text-[#a8830f]"
-                          : "bg-[#3d1f47]/5 text-[#3d1f47]",
+                          ? "bg-jgen-jaune/20 text-[#a8830f]"
+                          : "bg-jgen-plum/5 text-jgen-plum",
                       )}
                     >
                       <ItemIcon type={item.type} />
                     </span>
                     <span
                       className={cn(
-                        "text-base lg:text-lg font-bold leading-snug text-[#3d1f47]",
-                        isInfo && "italic font-semibold text-[#3d1f47]/80",
+                        "text-base lg:text-lg font-bold leading-snug text-jgen-plum",
+                        isInfo && "italic font-semibold text-jgen-plum/80",
                       )}
                     >
                       {item.activity}
@@ -282,15 +282,15 @@ function AgendaTable({ day }: { day: AgendaDay }) {
 
                   <div
                     role="cell"
-                    className="text-sm text-[#3d1f47]/80 md:pr-2"
+                    className="text-sm text-jgen-plum/80 md:pr-2"
                   >
                     {item.lead ? (
                       <span className="inline-flex items-start gap-1.5">
-                        <User className="h-3.5 w-3.5 mt-1 flex-shrink-0 text-[#c61d4d]" />
+                        <User className="h-3.5 w-3.5 mt-1 flex-shrink-0 text-jgen-rose" />
                         <span className="font-medium">{item.lead}</span>
                       </span>
                     ) : (
-                      <span className="text-[#3d1f47]/30">—</span>
+                      <span className="text-jgen-plum/30">—</span>
                     )}
                   </div>
 
@@ -305,8 +305,8 @@ function AgendaTable({ day }: { day: AgendaDay }) {
                       className={cn(
                         "flex h-9 w-9 items-center justify-center rounded-full transition-all",
                         isOpen
-                          ? "bg-[#c61d4d] text-white rotate-180"
-                          : "bg-[#3d1f47]/5 text-[#3d1f47] group-hover:bg-[#c61d4d] group-hover:text-white",
+                          ? "bg-jgen-rose text-white rotate-180"
+                          : "bg-jgen-plum/5 text-jgen-plum group-hover:bg-jgen-rose group-hover:text-white",
                       )}
                       aria-hidden
                     >
@@ -328,17 +328,17 @@ function AgendaTable({ day }: { day: AgendaDay }) {
                   >
                     <div className="overflow-hidden">
                       <div className="px-6 pb-5 md:pl-[224px] md:pr-8">
-                        <div className="rounded-xl bg-gradient-to-br from-[#3d1f47]/[0.03] to-[#c61d4d]/[0.03] border border-[#3d1f47]/10 p-4 lg:p-5">
+                        <div className="rounded-xl bg-gradient-to-br from-jgen-plum/[0.03] to-jgen-rose/[0.03] border border-jgen-plum/10 p-4 lg:p-5">
                           {item.comment && (
                             <div className="flex items-start gap-3">
-                              <span className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[#3d1f47] text-white">
+                              <span className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-jgen-plum text-white">
                                 <MessageSquare className="h-3.5 w-3.5" />
                               </span>
                               <div className="flex-1">
-                                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#3d1f47]/60 mb-1">
+                                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-jgen-plum/60 mb-1">
                                   Commentaire
                                 </p>
-                                <p className="!text-base text-[#3d1f47]/90 leading-relaxed">
+                                <p className="!text-base text-jgen-plum/90 leading-relaxed">
                                   {item.comment}
                                 </p>
                               </div>
@@ -346,15 +346,15 @@ function AgendaTable({ day }: { day: AgendaDay }) {
                           )}
 
                           {item.lead && (
-                            <div className="md:hidden mt-4 pt-4 border-t border-[#3d1f47]/10 flex items-start gap-3">
-                              <span className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[#c61d4d] text-white">
+                            <div className="md:hidden mt-4 pt-4 border-t border-jgen-plum/10 flex items-start gap-3">
+                              <span className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-jgen-rose text-white">
                                 <User className="h-3.5 w-3.5" />
                               </span>
                               <div className="flex-1">
-                                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#3d1f47]/60 mb-1">
+                                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-jgen-plum/60 mb-1">
                                   Responsable
                                 </p>
-                                <p className="!text-base text-[#3d1f47]/90 font-semibold">
+                                <p className="!text-base text-jgen-plum/90 font-semibold">
                                   {item.lead}
                                 </p>
                               </div>
@@ -386,22 +386,22 @@ export function AssisesCalendar() {
       />
       <div
         aria-hidden
-        className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#ffd23f]/10 blur-3xl"
+        className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-jgen-jaune/10 blur-3xl"
       />
       <div
         aria-hidden
-        className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-[#00d4aa]/10 blur-3xl"
+        className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-jgen-vert/10 blur-3xl"
       />
 
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="max-w-3xl mx-auto text-center mb-12 lg:mb-16">
-          <span className="inline-block text-[#c61d4d] text-xs font-bold uppercase tracking-[0.25em] mb-4">
+          <span className="inline-block text-jgen-rose text-xs font-bold uppercase tracking-[0.25em] mb-4">
             Programme officiel
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#3d1f47] leading-tight mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-jgen-plum leading-tight mb-6">
             Le calendrier
           </h2>
-          <div className="w-20 h-1 bg-[#c61d4d] mx-auto mb-6 rounded-full" />
+          <div className="w-20 h-1 bg-jgen-rose mx-auto mb-6 rounded-full" />
           <p className="text-muted-foreground text-lg leading-relaxed">
             Découvrez le déroulé de l&apos;atelier d&apos;installation et de
             structuration du comité de pilotage. Cliquez sur une activité pour
@@ -411,15 +411,15 @@ export function AssisesCalendar() {
 
         <div className="max-w-6xl mx-auto">
           <Tabs defaultValue={SCHEDULE[0].id} className="gap-6 lg:gap-8">
-            <TabsList className="mx-auto h-auto bg-[#3d1f47]/5 p-1.5 rounded-full border border-[#3d1f47]/10">
+            <TabsList className="mx-auto h-auto bg-jgen-plum/5 p-1.5 rounded-full border border-jgen-plum/10">
               {SCHEDULE.map((day) => (
                 <TabsTrigger
                   key={day.id}
                   value={day.id}
                   className={cn(
                     "rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-wider",
-                    "data-[state=active]:bg-[#3d1f47] data-[state=active]:text-white data-[state=active]:shadow-md",
-                    "data-[state=inactive]:text-[#3d1f47]/70 hover:data-[state=inactive]:text-[#3d1f47]",
+                    "data-[state=active]:bg-jgen-plum data-[state=active]:text-white data-[state=active]:shadow-md",
+                    "data-[state=inactive]:text-jgen-plum/70 hover:data-[state=inactive]:text-jgen-plum",
                   )}
                 >
                   {day.number}

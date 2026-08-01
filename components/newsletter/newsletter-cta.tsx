@@ -12,11 +12,11 @@ export function NewsletterCta() {
         <div className="mx-auto max-w-4xl text-center">
           <h2
             id="agir-titre"
-            className="mb-3 text-3xl font-black tracking-tight text-[#3d1f47] sm:text-4xl"
+            className="mb-3 text-3xl font-black tracking-tight text-jgen-plum sm:text-4xl"
           >
             Poursuivons ensemble
           </h2>
-          <div className="mx-auto mb-8 h-1 w-20 bg-[#c61d4d]" aria-hidden="true" />
+          <div className="mx-auto mb-8 h-1 w-20 bg-jgen-rose" aria-hidden="true" />
 
           <p className="mb-10 text-lg leading-relaxed text-pretty text-gray-700">{conclusion}</p>
 
@@ -24,14 +24,14 @@ export function NewsletterCta() {
             <Button
               asChild
               size="lg"
-              className="h-auto bg-[#c61d4d] px-8 py-6 text-base font-bold text-white hover:bg-[#b01a45]"
+              className="h-auto bg-jgen-rose px-8 py-6 text-base font-bold text-white hover:bg-[#b01a45]"
             >
               <Link href={links.programs}>{cta.projects}</Link>
             </Button>
             <Button
               asChild
               size="lg"
-              className="h-auto bg-[#3d1f47] px-8 py-6 text-base font-bold text-white hover:bg-[#2d1537]"
+              className="h-auto bg-jgen-plum px-8 py-6 text-base font-bold text-white hover:bg-[#2d1537]"
             >
               <Link href={links.contact}>{cta.partner}</Link>
             </Button>
@@ -39,7 +39,7 @@ export function NewsletterCta() {
               asChild
               size="lg"
               variant="outline"
-              className="h-auto border-2 border-[#3d1f47] px-8 py-6 text-base font-bold text-[#3d1f47] hover:bg-[#3d1f47] hover:text-white"
+              className="h-auto border-2 border-jgen-plum px-8 py-6 text-base font-bold text-jgen-plum hover:bg-jgen-plum hover:text-white"
             >
               <Link href={links.contact}>{cta.contact}</Link>
             </Button>

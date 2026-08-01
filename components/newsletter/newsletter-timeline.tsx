@@ -18,22 +18,22 @@ export function NewsletterTimeline() {
         <div className="mx-auto max-w-7xl">
           <h2
             id="chronologie-titre"
-            className="mb-3 text-3xl font-black tracking-tight text-[#3d1f47] sm:text-4xl"
+            className="mb-3 text-3xl font-black tracking-tight text-jgen-plum sm:text-4xl"
           >
             Chronologie du semestre
           </h2>
-          <div className="mb-12 h-1 w-20 bg-[#c61d4d]" aria-hidden="true" />
+          <div className="mb-12 h-1 w-20 bg-jgen-rose" aria-hidden="true" />
 
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
             {timeline.map((block) => (
               <section key={block.id} aria-labelledby={`${block.id}-titre`}>
                 <div className="mb-6">
-                  <p className="text-xs font-bold uppercase tracking-wide text-[#c61d4d]">
+                  <p className="text-xs font-bold uppercase tracking-wide text-jgen-rose">
                     {block.label}
                   </p>
                   <h3
                     id={`${block.id}-titre`}
-                    className="text-2xl font-black tracking-tight text-[#3d1f47]"
+                    className="text-2xl font-black tracking-tight text-jgen-plum"
                   >
                     {block.period}
                   </h3>
@@ -43,10 +43,10 @@ export function NewsletterTimeline() {
                   {block.entries.map((entry, index) => (
                     <li key={index} className="relative pb-7 pl-7 last:pb-0">
                       <span
-                        className="absolute top-1.5 -left-[7px] h-3 w-3 rounded-full border-2 border-white bg-[#c61d4d]"
+                        className="absolute top-1.5 -left-[7px] h-3 w-3 rounded-full border-2 border-white bg-jgen-rose"
                         aria-hidden="true"
                       />
-                      <p className="mb-1 text-base font-bold text-[#3d1f47]">{entry.label}</p>
+                      <p className="mb-1 text-base font-bold text-jgen-plum">{entry.label}</p>
                       <p className="text-base leading-relaxed text-gray-700">{entry.text}</p>
                     </li>
                   ))}

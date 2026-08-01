@@ -85,12 +85,12 @@ const Slide = ({ slide, current }: SlideProps) => {
 
           {/* Badge */}
           {slide.badge && (
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ffd23f]/10 border border-[#ffd23f]/30 mb-5">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-jgen-jaune/10 border border-jgen-jaune/30 mb-5">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ffd23f] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ffd23f]" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-jgen-jaune opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-jgen-jaune" />
               </span>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#ffd23f]">
+              <span className="text-xs font-bold uppercase tracking-widest text-jgen-jaune">
                 {slide.badge}
               </span>
             </div>
@@ -113,7 +113,7 @@ const Slide = ({ slide, current }: SlideProps) => {
             <>
               <button
                 onClick={() => setVideoOpen(true)}
-                className="inline-flex items-center gap-3 text-[#ffd23f] hover:text-[#ffd23f]/80 transition-colors group"
+                className="inline-flex items-center gap-3 text-jgen-jaune hover:text-jgen-jaune/80 transition-colors group"
               >
                 <span className="text-base font-bold uppercase tracking-wide">{slide.ctaLabel}</span>
                 <Play className="h-5 w-5 transition-transform group-hover:scale-110" />
@@ -138,7 +138,7 @@ const Slide = ({ slide, current }: SlideProps) => {
           ) : slide.ctaUrl ? (
             <Link
               href={slide.ctaUrl}
-              className="inline-flex items-center gap-3 text-[#ffd23f] hover:text-[#ffd23f]/80 transition-colors group"
+              className="inline-flex items-center gap-3 text-jgen-jaune hover:text-jgen-jaune/80 transition-colors group"
             >
               <span className="text-base font-bold uppercase tracking-wide">{slide.ctaLabel}</span>
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-2" />
@@ -199,7 +199,7 @@ export function HeroCarouselClient({ slides }: HeroCarouselClientProps) {
               </p>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-3 text-[#ffd23f] hover:text-[#ffd23f]/80 transition-colors group"
+                className="inline-flex items-center gap-3 text-jgen-jaune hover:text-jgen-jaune/80 transition-colors group"
               >
                 <span className="text-base font-bold uppercase tracking-wide">Découvrir notre action</span>
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-2" />
@@ -273,7 +273,7 @@ export function HeroCarouselClient({ slides }: HeroCarouselClientProps) {
                       aria-label={`Aller au slide ${index + 1}`}
                       className={`h-[3px] rounded-full transition-all duration-300 ${
                         index === current
-                          ? "w-10 bg-[#c61d4d]"
+                          ? "w-10 bg-jgen-rose"
                           : "w-5 bg-white/25 hover:bg-white/40"
                       }`}
                     />

@@ -37,9 +37,9 @@ function formatDate(iso: string): string {
 function categoryStyles(category: string) {
   switch (category) {
     case "TDRs":
-      return "bg-[#ffd23f] text-[#3d1f47]"
+      return "bg-jgen-jaune text-jgen-plum"
     case "Feuille de route":
-      return "bg-[#00d4aa] text-[#3d1f47]"
+      return "bg-jgen-vert text-jgen-plum"
     default:
       return "bg-white/20 text-white"
   }
@@ -49,7 +49,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
   return (
     <section
       id="documents"
-      className="relative py-20 lg:py-28 bg-[#3d1f47] overflow-hidden"
+      className="relative py-20 lg:py-28 bg-jgen-plum overflow-hidden"
     >
       <div
         aria-hidden
@@ -62,13 +62,13 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
 
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="max-w-3xl mx-auto text-center mb-14 lg:mb-20">
-          <span className="inline-block text-[#ffd23f] text-xs font-bold uppercase tracking-[0.25em] mb-4">
+          <span className="inline-block text-jgen-jaune text-xs font-bold uppercase tracking-[0.25em] mb-4">
             Ressources & documentation
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
             Documents officiels
           </h2>
-          <div className="w-20 h-1 bg-[#c61d4d] mx-auto mb-6 rounded-full" />
+          <div className="w-20 h-1 bg-jgen-rose mx-auto mb-6 rounded-full" />
           <p className="text-white/80 text-lg leading-relaxed">
             Consultez ou téléchargez les documents officiels des Assises
             nationales citoyennes (Termes de référence, Feuille de route, etc.).
@@ -79,7 +79,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
           <div className="max-w-2xl mx-auto">
             <div className="bg-white/5 border border-white/10 backdrop-blur-sm rounded-2xl p-10 text-center">
               <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-5">
-                <Inbox className="h-7 w-7 text-[#ffd23f]" />
+                <Inbox className="h-7 w-7 text-jgen-jaune" />
               </div>
               <h3 className="text-xl font-black text-white mb-2">
                 Documents bientôt disponibles
@@ -103,7 +103,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
                 >
                   <div className="flex flex-col md:flex-row md:items-center gap-6">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-[#c61d4d] to-[#a8173f] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-jgen-rose to-[#a8173f] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                         <FileText className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
                       </div>
                     </div>
@@ -117,7 +117,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
                         >
                           {doc.category}
                         </span>
-                        <span className="inline-block bg-[#3d1f47] text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded">
+                        <span className="inline-block bg-jgen-plum text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded">
                           PDF
                         </span>
                         {fileSize && (
@@ -126,7 +126,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
                           </span>
                         )}
                       </div>
-                      <h3 className="text-xl lg:text-2xl font-black text-[#3d1f47] mb-2 leading-tight">
+                      <h3 className="text-xl lg:text-2xl font-black text-jgen-plum mb-2 leading-tight">
                         {doc.title}
                       </h3>
                       {doc.description && (
@@ -134,7 +134,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
                           {doc.description}
                         </p>
                       )}
-                      <div className="flex items-center gap-2 text-xs text-[#3d1f47]/60">
+                      <div className="flex items-center gap-2 text-xs text-jgen-plum/60">
                         <Calendar className="h-3.5 w-3.5" />
                         <span>Publié le {formatDate(doc.publishedAt)}</span>
                       </div>
@@ -145,7 +145,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
                         href={doc.fileUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-2 bg-[#c61d4d] hover:bg-[#a8173f] text-white font-bold px-5 py-3 rounded-full text-sm transition-all hover:shadow-lg whitespace-nowrap"
+                        className="inline-flex items-center justify-center gap-2 bg-jgen-rose hover:bg-[#a8173f] text-white font-bold px-5 py-3 rounded-full text-sm transition-all hover:shadow-lg whitespace-nowrap"
                       >
                         Aperçu
                         <ExternalLink className="h-4 w-4" />
@@ -164,7 +164,7 @@ export function AssisesDocument({ documents }: AssisesDocumentProps) {
             email, contactez le secrétariat des Assises à{" "}
             <a
               href="mailto:contact@jgen.sn"
-              className="text-[#ffd23f] hover:text-white font-semibold underline underline-offset-4 transition-colors"
+              className="text-jgen-jaune hover:text-white font-semibold underline underline-offset-4 transition-colors"
             >
               contact@jgen.sn
             </a>

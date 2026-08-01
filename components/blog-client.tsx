@@ -41,18 +41,18 @@ export function BlogClient({ posts }: BlogClientProps) {
   return (
     <>
       {/* Hero Section - Violet avec carrés décoratifs */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-[#3d1f47] to-[#2d1537] relative overflow-hidden">
+      <section className="pt-32 pb-16 bg-gradient-to-br from-jgen-plum to-[#2d1537] relative overflow-hidden">
         {/* Decorative squares */}
-        <div className="absolute top-20 right-10 w-24 h-24 bg-[#ffd23f] opacity-40 z-0 rotate-12" />
-        <div className="absolute bottom-10 left-10 w-28 h-28 bg-[#00d4aa] opacity-30 z-0 -rotate-12" />
-        <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-[#8c80f7] opacity-20 z-0" />
+        <div className="absolute top-20 right-10 w-24 h-24 bg-jgen-jaune opacity-40 z-0 rotate-12" />
+        <div className="absolute bottom-10 left-10 w-28 h-28 bg-jgen-vert opacity-30 z-0 -rotate-12" />
+        <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-jgen-violet opacity-20 z-0" />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6">
               Notre Blog
             </h1>
-            <div className="w-24 h-1 bg-[#ffd23f] mx-auto mb-6" />
+            <div className="w-24 h-1 bg-jgen-jaune mx-auto mb-6" />
             <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               Découvrez nos articles sur l'égalité des sexes, l'autonomisation des femmes
               et nos actions au Sénégal.
@@ -64,8 +64,8 @@ export function BlogClient({ posts }: BlogClientProps) {
       {/* Search and Filters - Blanc avec carrés décoratifs */}
       <section className="py-12 bg-white border-b border-gray-200 relative overflow-hidden">
         {/* Decorative squares */}
-        <div className="absolute top-5 left-5 w-16 h-16 bg-[#c61d4d] opacity-20 z-0" />
-        <div className="absolute bottom-5 right-5 w-20 h-20 bg-[#8c80f7] opacity-20 z-0 rotate-45" />
+        <div className="absolute top-5 left-5 w-16 h-16 bg-jgen-rose opacity-20 z-0" />
+        <div className="absolute bottom-5 right-5 w-20 h-20 bg-jgen-violet opacity-20 z-0 rotate-45" />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -80,7 +80,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                   placeholder="Rechercher des articles..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full rounded-full h-12 pl-12 pr-4 bg-white border-2 border-gray-300 focus:ring-2 focus:ring-[#c61d4d] focus:border-[#c61d4d] text-base shadow-sm"
+                  className="w-full rounded-full h-12 pl-12 pr-4 bg-white border-2 border-gray-300 focus:ring-2 focus:ring-jgen-rose focus:border-jgen-rose text-base shadow-sm"
                 />
               </div>
             </div>
@@ -93,7 +93,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                   onClick={() => setSelectedCategory(category)}
                   className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${
                     selectedCategory === category
-                      ? "bg-[#c61d4d] text-white shadow-md"
+                      ? "bg-jgen-rose text-white shadow-md"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
@@ -108,9 +108,9 @@ export function BlogClient({ posts }: BlogClientProps) {
       {/* Blog Posts Grid - Blanc avec carrés décoratifs */}
       <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
         {/* Decorative squares */}
-        <div className="absolute top-40 right-10 w-24 h-24 bg-[#ffd23f] opacity-30 z-0 rotate-12" />
+        <div className="absolute top-40 right-10 w-24 h-24 bg-jgen-jaune opacity-30 z-0 rotate-12" />
         <div className="absolute bottom-40 left-10 w-28 h-28 bg-[#a42c64] opacity-25 z-0" />
-        <div className="absolute top-1/2 right-1/4 w-20 h-20 bg-[#00d4aa] opacity-20 z-0 -rotate-12" />
+        <div className="absolute top-1/2 right-1/4 w-20 h-20 bg-jgen-vert opacity-20 z-0 -rotate-12" />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-7xl mx-auto">
@@ -121,13 +121,13 @@ export function BlogClient({ posts }: BlogClientProps) {
                     <div className="relative h-full">
                       {/* Decorative squares around cards (only on first few cards) */}
                       {index % 3 === 0 && (
-                        <div className="absolute -top-3 -left-3 w-16 h-16 bg-[#c61d4d] opacity-40 z-0" />
+                        <div className="absolute -top-3 -left-3 w-16 h-16 bg-jgen-rose opacity-40 z-0" />
                       )}
                       {index % 3 === 1 && (
-                        <div className="absolute -bottom-3 -right-3 w-20 h-20 bg-[#ffd23f] opacity-40 z-0 rotate-12" />
+                        <div className="absolute -bottom-3 -right-3 w-20 h-20 bg-jgen-jaune opacity-40 z-0 rotate-12" />
                       )}
                       {index % 3 === 2 && (
-                        <div className="absolute -top-3 -right-3 w-16 h-16 bg-[#8c80f7] opacity-40 z-0" />
+                        <div className="absolute -top-3 -right-3 w-16 h-16 bg-jgen-violet opacity-40 z-0" />
                       )}
                       
                       <Card className="relative h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden bg-white z-10">
@@ -139,7 +139,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                           />
                         </div>
                         <CardContent className="p-6">
-                          <h3 className="text-xl md:text-2xl font-bold mb-3 leading-tight text-gray-900 group-hover:text-[#c61d4d] transition-colors line-clamp-2">
+                          <h3 className="text-xl md:text-2xl font-bold mb-3 leading-tight text-gray-900 group-hover:text-jgen-rose transition-colors line-clamp-2">
                             {post.title}
                           </h3>
                           <p className="text-sm text-gray-600 mb-2">
@@ -176,7 +176,7 @@ export function BlogClient({ posts }: BlogClientProps) {
                         setSearchQuery("")
                         setSelectedCategory("Tous")
                       }}
-                      className="bg-[#c61d4d] text-white px-6 py-2 rounded-lg hover:bg-[#b01a45] transition-colors"
+                      className="bg-jgen-rose text-white px-6 py-2 rounded-lg hover:bg-[#b01a45] transition-colors"
                     >
                       Effacer les filtres
                     </button>

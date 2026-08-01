@@ -16,11 +16,11 @@ export function NewsletterHighlights() {
         <div className="mx-auto max-w-7xl">
           <h2
             id="temps-forts-titre"
-            className="mb-3 text-3xl font-black tracking-tight text-[#3d1f47] sm:text-4xl"
+            className="mb-3 text-3xl font-black tracking-tight text-jgen-plum sm:text-4xl"
           >
             Les temps forts
           </h2>
-          <div className="mb-12 h-1 w-20 bg-[#c61d4d]" aria-hidden="true" />
+          <div className="mb-12 h-1 w-20 bg-jgen-rose" aria-hidden="true" />
 
           <div className="grid gap-8 lg:grid-cols-3">
             {highlights.map((highlight) => (
@@ -39,7 +39,7 @@ export function NewsletterHighlights() {
                 <div className="flex flex-1 flex-col p-6">
                   <h3
                     id={`${highlight.id}-titre`}
-                    className="mb-3 text-xl font-bold text-[#3d1f47]"
+                    className="mb-3 text-xl font-bold text-jgen-plum"
                   >
                     {highlight.title}
                   </h3>
@@ -48,13 +48,13 @@ export function NewsletterHighlights() {
                     <p className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-600">
                       {highlight.date && (
                         <span className="inline-flex items-center gap-1.5">
-                          <Calendar className="h-4 w-4 text-[#00d4aa]" aria-hidden="true" />
+                          <Calendar className="h-4 w-4 text-jgen-vert" aria-hidden="true" />
                           {highlight.date}
                         </span>
                       )}
                       {highlight.place && (
                         <span className="inline-flex items-center gap-1.5">
-                          <MapPin className="h-4 w-4 text-[#00d4aa]" aria-hidden="true" />
+                          <MapPin className="h-4 w-4 text-jgen-vert" aria-hidden="true" />
                           {highlight.place}
                         </span>
                       )}
@@ -71,7 +71,7 @@ export function NewsletterHighlights() {
                           className="flex gap-3 text-sm leading-relaxed text-gray-700"
                         >
                           <span
-                            className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 bg-[#ffd23f]"
+                            className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 bg-jgen-jaune"
                             aria-hidden="true"
                           />
                           <span>{detail}</span>

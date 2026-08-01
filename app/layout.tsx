@@ -1,22 +1,27 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Anton } from "next/font/google"
-import { Open_Sans } from "next/font/google"
+import { Bricolage_Grotesque } from "next/font/google"
+import { Archivo } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { OrganizationSchema, WebsiteSchema } from "@/components/structured-data"
 import "./globals.css"
 
-const anton = Anton({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-anton",
+// Titres et donnees chiffrees. Police variable : l'axe opsz accentue les ink
+// traps en grand et neutralise le dessin en petit, automatiquement.
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin", "latin-ext"],
+  axes: ["opsz"],
+  variable: "--font-bricolage",
   display: "swap",
 })
 
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  variable: "--font-open-sans",
+// Corps de texte et interface. L'italique reel evite l'oblique synthetique
+// dans les citations.
+const archivo = Archivo({
+  subsets: ["latin", "latin-ext"],
+  style: ["normal", "italic"],
+  variable: "--font-archivo",
   display: "swap",
 })
 
@@ -113,7 +118,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`font-sans ${anton.variable} ${openSans.variable} antialiased`}>
+      <body className={`font-sans ${bricolage.variable} ${archivo.variable} antialiased`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>

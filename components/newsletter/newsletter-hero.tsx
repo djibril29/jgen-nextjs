@@ -8,21 +8,21 @@ export function NewsletterHero() {
   const { header, intro, coverImage, links, cta } = data
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#3d1f47] to-[#2d1537] pt-28 pb-16 lg:pt-36 lg:pb-24">
+    <section className="relative overflow-hidden bg-gradient-to-br from-jgen-plum to-[#2d1537] pt-28 pb-16 lg:pt-36 lg:pb-24">
       {/* Formes décoratives, cohérentes avec les autres pages du site */}
       <div
-        className="pointer-events-none absolute top-24 right-8 h-24 w-24 rotate-12 bg-[#ffd23f] opacity-30"
+        className="pointer-events-none absolute top-24 right-8 h-24 w-24 rotate-12 bg-jgen-jaune opacity-30"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute bottom-12 left-6 h-16 w-16 -rotate-12 bg-[#00d4aa] opacity-30"
+        className="pointer-events-none absolute bottom-12 left-6 h-16 w-16 -rotate-12 bg-jgen-vert opacity-30"
         aria-hidden="true"
       />
 
       <div className="container relative z-10 mx-auto px-4 lg:px-8">
         <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div>
-            <p className="mb-5 inline-block border-2 border-[#ffd23f] px-4 py-2 text-xs font-bold uppercase tracking-wide text-[#ffd23f] sm:text-sm">
+            <p className="mb-5 inline-block border-2 border-jgen-jaune px-4 py-2 text-xs font-bold uppercase tracking-wide text-jgen-jaune sm:text-sm">
               {header.overline}
             </p>
 
@@ -30,7 +30,7 @@ export function NewsletterHero() {
               {header.title}
             </h1>
 
-            <div className="mb-8 h-1 w-24 bg-[#ffd23f]" aria-hidden="true" />
+            <div className="mb-8 h-1 w-24 bg-jgen-jaune" aria-hidden="true" />
 
             <p className="mb-8 text-lg leading-relaxed text-pretty text-white/90 lg:text-xl">
               {intro.web[0]}
@@ -40,14 +40,14 @@ export function NewsletterHero() {
               <Button
                 asChild
                 size="lg"
-                className="h-auto bg-[#c61d4d] px-8 py-6 text-base font-bold text-white hover:bg-[#b01a45]"
+                className="h-auto bg-jgen-rose px-8 py-6 text-base font-bold text-white hover:bg-[#b01a45]"
               >
                 <Link href={links.achievementsAnchor}>{cta.heroPrimary}</Link>
               </Button>
               <Button
                 asChild
                 size="lg"
-                className="h-auto bg-white px-8 py-6 text-base font-bold text-[#3d1f47] hover:bg-white/90"
+                className="h-auto bg-white px-8 py-6 text-base font-bold text-jgen-plum hover:bg-white/90"
               >
                 <Link href={links.about}>{cta.heroSecondary}</Link>
               </Button>

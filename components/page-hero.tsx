@@ -20,7 +20,7 @@ export function PageHero({ title, description, breadcrumbs, image, imageAlt, cat
     <section className="pt-20 lg:pt-24">
       <div className="grid lg:grid-cols-5 min-h-[500px]">
         {/* Left side - Text content with crimson background */}
-        <div className="lg:col-span-2 bg-[#c61d4d] text-white p-8 lg:pl-24 lg:pr-12 lg:py-12 flex flex-col justify-center">
+        <div className="lg:col-span-2 bg-jgen-rose text-white p-8 lg:pl-24 lg:pr-12 lg:py-12 flex flex-col justify-center">
           <div className="max-w-xl">
             {/* Category Label */}
             {category && (

@@ -60,7 +60,7 @@ function buildEmailHtml(firstName: string, lastName: string, email: string, mess
     <!DOCTYPE html>
     <html lang="fr">
     <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head>
-    <body style="font-family: 'Open Sans', Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0;">
+    <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0;">
       <table width="100%" cellpadding="0" cellspacing="0" style="background: #f5f5f5; padding: 40px 0;">
         <tr><td align="center">
           <table width="600" cellpadding="0" cellspacing="0" style="background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">

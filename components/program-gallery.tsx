@@ -78,7 +78,7 @@ export function ProgramGallery({ images }: ProgramGalleryProps) {
     <>
       <div ref={ref} className="py-12 border-y border-border">
         <div className="flex items-center gap-3 mb-8">
-          <ImageIcon className="h-6 w-6 text-[#ffd23f]" />
+          <ImageIcon className="h-6 w-6 text-jgen-jaune" />
           <h2 className="text-2xl md:text-3xl font-bold">Galerie du Programme</h2>
         </div>
 
@@ -115,7 +115,7 @@ export function ProgramGallery({ images }: ProgramGalleryProps) {
               </div>
 
               {/* Decorative corner */}
-              <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-[#00d4aa] opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-jgen-vert opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
           ))}
         </div>

@@ -24,18 +24,18 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero Section - Violet avec carrés décoratifs */}
-      <section className="pt-32 pb-16 bg-gradient-to-br from-[#3d1f47] to-[#2d1537] relative overflow-hidden">
+      <section className="pt-32 pb-16 bg-gradient-to-br from-jgen-plum to-[#2d1537] relative overflow-hidden">
         {/* Decorative squares */}
-        <div className="absolute top-20 right-10 w-24 h-24 bg-[#ffd23f] opacity-40 z-0 rotate-12" />
-        <div className="absolute bottom-10 left-10 w-28 h-28 bg-[#00d4aa] opacity-30 z-0 -rotate-12" />
-        <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-[#8c80f7] opacity-20 z-0" />
+        <div className="absolute top-20 right-10 w-24 h-24 bg-jgen-jaune opacity-40 z-0 rotate-12" />
+        <div className="absolute bottom-10 left-10 w-28 h-28 bg-jgen-vert opacity-30 z-0 -rotate-12" />
+        <div className="absolute top-1/2 left-1/4 w-20 h-20 bg-jgen-violet opacity-20 z-0" />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white mb-6">
               À Propos de J-GEN SENEGAL
             </h1>
-            <div className="w-24 h-1 bg-[#ffd23f] mx-auto mb-6" />
+            <div className="w-24 h-1 bg-jgen-jaune mx-auto mb-6" />
             <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
               Nous sommes une organisation féministe engagée à créer un Sénégal où les femmes et les filles vivent libres de toute violence, avec des opportunités et des droits égaux.
             </p>
@@ -46,7 +46,7 @@ export default function AboutPage() {
       <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
         {/* Decorative squares */}
         <div className="absolute top-20 right-10 w-24 h-24 bg-[#a42c64] opacity-40 z-0 rotate-12" />
-        <div className="absolute bottom-20 left-10 w-28 h-28 bg-[#ffd23f] opacity-50 z-0" />
+        <div className="absolute bottom-20 left-10 w-28 h-28 bg-jgen-jaune opacity-50 z-0" />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto">
@@ -77,17 +77,17 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-[#3d1f47] to-[#2d1537] relative overflow-hidden">
+      <section className="py-16 lg:py-24 bg-gradient-to-br from-jgen-plum to-[#2d1537] relative overflow-hidden">
         {/* Decorative squares */}
-        <div className="absolute top-10 left-10 w-20 h-20 bg-[#8c80f7] opacity-50 z-0" />
-        <div className="absolute bottom-10 right-10 w-32 h-32 bg-[#00d4aa] opacity-40 z-0 rotate-45" />
-        <div className="absolute top-1/2 right-20 w-24 h-24 bg-[#ffd23f] opacity-30 z-0 -rotate-12" />
+        <div className="absolute top-10 left-10 w-20 h-20 bg-jgen-violet opacity-50 z-0" />
+        <div className="absolute bottom-10 right-10 w-32 h-32 bg-jgen-vert opacity-40 z-0 rotate-45" />
+        <div className="absolute top-1/2 right-20 w-24 h-24 bg-jgen-jaune opacity-30 z-0 -rotate-12" />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-5xl mx-auto">
             <div ref={videoReveal.ref} className={`scroll-reveal-scale ${videoReveal.isVisible ? "is-visible" : ""}`}>
               <h2 className="text-4xl md:text-5xl font-bold mb-8 text-center text-white">Découvrez J-GEN SENEGAL</h2>
-              <div className="w-24 h-1 bg-[#ffd23f] mx-auto mb-8" />
+              <div className="w-24 h-1 bg-jgen-jaune mx-auto mb-8" />
               <p className="text-center text-white/80 mb-12 text-xl max-w-3xl mx-auto">
                 Regardez notre vidéo de présentation pour mieux comprendre notre mission, nos valeurs et notre impact
                 sur les communautés sénégalaises.
@@ -110,8 +110,8 @@ export default function AboutPage() {
 
       <section className="py-16 lg:py-24 bg-white relative overflow-hidden">
         {/* Decorative squares */}
-        <div className="absolute top-40 left-5 w-16 h-16 bg-[#c61d4d] opacity-30 z-0 rotate-45" />
-        <div className="absolute bottom-40 right-5 w-20 h-20 bg-[#8c80f7] opacity-40 z-0" />
+        <div className="absolute top-40 left-5 w-16 h-16 bg-jgen-rose opacity-30 z-0 rotate-45" />
+        <div className="absolute bottom-40 right-5 w-20 h-20 bg-jgen-violet opacity-40 z-0" />
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto">
@@ -184,10 +184,10 @@ export default function AboutPage() {
                             quality={85}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#3d1f47]/95 via-[#3d1f47]/60 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-jgen-plum/95 via-jgen-plum/60 to-transparent" />
                           <div className="absolute bottom-0 left-0 right-0 p-6">
                             <div className="flex items-center gap-3 mb-2">
-                              <div className="w-12 h-12 bg-[#ffd23f] rounded-full flex items-center justify-center">
+                              <div className="w-12 h-12 bg-jgen-jaune rounded-full flex items-center justify-center">
                                 <Icon className="h-6 w-6 text-gray-900" />
                               </div>
                               <h3 className="text-2xl md:text-3xl font-bold text-white">{item.title}</h3>

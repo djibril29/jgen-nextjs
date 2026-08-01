@@ -97,7 +97,7 @@ export function PetitionClaimsParallax() {
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="mx-auto mb-14 max-w-3xl text-center">
-          <span className="mb-4 inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-[#ffd23f]">
+          <span className="mb-4 inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.24em] text-jgen-jaune">
             Nos revendications
           </span>
           <h2 className="mb-5 text-3xl font-black md:text-4xl">Des droits qui doivent enfin devenir concrets</h2>
@@ -143,18 +143,18 @@ export function PetitionClaimsParallax() {
                       />
                     </div>
 
-                    <div className="flex items-center bg-[#f8f2f5] px-6 py-10 text-[#3d1f47] md:px-10 lg:px-14">
+                    <div className="flex items-center bg-[#f8f2f5] px-6 py-10 text-jgen-plum md:px-10 lg:px-14">
                       <div className="max-w-xl">
-                        <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.24em] text-[#c61d4d]">
+                        <span className="mb-4 inline-block text-xs font-semibold uppercase tracking-[0.24em] text-jgen-rose">
                           {claim.tag}
                         </span>
                         <h3 className="mb-4 text-3xl font-black leading-tight md:text-4xl">
                           {claim.title}
                         </h3>
-                        <p className="mb-6 text-base leading-relaxed text-[#3d1f47]/80 md:text-lg">
+                        <p className="mb-6 text-base leading-relaxed text-jgen-plum/80 md:text-lg">
                           {claim.description}
                         </p>
-                        <p className="border-l-4 border-[#ffd23f] pl-4 text-sm font-semibold leading-relaxed text-[#3d1f47] md:text-base">
+                        <p className="border-l-4 border-jgen-jaune pl-4 text-sm font-semibold leading-relaxed text-jgen-plum md:text-base">
                           {claim.emotion}
                         </p>
                       </div>

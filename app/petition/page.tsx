@@ -45,14 +45,14 @@ export default async function PetitionPage() {
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="lg:grid lg:grid-cols-2">
         {/* Left — dark purple, text content */}
-        <div className="bg-[#3d1f47] px-8 py-20 lg:px-16 lg:py-28 flex items-center">
+        <div className="bg-jgen-plum px-8 py-20 lg:px-16 lg:py-28 flex items-center">
           <div className="max-w-xl w-full">
-            <span className="inline-block text-[#ffd23f] text-xs font-semibold uppercase tracking-widest mb-6">
+            <span className="inline-block text-jgen-jaune text-xs font-semibold uppercase tracking-widest mb-6">
               Campagne & Mobilisation
             </span>
             <h1 className="text-4xl md:text-5xl xl:text-6xl font-black text-white leading-tight mb-6">
               Pour les droits des femmes au Sénégal&nbsp;:{' '}
-              <span className="text-[#c61d4d]">Agissons maintenant.</span>
+              <span className="text-jgen-rose">Agissons maintenant.</span>
             </h1>
             <p className="!text-base lg:!text-lg text-white/75 leading-relaxed mb-10">
               En cette Journée internationale des droits des femmes, rejoignez la mobilisation
@@ -61,7 +61,7 @@ export default async function PetitionPage() {
             <div className="flex flex-wrap gap-4">
               <a
                 href="#signer"
-                className="inline-block bg-[#c61d4d] hover:bg-[#a8173f] text-white font-bold px-8 py-3 rounded-full transition-colors"
+                className="inline-block bg-jgen-rose hover:bg-[#a8173f] text-white font-bold px-8 py-3 rounded-full transition-colors"
               >
                 Signer la pétition
               </a>
@@ -77,7 +77,7 @@ export default async function PetitionPage() {
 
         {/* Right — image fills the full column */}
         <div className="relative overflow-hidden min-h-[60vh] lg:min-h-0">
-          <div className="absolute top-0 left-0 right-0 h-2 bg-[#c61d4d] z-10" />
+          <div className="absolute top-0 left-0 right-0 h-2 bg-jgen-rose z-10" />
           <Image
             src="/petition-hero.jpeg"
             alt="Femme sénégalaise levant le poing pour ses droits"
@@ -91,10 +91,10 @@ export default async function PetitionPage() {
       {/* ── Pourquoi cette pétition ──────────────────────── */}
       <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
-          <h2 className="text-3xl md:text-4xl font-black text-[#3d1f47] mb-6">
+          <h2 className="text-3xl md:text-4xl font-black text-jgen-plum mb-6">
             Pourquoi cette pétition&nbsp;?
           </h2>
-          <div className="w-16 h-1 bg-[#c61d4d] mx-auto mb-8" />
+          <div className="w-16 h-1 bg-jgen-rose mx-auto mb-8" />
           <p className="text-muted-foreground text-lg leading-relaxed mb-4">
             Les violences basées sur le genre, notamment les violences sexuelles et sexistes,
             touchent de manière disproportionnée les femmes et les filles au Sénégal et entravent
@@ -112,11 +112,11 @@ export default async function PetitionPage() {
       <PetitionClaimsParallax />
 
       {/* ── Formulaire de signature ───────────────────────── */}
-      <section id="signer" className="py-20 lg:py-28 bg-[#c61d4d]">
+      <section id="signer" className="py-20 lg:py-28 bg-jgen-rose">
         <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
           <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
             <div className="text-center mb-10">
-              <h2 className="text-3xl md:text-4xl font-black text-[#3d1f47] mb-3">
+              <h2 className="text-3xl md:text-4xl font-black text-jgen-plum mb-3">
                 Signez la pétition
               </h2>
               <p className="text-muted-foreground max-w-lg mx-auto">
@@ -129,14 +129,14 @@ export default async function PetitionPage() {
       </section>
 
       {/* ── Citation ─────────────────────────────────────── */}
-      <section className="py-20 lg:py-28 bg-[#3d1f47]">
+      <section className="py-20 lg:py-28 bg-jgen-plum">
         <div className="container mx-auto px-4 lg:px-8 max-w-3xl text-center">
-          <span className="text-[#c61d4d] text-6xl leading-none select-none">&ldquo;</span>
+          <span className="text-jgen-rose text-6xl leading-none select-none">&ldquo;</span>
           <blockquote className="text-white text-2xl md:text-3xl font-bold leading-snug mt-2 mb-6">
             Les droits des femmes sont des droits humains. Ensemble, faisons avancer l&apos;égalité,
             la justice et la dignité pour toutes.
           </blockquote>
-          <cite className="text-[#ffd23f] text-sm font-semibold tracking-widest not-italic">
+          <cite className="text-jgen-jaune text-sm font-semibold tracking-widest not-italic">
             — J-GEN SÉNÉGAL
           </cite>
         </div>

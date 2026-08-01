@@ -84,12 +84,12 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
       <div className="relative">
         {/* Decorative Squares */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-32 -left-10 w-32 h-32 bg-[#c61d4d] opacity-10 rotate-12 animate-float" />
-          <div className="absolute top-96 right-20 w-24 h-24 bg-[#00d4aa] opacity-15 -rotate-6 animate-float-delayed" />
-          <div className="absolute top-[800px] -left-16 w-40 h-40 bg-[#ffd23f] opacity-10 rotate-45 animate-float" />
-          <div className="absolute top-[1200px] right-10 w-28 h-28 bg-[#8c80f7] opacity-15 -rotate-12 animate-float-delayed" />
-          <div className="absolute bottom-96 left-32 w-36 h-36 bg-[#c61d4d] opacity-10 rotate-[30deg] animate-float" />
-          <div className="absolute bottom-64 -right-12 w-32 h-32 bg-[#00d4aa] opacity-12 -rotate-[20deg] animate-float-delayed" />
+          <div className="absolute top-32 -left-10 w-32 h-32 bg-jgen-rose opacity-10 rotate-12 animate-float" />
+          <div className="absolute top-96 right-20 w-24 h-24 bg-jgen-vert opacity-15 -rotate-6 animate-float-delayed" />
+          <div className="absolute top-[800px] -left-16 w-40 h-40 bg-jgen-jaune opacity-10 rotate-45 animate-float" />
+          <div className="absolute top-[1200px] right-10 w-28 h-28 bg-jgen-violet opacity-15 -rotate-12 animate-float-delayed" />
+          <div className="absolute bottom-96 left-32 w-36 h-36 bg-jgen-rose opacity-10 rotate-[30deg] animate-float" />
+          <div className="absolute bottom-64 -right-12 w-32 h-32 bg-jgen-vert opacity-12 -rotate-[20deg] animate-float-delayed" />
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 py-12 relative">
@@ -113,8 +113,8 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                 {program.status && (
                   <div className="flex items-center gap-2">
                     <div className={`w-2 h-2 rounded-full ${
-                      program.status === 'ongoing' ? 'bg-[#00d4aa]' : 
-                      program.status === 'completed' ? 'bg-[#8c80f7]' : 'bg-[#ffd23f]'
+                      program.status === 'ongoing' ? 'bg-jgen-vert' : 
+                      program.status === 'completed' ? 'bg-jgen-violet' : 'bg-jgen-jaune'
                     }`} />
                     <span className="text-sm font-semibold">
                       {program.status === 'ongoing' ? 'En cours' : 
@@ -125,21 +125,21 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
 
                 {program.executionPeriod && (
                   <div className="flex items-center gap-2 text-sm">
-                    <Calendar className="h-4 w-4 text-[#c61d4d]" />
+                    <Calendar className="h-4 w-4 text-jgen-rose" />
                     <span className="text-muted-foreground">{program.executionPeriod}</span>
                   </div>
                 )}
 
                 {program.location && (
                   <div className="flex items-center gap-2 text-sm">
-                    <MapPin className="h-4 w-4 text-[#00d4aa]" />
+                    <MapPin className="h-4 w-4 text-jgen-vert" />
                     <span className="text-muted-foreground">{program.location}</span>
                   </div>
                 )}
 
                 {program.beneficiaries && (
                   <div className="flex items-center gap-2 text-sm">
-                    <Users className="h-4 w-4 text-[#ffd23f]" />
+                    <Users className="h-4 w-4 text-jgen-jaune" />
                     <span className="text-muted-foreground">{program.beneficiaries}</span>
                   </div>
                 )}
@@ -160,9 +160,9 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
 
             {/* Impact Statistics - Clean Grid */}
             {(program.impactStats?.length > 0 || program.projectsCompleted || program.partnersEngaged) && (
-              <div className="py-16 border-y-2 border-[#8c80f7]/20 bg-gradient-to-br from-[#8c80f7]/5 to-transparent">
+              <div className="py-16 border-y-2 border-jgen-violet/20 bg-gradient-to-br from-jgen-violet/5 to-transparent">
                 <div className="flex items-center gap-3 mb-12">
-                  <div className="w-2 h-10 bg-[#8c80f7] rounded-full" />
+                  <div className="w-2 h-10 bg-jgen-violet rounded-full" />
                   <h2 className="text-3xl md:text-4xl font-bold">Impact & Résultats</h2>
                 </div>
                 
@@ -171,7 +171,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                     <div key={index} className="text-center space-y-3">
                       <CounterAnimation 
                         value={stat.value} 
-                        className="text-5xl md:text-6xl lg:text-7xl font-black text-[#8c80f7] drop-shadow-sm"
+                        className="text-5xl md:text-6xl lg:text-7xl font-black text-jgen-violet drop-shadow-sm"
                       />
                       <p className="text-sm md:text-base font-semibold text-foreground/80 leading-tight">{stat.label}</p>
                     </div>
@@ -181,7 +181,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                     <div className="text-center space-y-3">
                       <CounterAnimation 
                         value={program.projectsCompleted} 
-                        className="text-5xl md:text-6xl lg:text-7xl font-black text-[#8c80f7] drop-shadow-sm"
+                        className="text-5xl md:text-6xl lg:text-7xl font-black text-jgen-violet drop-shadow-sm"
                       />
                       <p className="text-sm md:text-base font-semibold text-foreground/80 leading-tight">Projets réalisés</p>
                     </div>
@@ -191,7 +191,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                     <div className="text-center space-y-3">
                       <CounterAnimation 
                         value={program.partnersEngaged} 
-                        className="text-5xl md:text-6xl lg:text-7xl font-black text-[#8c80f7] drop-shadow-sm"
+                        className="text-5xl md:text-6xl lg:text-7xl font-black text-jgen-violet drop-shadow-sm"
                       />
                       <p className="text-sm md:text-base font-semibold text-foreground/80 leading-tight">Partenaires engagés</p>
                     </div>
@@ -204,10 +204,10 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             {program.achievements && program.achievements.length > 0 && (
               <div>
                 <div className="flex items-center gap-3 mb-6">
-                  <Target className="h-6 w-6 text-[#00d4aa]" />
+                  <Target className="h-6 w-6 text-jgen-vert" />
                   <h2 className="text-2xl md:text-3xl font-bold">Réalisations</h2>
                 </div>
-                <div className="prose prose-lg max-w-none pl-9 border-l-2 border-[#00d4aa]/30">
+                <div className="prose prose-lg max-w-none pl-9 border-l-2 border-jgen-vert/30">
                     <PortableText value={program.achievements} />
         </div>
               </div>
@@ -217,10 +217,10 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
             {program.nextSteps && program.nextSteps.length > 0 && (
               <div>
                 <div className="flex items-center gap-3 mb-6">
-                  <TrendingUp className="h-6 w-6 text-[#8c80f7]" />
+                  <TrendingUp className="h-6 w-6 text-jgen-violet" />
                   <h2 className="text-2xl md:text-3xl font-bold">Prochaines étapes</h2>
                 </div>
-                <div className="prose prose-lg max-w-none pl-9 border-l-2 border-[#8c80f7]/30">
+                <div className="prose prose-lg max-w-none pl-9 border-l-2 border-jgen-violet/30">
                     <PortableText value={program.nextSteps} />
                   </div>
               </div>
@@ -263,7 +263,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                 <div className="grid md:grid-cols-2 gap-6">
                   {program.relatedPosts.map((post: any) => (
                     <Link key={post._id} href={`/blog/${post.slug}`} className="group">
-                      <div className="overflow-hidden rounded-lg border border-border hover:border-[#c61d4d] transition-all">
+                      <div className="overflow-hidden rounded-lg border border-border hover:border-jgen-rose transition-all">
                         <div className="aspect-[16/9] overflow-hidden relative">
                           <img
                             src={post.image ? urlFor(post.image).width(800).height(450).url() : "/placeholder.svg"}
@@ -279,7 +279,7 @@ export default async function ProgramPage({ params }: { params: Promise<{ slug: 
                               day: 'numeric'
                             }) : ''}
                           </p>
-                          <h3 className="text-lg font-bold mb-2 group-hover:text-[#c61d4d] transition-colors line-clamp-2">
+                          <h3 className="text-lg font-bold mb-2 group-hover:text-jgen-rose transition-colors line-clamp-2">
                             {post.title}
                           </h3>
                           {post.excerpt && (

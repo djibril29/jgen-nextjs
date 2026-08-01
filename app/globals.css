@@ -31,7 +31,9 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
+  /* Geometrie : cartes, sections et images a angles vifs. Les boutons gardent
+     leur propre rayon de 4px, defini sur le composant. */
+  --radius: 0rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   /* Updated sidebar primary to match crimson */
@@ -41,8 +43,14 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --font-open-sans: "Open Sans", sans-serif;
-  --font-anton: "Anton", sans-serif;
+  /* Couleurs de marque J-GEN. Valeurs inchangees, simplement nommees. */
+  --jgen-plum: #3d1f47;
+  --jgen-rose: #c61d4d;
+  --jgen-jaune: #ffd23f;
+  --jgen-vert: #00d4aa;
+  /* Contraste insuffisant pour porter du texte (3.2 sur blanc, 4.4 sur plum) :
+     reserve aux formes decoratives. */
+  --jgen-violet: #8c80f7;
 }
 
 .dark {
@@ -83,9 +91,36 @@
 }
 
 @theme inline {
-  /* Configure Anton for headings and Open Sans for body text */
-  --font-sans: var(--font-open-sans);
-  --font-heading: var(--font-anton);
+  /* Bricolage Grotesque pour les titres et les chiffres, Archivo pour le
+     texte et l'interface. */
+  --font-sans: var(--font-archivo);
+  --font-heading: var(--font-bricolage);
+
+  /* Palette de marque exposee en utilitaires : bg-jgen-jaune, text-jgen-plum,
+     border-jgen-rose, etc. */
+  --color-jgen-plum: var(--jgen-plum);
+  --color-jgen-rose: var(--jgen-rose);
+  --color-jgen-jaune: var(--jgen-jaune);
+  --color-jgen-vert: var(--jgen-vert);
+  --color-jgen-violet: var(--jgen-violet);
+
+  /* Echelle typographique fluide. Redefinir ces tokens recalibre d'un coup
+     les text-4xl, text-5xl... deja ecrits dans les composants, sans avoir a
+     les toucher. Plafonds volontairement abaisses : Bricolage en chasse
+     normale occupe plus de largeur qu'Anton, qui etait condensee. */
+  --text-3xl: clamp(1.5rem, 1.25rem + 1.1vw, 1.875rem);
+  --text-3xl--line-height: 1.2;
+  --text-4xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.25rem);
+  --text-4xl--line-height: 1.15;
+  --text-5xl: clamp(2rem, 1.55rem + 2.2vw, 2.75rem);
+  --text-5xl--line-height: 1.1;
+  --text-6xl: clamp(2.25rem, 1.7rem + 2.8vw, 3.25rem);
+  --text-6xl--line-height: 1.08;
+  --text-7xl: clamp(2.5rem, 1.8rem + 3.5vw, 3.75rem);
+  --text-7xl--line-height: 1.05;
+  --text-8xl: clamp(3rem, 2rem + 5vw, 4.5rem);
+  --text-8xl--line-height: 1;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -110,10 +145,13 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* Angles vifs. Neutralise d'un coup les rounded-sm/md/lg/xl du site sans
+     toucher aux composants. Les calc() negatifs de la definition d'origine
+     auraient produit des valeurs invalides une fois --radius passe a 0. */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -131,25 +169,74 @@
   body {
     @apply bg-background text-foreground;
   }
-  /* Apply Anton font to all headings */
+  /* Bricolage porte les titres jusqu'au h3, la ou son dessin se voit. En
+     dessous, Archivo reste nette : les ink traps ne se lisent plus a 16px et
+     ne feraient que salir le rendu. */
   h1,
   h2,
-  h3,
+  h3 {
+    font-family: var(--font-bricolage);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  h1,
+  h2 {
+    font-weight: 800; /* Bricolage plafonne a 800, il n'y a pas de Black 900 */
+  }
+
+  h3 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
   h4,
   h5,
   h6 {
-    font-family: var(--font-anton);
+    font-family: var(--font-archivo);
+    text-wrap: balance;
   }
 
-  /* Increased paragraph font sizes for better readability */
+  h4 {
+    font-weight: 700;
+  }
+
+  h5,
+  h6 {
+    font-weight: 500;
+  }
+
+  /* Un seul corps de texte. La regle d'origine mettait tout paragraphe de
+     section a 20px, ce qui donnait la meme emphase a un chapeau et a une note
+     de bas de page. */
   p {
-    @apply text-lg leading-relaxed;
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.6;
   }
 
-  /* Larger paragraphs in main content areas */
-  article p,
-  section p {
-    @apply text-xl leading-relaxed;
+  /* Chapeau d'introduction, applique volontairement. */
+  .lead {
+    font-size: 1.3125rem; /* 21px */
+    line-height: 1.5;
+  }
+
+  /* Surtitre : c'est desormais le seul endroit ou l'on capitalise. */
+  .eyebrow {
+    font-family: var(--font-archivo);
+    font-weight: 500;
+    font-size: 0.8125rem; /* 13px */
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* Chiffres a chasse fixe : sans cela, les compteurs animes tressautent
+     lateralement pendant toute l'animation, le « 1 » etant plus etroit que le
+     « 8 ». */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
   }
 
   /* Portable Text / Prose styling for Sanity content */

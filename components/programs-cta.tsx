@@ -45,13 +45,13 @@ export function ProgramsCTA() {
             ? 'w-full py-20 px-4' 
             : 'w-32 h-32 py-0 px-0'
           }
-          bg-[#3d1f47] text-white
+          bg-jgen-plum text-white
         `}
       >
         {/* Decorative elements */}
         <div 
           className={`
-            absolute top-0 right-0 w-64 h-64 bg-[#8c80f7] opacity-10 rounded-full 
+            absolute top-0 right-0 w-64 h-64 bg-jgen-violet opacity-10 rounded-full 
             -translate-y-1/2 translate-x-1/2
             transition-all duration-1000 delay-300
             ${isExpanded ? 'scale-100' : 'scale-0'}
@@ -59,7 +59,7 @@ export function ProgramsCTA() {
         />
         <div 
           className={`
-            absolute bottom-0 left-0 w-48 h-48 bg-[#c61d4d] opacity-10 rounded-full 
+            absolute bottom-0 left-0 w-48 h-48 bg-jgen-rose opacity-10 rounded-full 
             translate-y-1/2 -translate-x-1/2
             transition-all duration-1000 delay-500
             ${isExpanded ? 'scale-100' : 'scale-0'}
@@ -87,7 +87,7 @@ export function ProgramsCTA() {
             <Link href="/programs">
               <Button 
                 size="lg" 
-                className="bg-[#00d4aa] hover:bg-[#00d4aa]/90 text-[#3d1f47] font-bold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                className="bg-jgen-vert hover:bg-jgen-vert/90 text-jgen-plum font-bold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
               >
                 Voir tous les programmes
               </Button>
@@ -98,7 +98,7 @@ export function ProgramsCTA() {
         {/* Small pulsing dot when collapsed */}
         {!isExpanded && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-4 h-4 bg-[#00d4aa] rounded-full animate-pulse" />
+            <div className="w-4 h-4 bg-jgen-vert rounded-full animate-pulse" />
           </div>
         )}
       </div>

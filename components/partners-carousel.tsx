@@ -48,7 +48,7 @@ export function PartnersCarousel() {
     <section className="py-16 lg:py-20 bg-background">
       <div className="container mx-auto px-4">
         <div ref={titleReveal.ref} className={`scroll-reveal ${titleReveal.isVisible ? "is-visible" : ""}`}>
-          <h2 className="font-sans text-4xl md:text-5xl font-bold text-center mb-12 text-foreground">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-foreground">
             Nos Partenaires
           </h2>
         </div>
