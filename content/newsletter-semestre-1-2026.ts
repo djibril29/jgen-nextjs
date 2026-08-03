@@ -475,16 +475,18 @@ const projects: NewsletterProject[] = [
     name: "Naatal Jaboot Gui",
     category: "Réforme du Code de la famille et dialogue citoyen",
     summary:
-      "Le programme vise notamment à soutenir le plaidoyer en faveur de la révision des dispositions discriminatoires du Code de la famille. Il cherche à créer un dialogue entre les parlementaires et les communautés, particulièrement les femmes.",
+      "Naatal Jaboot Gui est un programme de plaidoyer pour un Code de la famille juste et équitable. Financé par l'African Women's Development Fund et mis en œuvre à Dakar et à Thiès, il crée un cadre de dialogue entre les parlementaires et les communautés, en particulier les femmes, pour accélérer la révision des dispositions discriminatoires du Code de 1972.",
+    locations: ["Dakar", "Thiès"],
+    partnerNames: ["African Women's Development Fund"],
     href: "#naatal-jaboot-gui",
     programHref: "/programs/naatal-jaboot-gui-un-plaidoyer-pour-la-reforme-du-code-de-la-famille",
     programCta: "Découvrir le programme Naatal Jaboot Gui",
     image: {
-      name: "assises1",
-      alt: "Réunion d'orientation réunissant les parties prenantes du programme Naatal Jaboot Gui",
+      name: "naatal1",
+      alt: "Rassemblement communautaire organisé dans le cadre de la campagne Naatal Jaboot Gui pour un Code de la famille juste et équitable",
     },
     imageCaption:
-      "Réunion d'orientation des Assises nationales citoyennes, les 16 et 17 mars 2026 aux Almadies.",
+      "Rassemblement communautaire organisé dans le cadre de la campagne Naatal Jaboot Gui.",
     media: [
       {
         // La photo montre un rassemblement de plaidoyer ; les rapports n'en
@@ -495,20 +497,21 @@ const projects: NewsletterProject[] = [
       },
     ],
     emailSummary:
-      "Une réunion d'orientation tenue les 16 et 17 mars 2026 a défini les orientations stratégiques, organisationnelles et méthodologiques des Assises nationales citoyennes.",
+      "Porté avec le soutien de l'African Women's Development Fund, Naatal Jaboot Gui plaide pour la révision des dispositions discriminatoires du Code de la famille sénégalais. Le programme crée un dialogue entre parlementaires et communautés à Dakar et à Thiès, et prépare les Assises nationales citoyennes comme espace de consultation nationale.",
     narrative: [
-      "Le programme porte un plaidoyer collectif et coordonné pour accélérer la réforme du Code de la famille sénégalais, en tenant compte des réalités sociales actuelles. Mis en œuvre dans les régions de Dakar et de Thiès, il cherche à créer un cadre de dialogue entre les parlementaires et les communautés, et en particulier les femmes.",
-      "Une réunion d'orientation s'est tenue [[les 16 et 17 mars 2026]] à Sama Hôtel, aux Almadies. Elle a permis de définir les orientations stratégiques, organisationnelles et méthodologiques du processus des Assises nationales citoyennes.",
-      "Les participants y ont validé la réorganisation des instances de gouvernance, avec un Comité technique chargé de l'orientation scientifique et un Comité de pilotage responsable de la coordination opérationnelle et des pré-assises régionales. Ils ont également identifié les thématiques qui structureront les consultations : accès aux ressources, réformes juridiques, autonomisation économique, santé, leadership, violences basées sur le genre, famille et justice climatique.",
+      "Adopté en 1972, le Code de la famille sénégalais ne reflète plus les réalités sociales, culturelles et économiques du pays. De nombreuses dispositions demeurent discriminatoires à l'égard des femmes, notamment en matière d'autorité parentale, d'âge du mariage et de reconnaissance de paternité. C'est à cette injustice que répond la campagne [[Naatal Jaboot Gui]], pour un Code de la famille juste et équitable, menée avec une alliance nationale d'acteurs de la société civile.",
+      "Financé par l'African Women's Development Fund et mis en œuvre dans les régions de Dakar et de Thiès, le programme vise à créer un cadre de dialogue entre les parlementaires et les communautés, particulièrement les femmes, afin de promouvoir un engagement parlementaire en faveur de la révision. En marge de la campagne, des rencontres communautaires intitulées « Jakarlo ak sama député » ont été organisées pour recueillir les réalités vécues par les femmes et les filles et nourrir le plaidoyer.",
+      "Dans ce cadre, une réunion d'orientation s'est tenue [[les 16 et 17 mars 2026]] à Sama Hôtel, aux Almadies, pour préparer les Assises nationales citoyennes sur les droits des femmes et des filles — un processus national de dialogue porté par le programme. Les participants y ont défini les orientations stratégiques, organisationnelles et méthodologiques, validé la mise en place d'un Comité technique et d'un Comité de pilotage, et identifié huit thématiques de consultation, dont les réformes juridiques et la famille.",
     ],
     achievements: [
       {
         period: "T1",
         periodLabel: "Janvier – mars 2026",
         items: [
-          "Réunion d'orientation tenue les 16 et 17 mars 2026 à Sama Hôtel, aux Almadies.",
-          "Orientations stratégiques, organisationnelles et méthodologiques des Assises nationales citoyennes définies.",
-          "Un Comité technique et un Comité de pilotage ont été prévus.",
+          "Campagne Naatal Jaboot Gui poursuivie pour un Code de la famille juste et équitable.",
+          "Réunion d'orientation des Assises nationales citoyennes tenue les 16 et 17 mars 2026 à Sama Hôtel, aux Almadies.",
+          "Orientations stratégiques, organisationnelles et méthodologiques du processus définies.",
+          "Un Comité technique et un Comité de pilotage prévus pour la gouvernance des Assises.",
           "Thématiques identifiées : accès aux ressources, réformes juridiques, autonomisation économique, santé, leadership, VBG, famille et justice climatique.",
         ],
       },
@@ -517,10 +520,12 @@ const projects: NewsletterProject[] = [
   {
     id: "assises",
     // Intitulé officiel complet, identique à celui de la page /assises.
+    // Les Assises sont un processus national de dialogue porté dans le cadre
+    // du programme Naatal Jaboot Gui : elles n'en sont pas le programme lui-même.
     name: "Assises nationales citoyennes sur les droits des femmes et des filles au Sénégal",
     category: "Processus national de dialogue citoyen",
     summary:
-      "Les Assises nationales citoyennes sur les droits des femmes et des filles constituent un processus national de dialogue, préparé tout au long du semestre par la mise en place de ses instances de gouvernance.",
+      "Portées dans le cadre du programme Naatal Jaboot Gui, les Assises nationales citoyennes sur les droits des femmes et des filles constituent un processus national de dialogue, préparé tout au long du semestre par la mise en place de ses instances de gouvernance.",
     // URL réelle : la page /assises existe déjà sur le site.
     href: "/assises",
     programHref: "/assises",
@@ -530,10 +535,18 @@ const projects: NewsletterProject[] = [
       alt: "Séance de travail des membres du comité de pilotage des Assises nationales citoyennes sur les droits des femmes et des filles",
     },
     imageCaption: "Séance de travail du comité de pilotage des Assises nationales citoyennes.",
+    media: [
+      {
+        name: "assises1",
+        alt: "Réunion d'orientation réunissant les parties prenantes des Assises nationales citoyennes",
+        caption:
+          "Réunion d'orientation des Assises nationales citoyennes, les 16 et 17 mars 2026 aux Almadies.",
+      },
+    ],
     emailSummary:
-      "La feuille de route des Assises a été élaborée, un comité technique composé d'expert·e·s a été créé et un atelier d'installation et de structuration du Comité de pilotage a été organisé.",
+      "Portées par Naatal Jaboot Gui, les Assises ont progressé au semestre : feuille de route élaborée, comité technique d'expert·e·s créé, et atelier d'installation du Comité de pilotage organisé.",
     narrative: [
-      "Le processus préparatoire a été lancé au deuxième trimestre avec l'élaboration d'une feuille de route, qui rassemble l'ensemble des activités préalables conduisant à la tenue des Assises, dont l'organisation des pré-assises au niveau national.",
+      "Les Assises nationales citoyennes s'inscrivent dans le programme Naatal Jaboot Gui. Le processus préparatoire a été lancé au deuxième trimestre avec l'élaboration d'une feuille de route, qui rassemble l'ensemble des activités préalables conduisant à la tenue des Assises, dont l'organisation des pré-assises au niveau national.",
       "Un comité technique composé d'expert·e·s a été créé pour accompagner la préparation, et un atelier d'installation et de structuration du Comité de pilotage des Assises nationales citoyennes sur les droits des femmes et des filles du Sénégal a été organisé.",
     ],
     achievements: [
@@ -731,7 +744,7 @@ export const newsletterSemesterOne2026 = {
       projectIds: ["naatal-jaboot-gui", "assises"],
       emailTitle: "Plaidoyer et participation citoyenne",
       emailSummary:
-        "Les travaux préparatoires des Assises nationales citoyennes, les actions avec les collectivités et l'atelier des défenseur·e·s des droits humains ont renforcé les dynamiques de dialogue et de mobilisation.",
+        "Le plaidoyer pour la réforme du Code de la famille, porté par Naatal Jaboot Gui, et la préparation des Assises nationales citoyennes ont renforcé le dialogue entre communautés, parlementaires et institutions.",
     },
   ] satisfies NewsletterAxis[],
 
@@ -790,13 +803,20 @@ export const newsletterSemesterOne2026 = {
     },
     {
       id: "beijing-30",
-      title: "Rapport Beijing +30",
-      // ⚠️  Le rapport du deuxième trimestre mentionne uniquement l'existence de
-      //     cet atelier. Aucune date, aucun nombre de participant·e·s et aucun
-      //     résultat ne figurent dans le document : ne rien ajouter ici.
-      body: "Le rapport du deuxième trimestre mentionne la tenue d'un atelier de restitution du rapport des 30 ans de Beijing. Aucun détail supplémentaire n'est fourni dans le document source.",
-      // Seule la banderole photographiée situe l'atelier : Hôtel Ndiambour, à
-      // Dakar. Le quantième reste masqué sur la photo, il n'est donc pas énoncé.
+      title: "Restitution du rapport alternatif Beijing +30",
+      // Source : article blog « Beijing +30 : la société civile sénégalaise
+      // restitue son rapport alternatif… » (slug restitution-rapport-alternatif-
+      // beijing-30-senegal). Le quantième exact reste masqué sur la banderole :
+      // on retient donc le mois, sans inventer de jour.
+      date: "Juin 2026",
+      place: "Hôtel Ndiambour, Dakar",
+      body: "J-GEN Sénégal a organisé la restitution du rapport alternatif de la société civile sur trente ans de mise en œuvre du Programme d'action de Beijing au Sénégal. Autour des douze domaines critiques, la rencontre a croisé organisations féministes, institutions publiques et partenaires sur les avancées, les défis et les recommandations pour renforcer les politiques publiques.",
+      details: [
+        "Rapport alternatif produit par la société civile, en parallèle du rapport officiel de l'État.",
+        "Évaluation des avancées, des défis et des recommandations autour des douze domaines critiques du Programme d'action de Beijing.",
+        "Présence conjointe d'organisations de femmes, de ministères sectoriels, d'institutions nationales, de chercheur·e·s et de partenaires techniques et financiers.",
+        "Appui de la GIZ (projet REDTRA) et de la Foundation for a Just Society.",
+      ],
       image: {
         name: "beijing30",
         alt: "Panel d'ouverture de l'atelier de restitution du rapport alternatif Beijing +30, à l'Hôtel Ndiambour à Dakar",
@@ -815,7 +835,7 @@ export const newsletterSemesterOne2026 = {
         { label: "KIIRAY", text: "Lancements officiels à Diamaguène Sicap Mbao et Yoff, diagnostics participatifs et trois plans d'action locaux budgétisés." },
         { label: "PAS À PAS", text: "Argumentaire religieux enrichi et validé, enrôlement de 60 jeunes leaders." },
         { label: "JVSSR", text: "Validation du plan d'action et du budget, lancement du recrutement d'un consultant." },
-        { label: "Naatal Jaboot Gui", text: "Réunion d'orientation des Assises nationales citoyennes, les 16 et 17 mars aux Almadies." },
+        { label: "Naatal Jaboot Gui", text: "Plaidoyer pour la réforme du Code de la famille ; réunion d'orientation des Assises nationales citoyennes, les 16 et 17 mars aux Almadies." },
         { label: "8 mars", text: "Journée internationale des droits des femmes à Guédiawaye : 2 091 personnes mobilisées." },
         { label: "Défenseur·e·s des droits humains", text: "Atelier à Saly du 10 au 12 mars, plan d'action commun pour 2026." },
       ],
@@ -828,8 +848,8 @@ export const newsletterSemesterOne2026 = {
         { label: "KIIRAY", text: "Atelier national sur le rôle des Bajenu Gox, validation de leur plan d'action et dialogues intergénérationnels à Dakar." },
         { label: "PAS À PAS", text: "Formations à Pikine, Tivaouane Peulh et Patte d'Oie sur les DSSR et les mouvements anti-droits." },
         { label: "JVSSR", text: "Étude sur les perceptions de la communauté de Yoff, restitution aux parties prenantes et deux cercles de sororité." },
-        { label: "Assises nationales citoyennes", text: "Feuille de route élaborée, comité technique créé et atelier d'installation du Comité de pilotage." },
-        { label: "Beijing +30", text: "Atelier de restitution du rapport des 30 ans de Beijing." },
+        { label: "Assises nationales citoyennes", text: "Dans le cadre de Naatal Jaboot Gui : feuille de route élaborée, comité technique créé et atelier d'installation du Comité de pilotage." },
+        { label: "Beijing +30", text: "Restitution à Dakar du rapport alternatif de la société civile sur trente ans de mise en œuvre du Programme d'action de Beijing." },
       ],
     },
   ] satisfies NewsletterTimelineBlock[],
@@ -942,14 +962,6 @@ export const newsletterSemesterOne2026 = {
       issue:
         "Les rapports indiquent les Assises « prévues du 25 au 27 novembre 2026 ». Il s'agit d'une information future, non d'un fait réalisé.",
       action: "Vérifier et confirmer les dates définitives avant toute publication.",
-    },
-    {
-      id: "beijing-30",
-      subject: "Atelier Beijing +30",
-      issue:
-        "Le rapport du deuxième trimestre mentionne l'atelier de restitution sans aucun détail : ni date, ni nombre de participant·e·s, ni résultat.",
-      action:
-        "Fournir les informations manquantes si l'activité doit être davantage développée. En l'état, seule son existence est mentionnée.",
     },
     {
       id: "visuels",

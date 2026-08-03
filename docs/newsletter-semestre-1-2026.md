@@ -224,7 +224,8 @@ est celui du champ `image.name` correspondant, dans le fichier de contenu.
 | `pas-a-pas` | Formation des jeunes leaders aux DSSR (**PAS À PAS**) | ✅ |
 | `jvssr1` | Cercle de sororité, Yoff (**JVSSR**) | ✅ |
 | `euleug` | Formation aux métiers d'un GIE (**Liggeyal Ëlëg**) | ✅ |
-| `assises1` | Réunion d'orientation (**Naatal Jaboot Gui**) | ✅ |
+| `naatal1` | Rassemblement communautaire (**Naatal Jaboot Gui**) | ✅ |
+| `assises1` | Réunion d'orientation (**Assises**) | ✅ (média secondaire) |
 | `copil` | Comité de pilotage (**Assises nationales citoyennes**) | ✅ |
 | `beijing30` | Atelier de restitution du rapport Beijing +30 | ✅ |
 | `atelier-defenseurs-saly` | Atelier des défenseur·e·s, Saly | ⬜ **à fournir** |
@@ -314,7 +315,6 @@ Ces points sont également listés, avec leur contexte, dans le tableau
 |---|---|
 | **Graphie des programmes** | Les rapports emploient des formes concurrentes (« Naatal Ndiabote Gui » / « Naatal Jaboot Gui » / « Naatal Jaboot Gi », « KIIRAY » / « KIIRAAY », « Bajenu Gox » / « Badienou Gox »). Aucune graphie officielle n'existait sur le site. Les formes provisoires retenues — **Naatal Jaboot Gui**, **KIIRAY**, **Bajenu Gox**, **Liggeyal Ëlëg** — doivent être confirmées. |
 | **Dates des Assises** | Les rapports annoncent les Assises « prévues du 25 au 27 novembre 2026 ». C'est une **information future**, affichée comme telle avec un avertissement. À vérifier avant publication. |
-| **Beijing +30** | Le rapport du T2 mentionne l'atelier de restitution **sans aucun détail** : ni date, ni nombre de participant·e·s, ni résultat. Seule son existence est mentionnée. Fournir les informations si la rubrique doit être développée. |
 | **Visuels et crédits** | Il manque encore une photographie d'**ELLES AUSSI** et une de l'**atelier de Saly**. Voir §6. Communiquer également les crédits photographiques. |
 | **Adresse postale** | Le site ne mentionne que « Dakar, Sénégal ». Mailchimp exige une **adresse physique complète**, à renseigner dans les paramètres de l'audience — elle est injectée par `*|HTML:LIST_ADDRESS_HTML|*`. |
 | **URL des pages projets** | Les six pages programmes et `/assises` existent désormais : chaque activité de l'e-mail a son bouton (`programHref`). Vérifier que ces pages sont bien publiées avant l'envoi. |
