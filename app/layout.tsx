@@ -2,7 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Bricolage_Grotesque } from "next/font/google"
 import { Archivo } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
+import Script from "next/script"
 import { Suspense } from "react"
 import { OrganizationSchema, WebsiteSchema } from "@/components/structured-data"
 import "./globals.css"
@@ -107,20 +107,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <head>
+      {/*
+        Pas de <head> manuel : en App Router, Next.js construit lui-meme le head
+        a partir de l'API Metadata. En rendre un soi-meme fait cohabiter deux
+        sources sur les memes noeuds, ce qui casse l'hydratation.
+
+        Le JSON-LD est valide dans le <body> : Google le lit ou qu'il soit.
+      */}
+      <body className={`font-sans ${bricolage.variable} ${archivo.variable} antialiased`}>
         <OrganizationSchema />
         <WebsiteSchema />
-        {/* Mailchimp Newsletter Integration */}
-        <script
-          id="mcjs"
-          dangerouslySetInnerHTML={{
-            __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/82a350c96cc3fb21f345f388f/f721dc9b90678893f85cd88ac.js");`
-          }}
-        />
-      </head>
-      <body className={`font-sans ${bricolage.variable} ${archivo.variable} antialiased`}>
         <Suspense fallback={null}>{children}</Suspense>
-        <Analytics />
+        {/*
+          Mailchimp. L'ancien extrait inline creait un <script> et l'inserait en
+          tete du document ; cette mutation du DOM survenait avant l'hydratation
+          et faisait diverger l'arbre React. next/script fait le meme chargement
+          asynchrone, mais apres l'hydratation.
+        */}
+        <Script
+          id="mcjs"
+          strategy="afterInteractive"
+          src="https://chimpstatic.com/mcjs-connected/js/users/82a350c96cc3fb21f345f388f/f721dc9b90678893f85cd88ac.js"
+        />
       </body>
     </html>
   )
