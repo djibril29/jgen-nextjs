@@ -24,6 +24,17 @@ const nextConfig = {
   },
   compress: true,
   poweredByHeader: false,
+  // jgen.sn est l'adresse canonique. jgensn.org a servi de domaine de secours
+  // pendant la panne de septembre 2026 et reste rattache au site : ses
+  // visiteurs, et le referencement acquis entre-temps, sont renvoyes ici.
+  async redirects() {
+    return ['jgensn.org', 'www.jgensn.org', 'www.jgen.sn'].map((host) => ({
+      source: '/:path*',
+      has: [{ type: 'host', value: host }],
+      destination: 'https://jgen.sn/:path*',
+      permanent: true,
+    }))
+  },
   async headers() {
     return [
       {
