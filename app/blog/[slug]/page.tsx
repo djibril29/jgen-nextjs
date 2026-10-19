@@ -7,7 +7,7 @@ import { Calendar, ArrowLeft, Share2 } from "lucide-react"
 import Link from "next/link"
 import { client } from "@/sanity/lib/client"
 import { urlFor } from "@/sanity/lib/image"
-import { PortableText } from "@portabletext/react"
+import { PostBody } from "@/components/post-body"
 import { BlogHeroImage } from "@/components/blog-hero-image"
 import { ArticleSchema, BreadcrumbSchema } from "@/components/structured-data"
 import { buildUrl } from "@/lib/site"
@@ -176,7 +176,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {/* Article Content */}
             <div className="prose prose-lg max-w-none">
-              <PortableText value={post.body} />
+              <PostBody value={post.body} />
             </div>
 
             {/* Rattachement au programme. Ce lien de retour ferme la boucle du

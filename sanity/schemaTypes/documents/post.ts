@@ -61,7 +61,36 @@ export const postType = defineType({
     defineField({
       name: 'body',
       type: 'array',
-      of: [{type: 'block'}, {type: 'image'}],
+      of: [
+        {type: 'block'},
+        {
+          type: 'image',
+          options: {hotspot: true},
+          fields: [
+            defineField({ name: 'alt', type: 'string', title: 'Texte alternatif' }),
+            defineField({ name: 'caption', type: 'string', title: 'Légende' }),
+          ],
+        },
+        // Vidéo YouTube lue dans la page, pour que le lecteur reste sur l'article.
+        {
+          name: 'youtube',
+          title: 'Vidéo YouTube',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'url',
+              title: 'Lien YouTube',
+              type: 'url',
+              validation: (rule) => rule.required().uri({scheme: ['https']}),
+            }),
+            defineField({ name: 'caption', type: 'string', title: 'Légende' }),
+          ],
+          preview: {
+            select: {title: 'caption', subtitle: 'url'},
+            prepare: ({title, subtitle}) => ({title: title || 'Vidéo YouTube', subtitle}),
+          },
+        },
+      ],
       group: 'main',
     }),
     defineField({
