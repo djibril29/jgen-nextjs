@@ -155,6 +155,7 @@ const document = {
   title: 'Pré-assises nationales citoyennes : la région de Thiès ouvre la marche',
   slug: {_type: 'slug', current: SLUG},
   publishedAt: '2026-10-19T09:00:00.000Z',
+  featured: true,
   author: {_type: 'reference', _ref: '2e8bf1e0-8d86-415a-8c58-c04222f704e8'}, // J-GEN Sénégal
   categories: [
     {_type: 'reference', _key: 'c0', _ref: 'bb1a7d4d-1f07-4ad4-976f-27ad65f7f29b'}, // Plaidoyer
@@ -251,7 +252,26 @@ async function main() {
   await client.createOrReplace({...document, _id: draftId, image, body: await toPortableText(body)})
 
   console.log(`  ${existing ? '↻' : '+'} ${SLUG} (${draftId})`)
-  console.log("\nL'article est en BROUILLON : à relire et publier depuis /studio.")
+
+  // À la une : slide du carrousel d'accueil, placé en tête (ordre 5).
+  // Référence faible tant que l'article n'est pas publié, comme le fait le Studio.
+  await client.createOrReplace({
+    _id: 'drafts.hero-pre-assises-thies',
+    _type: 'heroSlide',
+    internalName: 'Pré-assises nationales citoyennes — région de Thiès',
+    slideType: 'linked',
+    linkedDocument: {
+      _type: 'reference',
+      _ref: draftId.replace(/^drafts\./, ''),
+      _weak: true,
+      _strengthenOnPublish: {type: 'post'},
+    },
+    order: 5,
+    isActive: true,
+  })
+
+  console.log('  + slide « À la une » (drafts.hero-pre-assises-thies)')
+  console.log("\nL'article et le slide sont en BROUILLON : publier l'article d'abord, puis le slide, depuis /studio.")
 }
 
 main().catch((error) => {
