@@ -63,8 +63,10 @@ const components: PortableTextComponents = {
   marks: {
     // Les liens sortants s'ouvrent dans un nouvel onglet : l'article reste ouvert.
     link: ({ value, children }) => {
-      const href: string = value?.href || ""
-      const external = /^https?:\/\//.test(href)
+      const href: string = (value?.href || "").trim()
+      // Seuls les schémas sûrs deviennent des liens : un « javascript: » saisi dans le Studio reste du texte.
+      if (!/^(https?:|mailto:|tel:|\/(?!\/)|#)/i.test(href)) return <>{children}</>
+      const external = /^https?:\/\//i.test(href)
       return (
         <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
           {children}
