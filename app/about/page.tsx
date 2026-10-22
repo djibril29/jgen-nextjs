@@ -131,8 +131,8 @@ export default function AboutPage() {
               {[
                 {
                   href: "/interventions/plaidoyer",
-                  image: "/african-women-advocacy-protest-rights.jpg",
-                  alt: "Le plaidoyer",
+                  image: "/newsletters/semestre-1/codefamille.jpg",
+                  alt: "Rassemblement communautaire de femmes lors d'une rencontre de plaidoyer de J-GEN Sénégal pour un Code de la famille juste",
                   icon: Megaphone,
                   title: "Le plaidoyer",
                   description:
@@ -140,8 +140,8 @@ export default function AboutPage() {
                 },
                 {
                   href: "/interventions/sensibilisation",
-                  image: "/community-awareness-workshop-senegal-women.jpg",
-                  alt: "La sensibilisation communautaire",
+                  image: "/newsletters/semestre-1/cercles.jpeg",
+                  alt: "Cercle de sororité réunissant des adolescentes et de jeunes femmes à Yoff",
                   icon: Users,
                   title: "La sensibilisation communautaire",
                   description:
@@ -149,8 +149,8 @@ export default function AboutPage() {
                 },
                 {
                   href: "/interventions/renforcement-capacite",
-                  image: "/capacity-building-training-women-empowerment.jpg",
-                  alt: "Le renforcement de capacité",
+                  image: "/newsletters/semestre-1/pas-a-pas.jpg",
+                  alt: "Jeunes leaders formé·e·s sur les DSSR et les VBG dans le cadre du programme PAS À PAS",
                   icon: TrendingUp,
                   title: "Le renforcement de capacité",
                   description:
@@ -158,8 +158,8 @@ export default function AboutPage() {
                 },
                 {
                   href: "/interventions/reseautage-partenariat",
-                  image: "/networking-partnership-collaboration-women-organiz.jpg",
-                  alt: "Le réseautage et partenariat",
+                  image: "/newsletters/semestre-1/copil.jpg",
+                  alt: "Séance de travail du comité de pilotage des Assises nationales citoyennes sur les droits des femmes et des filles",
                   icon: Network,
                   title: "Le réseautage et partenariat",
                   description:
